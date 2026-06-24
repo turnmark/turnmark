@@ -38,5 +38,29 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Generate CHANGELOG
+        run: |
+          LAST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "")
+
+          if [ -n "$LAST_TAG" ]; then
+            git log ${LAST_TAG}..HEAD --pretty="- %s" > commits.txt
+          else
+            git log --pretty="- %s" > commits.txt
+          fi
+
+          awk '
+            /^## Unreleased$/ {
+              print
+              print ""
+              while ((getline line < "commits.txt") > 0)
+                print line
+              close("commits.txt")
+              next
+            }
+            { print }
+          ' CHANGELOG.md > CHANGELOG_NEW.md
+
+          mv CHANGELOG_NEW.md CHANGELOG.md
+
       - name: Release Packages
         run: vendor/bin/monorepo-builder release ${{ github.event.inputs.version }}
