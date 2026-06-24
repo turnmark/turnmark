@@ -52,11 +52,12 @@ jobs:
           REMOTE=https://github.com/turnmark/${REPO}.git
           git push "${REMOTE}" "${SHA}:refs/heads/main" --force-with-lease
 
-          if git ls-remote --tags "${REMOTE}" "refs/tags/${TAG}" | grep -q "${TAG}"; then
+          if git ls-remote --tags "${REMOTE}" "refs/tags/${TAG}" | grep -q .; then
             echo "Tag already exists."
             exit 0
           fi
 
+          git tag -d "${TAG}" 2>/dev/null || true
           git tag -a "${TAG}" "${SHA}" -m "${TAG}"
           git push "${REMOTE}" "refs/tags/${TAG}"
           git tag -d "${TAG}"
