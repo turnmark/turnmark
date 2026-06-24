@@ -27,6 +27,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v6
         with:
+          token: ${{ secrets.TURNMARK_ACCESS_TOKEN }}
           fetch-depth: 0
 
       - name: Install Dependencies
@@ -38,6 +39,4 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Release Packages
-        env:
-          GH_TOKEN: ${{ secrets.TURNMARK_ACCESS_TOKEN }}
         run: vendor/bin/monorepo-builder release ${{ github.event.inputs.version }}
