@@ -24,6 +24,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v6
         with:
+          token: ${{ secrets.TURNMARK_ACCESS_TOKEN }}
           fetch-depth: 0
 
       - name: Configure Git
@@ -42,9 +43,9 @@ jobs:
           echo "sha=$SHA" >> "$GITHUB_OUTPUT"
           echo "Split SHA: $SHA"
 
-      - name: Push repository and tag
+      - name: Push Repository
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.TURNMARK_ACCESS_TOKEN }}
         run: |
           REPO=${{ matrix.package.name }}
           SHA=${{ steps.split.outputs.sha }}
