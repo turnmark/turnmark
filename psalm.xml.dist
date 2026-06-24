@@ -11,9 +11,6 @@
     <projectFiles>
         <directory name="packages/scraper/src"/>
         <directory name="packages/scraper/tests"/>
-        <ignoreFiles>
-            <directory name="packages/scraper/vendor"/>
-        </ignoreFiles>
     </projectFiles>
 
     <stubs>
