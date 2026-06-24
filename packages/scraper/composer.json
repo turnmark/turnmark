@@ -1,0 +1,44 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "turnmark/scraper",
+    "description": "Turnmark Scraper",
+    "keywords": [
+        "boatrace",
+        "library",
+        "scraper",
+        "turnmark"
+    ],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "shimomo",
+            "email": "turnmark@shimomo.net"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/turnmark/turnmark/issues",
+        "source": "https://github.com/turnmark/turnmark"
+    },
+    "require": {
+        "php": "^8.4",
+        "nesbot/carbon": "^3.8.4",
+        "symfony/browser-kit": "^8.0",
+        "symfony/css-selector": "^8.0",
+        "symfony/http-client": "^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^13.0",
+        "vimeo/psalm": "^6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Turnmark\\Scraper\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Turnmark\\Scraper\\Tests\\": "tests/"
+        }
+    }
+}

@@ -1,0 +1,61 @@
+name: Split
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: read
+
+jobs:
+  split:
+    name: Split ${{ matrix.package.name }} (Ubuntu 24.04)
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - name: scraper
+            path: packages/scraper
+    env:
+      TAG: ${{ github.ref_name }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Create subtree commit
+        id: split
+        run: |
+          SHA=$(
+            git subtree split \
+              --prefix=${{ matrix.package.path }}
+          )
+
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
+          echo "Split SHA: $SHA"
+
+      - name: Push repository and tag
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          REPO=${{ matrix.package.name }}
+          SHA=${{ steps.split.outputs.sha }}
+          REMOTE=https://github.com/turnmark/${REPO}.git
+          git push "${REMOTE}" "${SHA}:refs/heads/main" --force-with-lease
+
+          if git ls-remote --tags "${REMOTE}" "refs/tags/${TAG}" | grep -q "${TAG}"; then
+            echo "Tag already exists."
+            exit 0
+          fi
+
+          git tag -a "${TAG}" "${SHA}" -m "${TAG}"
+          git push "${REMOTE}" "refs/tags/${TAG}"
+          git tag -d "${TAG}"

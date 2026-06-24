@@ -1,0 +1,157 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Turnmark\Scraper\Tests\Scrapers;
+
+use Carbon\CarbonImmutable as Carbon;
+
+/**
+ * @psalm-import-type Arguments from \Turnmark\Scraper\Tests\ScraperPsalmType
+ * @psalm-import-type Expected from \Turnmark\Scraper\Tests\ScraperPsalmType
+ *
+ * @author shimomo
+ */
+final class PreviewScraperDataProvider
+{
+    /**
+     * @return non-empty-list<
+     *     array{
+     *         arguments: Arguments,
+     *         expected: Expected,
+     *     }
+     * >
+     */
+    public static function scrapeProvider(): array
+    {
+        return [
+            [
+                'arguments' => [Carbon::parse('2026-05-31'), 6, 12],
+                'expected' => [
+                    'date' => '2026-05-31',
+                    'stadium_number' => 6,
+                    'race_number' => 12,
+                    'wind_speed_source' => '3m',
+                    'wind_speed' => 3,
+                    'wind_direction_number_source' => '西',
+                    'wind_direction_number' => 13,
+                    'wave_height_source' => '2cm',
+                    'wave_height' => 2,
+                    'weather_number_source' => '晴',
+                    'weather_number' => 1,
+                    'air_temperature_source' => '23.0℃',
+                    'air_temperature' => 23.0,
+                    'water_temperature_source' => '23.0℃',
+                    'water_temperature' => 23.0,
+                    'racers' => [
+                        1 => [
+                            'entry_number' => 1,
+                            'course_number' => 1,
+                            'start_timing_source' => '.01',
+                            'start_timing' => 0.01,
+                            'weight_source' => '52.0kg',
+                            'weight' => 52.0,
+                            'weight_adjustment_source' => '0.0',
+                            'weight_adjustment' => 0.0,
+                            'exhibition_time_source' => '6.66',
+                            'exhibition_time' => 6.66,
+                            'tilt_adjustment_source' => '0.0',
+                            'tilt_adjustment' => 0.0,
+                        ],
+                        2 => [
+                            'entry_number' => 2,
+                            'course_number' => 2,
+                            'start_timing_source' => '.12',
+                            'start_timing' => 0.12,
+                            'weight_source' => '52.0kg',
+                            'weight' => 52.0,
+                            'weight_adjustment_source' => '0.0',
+                            'weight_adjustment' => 0.0,
+                            'exhibition_time_source' => '6.60',
+                            'exhibition_time' => 6.6,
+                            'tilt_adjustment_source' => '0.0',
+                            'tilt_adjustment' => 0.0,
+                        ],
+                        3 => [
+                            'entry_number' => 3,
+                            'course_number' => 4,
+                            'start_timing_source' => 'F.03',
+                            'start_timing' => -0.03,
+                            'weight_source' => '52.0kg',
+                            'weight' => 52.0,
+                            'weight_adjustment_source' => '0.0',
+                            'weight_adjustment' => 0.0,
+                            'exhibition_time_source' => '6.69',
+                            'exhibition_time' => 6.69,
+                            'tilt_adjustment_source' => '0.0',
+                            'tilt_adjustment' => 0.0,
+                        ],
+                        4 => [
+                            'entry_number' => 4,
+                            'course_number' => 3,
+                            'start_timing_source' => 'F.03',
+                            'start_timing' => -0.03,
+                            'weight_source' => '52.0kg',
+                            'weight' => 52.0,
+                            'weight_adjustment_source' => '0.0',
+                            'weight_adjustment' => 0.0,
+                            'exhibition_time_source' => '6.68',
+                            'exhibition_time' => 6.68,
+                            'tilt_adjustment_source' => '-0.5',
+                            'tilt_adjustment' => -0.5,
+                        ],
+                        5 => [
+                            'entry_number' => 5,
+                            'course_number' => 5,
+                            'start_timing_source' => '.07',
+                            'start_timing' => 0.07,
+                            'weight_source' => '52.2kg',
+                            'weight' => 52.2,
+                            'weight_adjustment_source' => '0.0',
+                            'weight_adjustment' => 0.0,
+                            'exhibition_time_source' => '6.69',
+                            'exhibition_time' => 6.69,
+                            'tilt_adjustment_source' => '0.0',
+                            'tilt_adjustment' => 0.0,
+                        ],
+                        6 => [
+                            'entry_number' => 6,
+                            'course_number' => 6,
+                            'start_timing_source' => '.01',
+                            'start_timing' => 0.01,
+                            'weight_source' => '52.0kg',
+                            'weight' => 52.0,
+                            'weight_adjustment_source' => '0.0',
+                            'weight_adjustment' => 0.0,
+                            'exhibition_time_source' => '6.58',
+                            'exhibition_time' => 6.58,
+                            'tilt_adjustment_source' => '0.0',
+                            'tilt_adjustment' => 0.0,
+                        ],
+                    ],
+                ],
+            ],
+            [
+                'arguments' => [Carbon::parse('2026-05-18'), 13, 12],
+                'expected' => [
+                    'date' => '2026-05-18',
+                    'stadium_number' => 13,
+                    'race_number' => 12,
+                    'wind_speed_source' => null,
+                    'wind_speed' => null,
+                    'wind_direction_number_source' => null,
+                    'wind_direction_number' => null,
+                    'wave_height_source' => null,
+                    'wave_height' => null,
+                    'weather_number_source' => null,
+                    'weather_number' => null,
+                    'air_temperature_source' => null,
+                    'air_temperature' => null,
+                    'water_temperature_source' => null,
+                    'water_temperature' => null,
+                    'racers' => [],
+                ],
+            ],
+        ];
+    }
+}

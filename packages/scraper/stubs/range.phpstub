@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @template T of int|float|string
+ * @param T $start
+ * @param T $end
+ * @param int|float $step
+ * @return list<T>
+ */
+function range($start, $end, $step = 1): array
+{
+    //
+}
