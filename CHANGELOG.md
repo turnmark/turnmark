@@ -1,5 +1,7 @@
 # Changelog
 
+## Unreleased
+
 ## 0.1.7 - 2026-06-25
 
 - Merge pull request #1 from turnmark/dependabot/github_actions/actions/checkout-7
