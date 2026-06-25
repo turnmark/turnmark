@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         php-version:
-          - '8.4'
+          - '8.5'
     steps:
       - name: Setup PHP ${{ matrix.php-version }}
         uses: shivammathur/setup-php@v2
@@ -31,7 +31,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install Dependencies
-        run: composer install --no-interaction --prefer-dist --no-progress
+        run: composer update --no-interaction --prefer-dist --no-progress
 
       - name: Configure Git
         run: |
@@ -71,7 +71,6 @@ jobs:
                 print
                 print ""
                 print "## Unreleased"
-                print ""
                 next
               }
               { print }
