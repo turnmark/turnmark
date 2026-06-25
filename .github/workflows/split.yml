@@ -13,7 +13,6 @@ jobs:
     name: Split ${{ matrix.package.name }} (Ubuntu 24.04)
     runs-on: ubuntu-24.04
     strategy:
-      fail-fast: false
       matrix:
         package:
           - name: scraper
@@ -32,7 +31,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Create subtree commit
+      - name: Create Subtree Commit
         id: split
         run: |
           SHA=$(
