@@ -50,7 +50,7 @@ jobs:
           SHA=${{ steps.split.outputs.sha }}
           REMOTE=https://github.com/turnmark/${REPO}.git
 
-          git fetch "${REMOTE}" main refs/tags/* || true
+          git fetch "${REMOTE}" main --tags || true
           git push "${REMOTE}" "${SHA}:refs/heads/main" --force-with-lease
 
           if git ls-remote --tags "${REMOTE}" "refs/tags/${TAG}" | grep -q .; then
