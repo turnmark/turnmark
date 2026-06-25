@@ -116,4 +116,29 @@ final class Converter
 
         return $value;
     }
+
+    /**
+     * @param string $value
+     * @return string
+     */
+    public static function toCamelCase(string $value): string
+    {
+        return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $value))));
+    }
+
+    /**
+     * @template TValue
+     * @param array<string, TValue> $array
+     * @return array<string, TValue>
+     */
+    public static function toCamelCaseKeys(array $array): array
+    {
+        $response = [];
+
+        foreach ($array as $key => $value) {
+            $response[self::toCamelCase($key)] = $value;
+        }
+
+        return $response;
+    }
 }
