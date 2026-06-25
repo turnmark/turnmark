@@ -58,5 +58,7 @@ jobs:
             exit 0
           fi
 
+          git tag -d "${TAG}" 2>/dev/null || true
           git tag -a "${TAG}" "${SHA}" -m "${TAG}"
           git push "${REMOTE}" "refs/tags/${TAG}"
+          git tag -d "${TAG}"
