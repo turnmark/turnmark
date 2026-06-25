@@ -31,7 +31,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install Dependencies
-        run: composer install --no-interaction --prefer-dist --no-progress
+        run: composer update --no-interaction --prefer-dist --no-progress
 
       - name: Run Psalm
         run: vendor/bin/psalm --config=psalm.xml.dist --output-format=github --show-info=true --no-progress
