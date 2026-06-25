@@ -1,6 +1,20 @@
 # Changelog
 
-## Unreleased
+## 0.1.7 - 2026-06-25
+
+- Merge pull request #1 from turnmark/dependabot/github_actions/actions/checkout-7
+- docs: update README.md
+- docs: update PHPDoc comments
+- chore(deps): bump actions/checkout from 6 to 7
+- chore: add .github/dependabot.yml
+- ci: update .github/workflows/validate.yml
+- ci: update .github/workflows/test.yml
+- ci: update .github/workflows/split.yml
+- ci: update .github/workflows/release.yml
+- ci: update .github/workflows/psalm.yml
+- ci: update .github/workflows/audit.yml
+- chore: update CHANGELOG.md
+- open 0.2-dev
 
 
 ## 0.1.6 - 2026-06-24
