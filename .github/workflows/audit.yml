@@ -30,7 +30,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install Dependencies
-        run: composer install --no-interaction --prefer-dist --no-progress
+        run: composer update --no-interaction --prefer-dist --no-progress
 
       - name: Audit Composer
         run: composer audit
