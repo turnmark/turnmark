@@ -1,5 +1,7 @@
 # Changelog
 
+## Unreleased
+
 ## 0.2.1 - 2026-06-26
 
 - chore: update composer.json
