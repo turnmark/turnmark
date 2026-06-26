@@ -1,6 +1,12 @@
 # Changelog
 
-## Unreleased
+## 0.2.1 - 2026-06-26
+
+- chore: update composer.json
+- chore: update composer.json
+- chore: update monorepo-builder.php
+- chore: update CHANGELOG.md
+- open 0.3-dev
 
 ## 0.2.0 - 2026-06-26
 

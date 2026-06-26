@@ -23,7 +23,7 @@
     },
     "require": {
         "php": "^8.4",
-        "turnmark/scraper": "^0.2"
+        "turnmark/scraper": "^0.2.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^13.0",
