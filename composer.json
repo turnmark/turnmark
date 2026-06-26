@@ -33,18 +33,27 @@
     },
     "autoload": {
         "psr-4": {
-            "Turnmark\\Scraper\\": "packages/scraper/src/"
+            "Turnmark\\Scraper\\": "packages/scraper/src/",
+            "Turnmark\\Scraper\\Fukuoka\\": "packages/scraper-fukuoka/src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
+            "Turnmark\\Scraper\\Fukuoka\\Tests\\": "packages/scraper-fukuoka/tests/",
             "Turnmark\\Scraper\\Tests\\": "packages/scraper/tests/"
         }
     },
     "repositories": [
         {
             "type": "path",
-            "url": "packages/*"
+            "url": "packages/*",
+            "options": {
+                "symlink": true
+            }
         }
-    ]
+    ],
+    "replace": {
+        "turnmark/scraper": "self.version",
+        "turnmark/scraper-fukuoka": "self.version"
+    }
 }
