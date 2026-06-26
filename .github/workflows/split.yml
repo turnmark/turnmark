@@ -17,6 +17,8 @@ jobs:
         package:
           - name: scraper
             path: packages/scraper
+          - name: scraper-fukuoka
+            path: packages/scraper-fukuoka
     env:
       TAG: ${{ github.ref_name }}
     steps:
