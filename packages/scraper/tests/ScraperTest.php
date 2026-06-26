@@ -10,8 +10,6 @@ use PHPUnit\Framework\TestCase;
 use Turnmark\Scraper\Scraper;
 
 /**
- * @psalm-import-type Date from \Turnmark\Scraper\Tests\ScraperPsalmType
- * @psalm-import-type StadiumNumber from \Turnmark\Scraper\Tests\ScraperPsalmType
  * @psalm-import-type Arguments from \Turnmark\Scraper\Tests\ScraperPsalmType
  * @psalm-import-type BatchArguments from \Turnmark\Scraper\Tests\ScraperPsalmType
  * @psalm-import-type Expected from \Turnmark\Scraper\Tests\ScraperPsalmType
