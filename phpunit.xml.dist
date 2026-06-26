@@ -8,6 +8,7 @@
     <testsuites>
         <testsuite name="Scraper for Boatrace Turnmark">
             <directory suffix="Test.php">packages/scraper/tests/</directory>
+            <directory suffix="Test.php">packages/scraper-fukuoka/tests/</directory>
         </testsuite>
     </testsuites>
 
