@@ -1,5 +1,4 @@
 {
-    "$schema": "https://getcomposer.org/schema.json",
     "name": "turnmark/turnmark",
     "description": "Turnmark",
     "keywords": [
@@ -8,17 +7,13 @@
         "turnmark"
     ],
     "license": "MIT",
-    "type": "library",
     "authors": [
         {
             "name": "shimomo",
             "email": "turnmark@shimomo.net"
         }
     ],
-    "support": {
-        "issues": "https://github.com/turnmark/turnmark/issues",
-        "source": "https://github.com/turnmark/turnmark"
-    },
+    "type": "library",
     "require": {
         "php": "^8.4",
         "nesbot/carbon": "^3.8.4",
@@ -53,7 +48,12 @@
         }
     ],
     "replace": {
-        "turnmark/scraper": "self.version",
-        "turnmark/scraper-fukuoka": "self.version"
-    }
+        "turnmark/scraper": "0.2.0",
+        "turnmark/scraper-fukuoka": "0.2.0"
+    },
+    "support": {
+        "issues": "https://github.com/turnmark/turnmark/issues",
+        "source": "https://github.com/turnmark/turnmark"
+    },
+    "$schema": "https://getcomposer.org/schema.json"
 }

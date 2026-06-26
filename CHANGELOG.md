@@ -1,6 +1,17 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 - 2026-06-26
+
+- ci: update .github/workflows/split.yml
+- chore: update phpunit.xml.dist
+- chore: update composer.json
+- feat: add scraper fukuoka packages
+- feat: add normalization classes
+- docs: update PHPDoc comments
+- chore: update composer.json
+- feat: add camel case conversion methods
+- chore: update CHANGELOG.md
+- open 0.2-dev
 
 ## 0.1.11 - 2026-06-25
 
