@@ -6,6 +6,9 @@ namespace Turnmark\Scraper;
 
 use DateTimeInterface;
 use Symfony\Component\BrowserKit\HttpBrowser;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Output\NullOutput;
 use Turnmark\Scraper\Converters\Converter;
 use Turnmark\Scraper\Scrapers\OddsScraper;
 use Turnmark\Scraper\Scrapers\PreviewScraper;
@@ -23,6 +26,11 @@ final class Scraper
      * @var ?float
      */
     private static ?float $lastThrottleAt = null;
+
+    /**
+     * @var bool
+     */
+    private static bool $showProgress = false;
 
     /**
      * @var float
@@ -101,18 +109,37 @@ final class Scraper
     ): array {
         $response = [];
 
+        $uniqueStadiumNumbers = array_unique($stadiumNumbers);
+        $uniqueRaceNumbers = array_unique($raceNumbers);
+        $totalSteps = count($uniqueStadiumNumbers) * count($uniqueRaceNumbers);
+
+        $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $progressBar = new ProgressBar($output, $totalSteps);
+        $progressBar->setFormat(
+            ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
+        );
+        $progressBar->start();
+
         $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
 
-        foreach (array_unique($stadiumNumbers) as $stadiumNumber) {
+        foreach ($uniqueStadiumNumbers as $stadiumNumber) {
             if (!in_array($stadiumNumber, $activeStadiumNumbers, true)) {
+                $progressBar->advance();
+
                 continue;
             }
 
-            foreach (array_unique($raceNumbers) as $raceNumber) {
+            foreach ($uniqueRaceNumbers as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     self::scrapeProgram($date, $stadiumNumber, $raceNumber, $httpBrowser);
+
+                $progressBar->advance();
             }
         }
+
+        $progressBar->finish();
+        $output->writeln('');
+        $output->writeln("<info>✅ 出走表のスクレイピングが完了しました（{$totalSteps}件）</info>");
 
         return $response;
     }
@@ -153,18 +180,37 @@ final class Scraper
     ): array {
         $response = [];
 
+        $uniqueStadiumNumbers = array_unique($stadiumNumbers);
+        $uniqueRaceNumbers = array_unique($raceNumbers);
+        $totalSteps = count($uniqueStadiumNumbers) * count($uniqueRaceNumbers);
+
+        $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $progressBar = new ProgressBar($output, $totalSteps);
+        $progressBar->setFormat(
+            ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
+        );
+        $progressBar->start();
+
         $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
 
-        foreach (array_unique($stadiumNumbers) as $stadiumNumber) {
+        foreach ($uniqueStadiumNumbers as $stadiumNumber) {
             if (!in_array($stadiumNumber, $activeStadiumNumbers, true)) {
+                $progressBar->advance();
+
                 continue;
             }
 
-            foreach (array_unique($raceNumbers) as $raceNumber) {
+            foreach ($uniqueRaceNumbers as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     self::scrapePreview($date, $stadiumNumber, $raceNumber, $httpBrowser);
+
+                $progressBar->advance();
             }
         }
+
+        $progressBar->finish();
+        $output->writeln('');
+        $output->writeln("<info>✅ 直前情報のスクレイピングが完了しました（{$totalSteps}件）</info>");
 
         return $response;
     }
@@ -205,18 +251,37 @@ final class Scraper
     ): array {
         $response = [];
 
+        $uniqueStadiumNumbers = array_unique($stadiumNumbers);
+        $uniqueRaceNumbers = array_unique($raceNumbers);
+        $totalSteps = count($uniqueStadiumNumbers) * count($uniqueRaceNumbers);
+
+        $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $progressBar = new ProgressBar($output, $totalSteps);
+        $progressBar->setFormat(
+            ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
+        );
+        $progressBar->start();
+
         $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
 
-        foreach (array_unique($stadiumNumbers) as $stadiumNumber) {
+        foreach ($uniqueStadiumNumbers as $stadiumNumber) {
             if (!in_array($stadiumNumber, $activeStadiumNumbers, true)) {
+                $progressBar->advance();
+
                 continue;
             }
 
-            foreach (array_unique($raceNumbers) as $raceNumber) {
+            foreach ($uniqueRaceNumbers as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     self::scrapeResult($date, $stadiumNumber, $raceNumber, $httpBrowser);
+
+                $progressBar->advance();
             }
         }
+
+        $progressBar->finish();
+        $output->writeln('');
+        $output->writeln("<info>✅ 結果のスクレイピングが完了しました（{$totalSteps}件）</info>");
 
         return $response;
     }
@@ -257,18 +322,37 @@ final class Scraper
     ): array {
         $response = [];
 
+        $uniqueStadiumNumbers = array_unique($stadiumNumbers);
+        $uniqueRaceNumbers = array_unique($raceNumbers);
+        $totalSteps = count($uniqueStadiumNumbers) * count($uniqueRaceNumbers);
+
+        $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $progressBar = new ProgressBar($output, $totalSteps);
+        $progressBar->setFormat(
+            ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
+        );
+        $progressBar->start();
+
         $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
 
-        foreach (array_unique($stadiumNumbers) as $stadiumNumber) {
+        foreach ($uniqueStadiumNumbers as $stadiumNumber) {
             if (!in_array($stadiumNumber, $activeStadiumNumbers, true)) {
+                $progressBar->advance();
+
                 continue;
             }
 
-            foreach (array_unique($raceNumbers) as $raceNumber) {
+            foreach ($uniqueRaceNumbers as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     self::scrapeOdds($date, $stadiumNumber, $raceNumber, $httpBrowser);
+
+                $progressBar->advance();
             }
         }
+
+        $progressBar->finish();
+        $output->writeln('');
+        $output->writeln("<info>✅ オッズのスクレイピングが完了しました（{$totalSteps}件）</info>");
 
         return $response;
     }
@@ -285,5 +369,14 @@ final class Scraper
         self::throttle();
 
         return StadiumScraper::scrape($date, $httpBrowser);
+    }
+
+    /**
+     * @param bool $showProgress
+     * @return void
+     */
+    public static function setShowProgress(bool $showProgress): void
+    {
+        self::$showProgress = $showProgress;
     }
 }
