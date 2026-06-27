@@ -6,7 +6,7 @@
          stopOnFailure="false">
 
     <testsuites>
-        <testsuite name="Scraper for Boatrace Turnmark">
+        <testsuite name="Turnmark">
             <directory suffix="Test.php">packages/scraper/tests/</directory>
             <directory suffix="Test.php">packages/scraper-fukuoka/tests/</directory>
         </testsuite>
