@@ -31,7 +31,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install Dependencies
-        run: composer update --no-interaction --prefer-dist --no-progress
+        run: composer update --prefer-dist --no-interaction --no-progress
 
       - name: Configure Git
         run: |
