@@ -1,6 +1,16 @@
 # Changelog
 
-## Unreleased
+## 0.2.7 - 2026-06-27
+
+- ci: update .github/workflows/split.yml
+- chore: update composer.json
+- chore: update composer.json
+- feat: add scraper tokuyama packages
+- docs: update PHPDoc comments
+- chore: update psalm.xml.dist
+- docs: update PHPDoc comments
+- chore: update phpunit.xml.dist
+- chore: update CHANGELOG.md
 
 ## 0.2.6 - 2026-06-27
 
