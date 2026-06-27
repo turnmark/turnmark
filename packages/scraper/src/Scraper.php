@@ -118,6 +118,7 @@ final class Scraper
         $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
 
         $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $output->writeln('<info>📊 出走表のスクレイピングを開始します</info>');
         $progressBar = new ProgressBar($output, $totalSteps);
         $progressBar->setFormat(
             ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
@@ -185,6 +186,7 @@ final class Scraper
         $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
 
         $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $output->writeln('<info>📊 直前情報のスクレイピングを開始します</info>');
         $progressBar = new ProgressBar($output, $totalSteps);
         $progressBar->setFormat(
             ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
@@ -252,6 +254,7 @@ final class Scraper
         $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
 
         $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $output->writeln('<info>📊 結果のスクレイピングを開始します</info>');
         $progressBar = new ProgressBar($output, $totalSteps);
         $progressBar->setFormat(
             ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
@@ -319,6 +322,7 @@ final class Scraper
         $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
 
         $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $output->writeln('<info>📊 オッズのスクレイピングを開始します</info>');
         $progressBar = new ProgressBar($output, $totalSteps);
         $progressBar->setFormat(
             ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
