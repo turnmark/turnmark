@@ -1,7 +1,8 @@
 {
-    "$schema": "https://getcomposer.org/schema.json",
     "name": "turnmark/scraper-fukuoka",
     "description": "Turnmark Scraper Fukuoka",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
         "boatrace",
         "fukuoka",
@@ -9,8 +10,6 @@
         "scraper",
         "turnmark"
     ],
-    "license": "MIT",
-    "type": "library",
     "authors": [
         {
             "name": "shimomo",
@@ -43,5 +42,6 @@
         "branch-alias": {
             "dev-main": "0.2.x-dev"
         }
-    }
+    },
+    "$schema": "https://getcomposer.org/schema.json"
 }
