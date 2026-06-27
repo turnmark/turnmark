@@ -16,6 +16,7 @@ enum Weather: int
     case 雨 = 3;
     case 雪 = 4;
     case 霧 = 5;
+    case 台 = 6;
 
     /**
      * @return non-empty-string
@@ -28,6 +29,7 @@ enum Weather: int
             Weather::雨 => '雨',
             Weather::雪 => '雪',
             Weather::霧 => '霧',
+            Weather::台 => '台風',
         };
     }
 
