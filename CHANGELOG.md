@@ -1,5 +1,7 @@
 # Changelog
 
+## Unreleased
+
 ## 0.2.6 - 2026-06-27
 
 - style: improve progress bar output in bulk methods
