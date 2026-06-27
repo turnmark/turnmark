@@ -1,6 +1,18 @@
 # Changelog
 
-## Unreleased
+## 0.2.3 - 2026-06-27
+
+- chore: update phpunit.xml.dist
+- feat: add typhoon case to Weather enum
+- chore: update composer.json
+- chore: update composer.json
+- ci: update .github/workflows/validate.yml
+- ci: update .github/workflows/test.yml
+- ci: update .github/workflows/release.yml
+- ci: update .github/workflows/psalm.yml
+- ci: update .github/workflows/audit.yml
+- chore: update composer.json
+- chore: update CHANGELOG.md
 
 ## 0.2.2 - 2026-06-26
 
