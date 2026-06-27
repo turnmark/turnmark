@@ -1,15 +1,14 @@
 {
-    "$schema": "https://getcomposer.org/schema.json",
     "name": "turnmark/scraper",
     "description": "Turnmark Scraper",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
         "boatrace",
         "library",
         "scraper",
         "turnmark"
     ],
-    "license": "MIT",
-    "type": "library",
     "authors": [
         {
             "name": "shimomo",
@@ -45,5 +44,6 @@
         "branch-alias": {
             "dev-main": "0.2.x-dev"
         }
-    }
+    },
+    "$schema": "https://getcomposer.org/schema.json"
 }
