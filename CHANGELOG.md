@@ -1,5 +1,7 @@
 # Changelog
 
+## Unreleased
+
 ## 0.2.3 - 2026-06-27
 
 - chore: update phpunit.xml.dist
