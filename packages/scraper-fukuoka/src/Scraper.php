@@ -6,6 +6,9 @@ namespace Turnmark\Scraper\Fukuoka;
 
 use DateTimeInterface;
 use Symfony\Component\BrowserKit\HttpBrowser;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Output\NullOutput;
 use Turnmark\Scraper\Converters\Converter;
 use Turnmark\Scraper\Fukuoka\Scrapers\TimeScraper;
 use Turnmark\Scraper\Validators\Validator;
@@ -19,6 +22,11 @@ final class Scraper
      * @var ?float
      */
     private static ?float $lastThrottleAt = null;
+
+    /**
+     * @var bool
+     */
+    private static bool $showProgress = false;
 
     /**
      * @var float
@@ -84,11 +92,32 @@ final class Scraper
     ): array {
         $response = [];
 
-        foreach (array_unique($raceNumbers) as $raceNumber) {
+        $uniqueRaceNumbers = array_unique($raceNumbers);
+        $totalSteps = count($uniqueRaceNumbers);
+
+        $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $progressBar = new ProgressBar($output, $totalSteps);
+        $progressBar->setFormat(
+            ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
+        );
+        $progressBar->start();
+
+        foreach ($uniqueRaceNumbers as $raceNumber) {
             $response[$raceNumber] =
                 self::scrapeTime($date, $raceNumber, $httpBrowser);
+
+            $progressBar->advance();
         }
 
         return $response;
+    }
+
+    /**
+     * @param bool $showProgress
+     * @return void
+     */
+    public static function setShowProgress(bool $showProgress): void
+    {
+        self::$showProgress = $showProgress;
     }
 }
