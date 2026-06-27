@@ -1,5 +1,7 @@
 # Changelog
 
+## Unreleased
+
 ## 0.2.5 - 2026-06-27
 
 - feat: add progress bar to bulk methods
