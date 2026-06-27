@@ -1,19 +1,23 @@
 {
     "name": "turnmark/turnmark",
     "description": "Turnmark",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
         "boatrace",
         "library",
         "turnmark"
     ],
-    "license": "MIT",
     "authors": [
         {
             "name": "shimomo",
             "email": "turnmark@shimomo.net"
         }
     ],
-    "type": "library",
+    "support": {
+        "issues": "https://github.com/turnmark/turnmark/issues",
+        "source": "https://github.com/turnmark/turnmark"
+    },
     "require": {
         "php": "^8.4",
         "nesbot/carbon": "^3.8.4",
@@ -28,17 +32,10 @@
         "symplify/monorepo-builder": "^12.0",
         "vimeo/psalm": "^6.0"
     },
-    "autoload": {
-        "psr-4": {
-            "Turnmark\\Scraper\\": "packages/scraper/src/",
-            "Turnmark\\Scraper\\Fukuoka\\": "packages/scraper-fukuoka/src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Turnmark\\Scraper\\Fukuoka\\Tests\\": "packages/scraper-fukuoka/tests/",
-            "Turnmark\\Scraper\\Tests\\": "packages/scraper/tests/"
-        }
+    "replace": {
+        "turnmark/scraper": "0.2.6",
+        "turnmark/scraper-fukuoka": "0.2.6",
+        "turnmark/scraper-tokuyama": "self.version"
     },
     "repositories": [
         {
@@ -50,18 +47,24 @@
             }
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Turnmark\\Scraper\\": "packages/scraper/src/",
+            "Turnmark\\Scraper\\Fukuoka\\": "packages/scraper-fukuoka/src/",
+            "Turnmark\\Scraper\\Tokuyama\\": "packages/scraper-tokuyama/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Turnmark\\Scraper\\Fukuoka\\Tests\\": "packages/scraper-fukuoka/tests/",
+            "Turnmark\\Scraper\\Tests\\": "packages/scraper/tests/",
+            "Turnmark\\Scraper\\Tokuyama\\Tests\\": "packages/scraper-tokuyama/tests/"
+        }
+    },
     "config": {
         "allow-plugins": {
             "ergebnis/composer-normalize": true
         }
-    },
-    "replace": {
-        "turnmark/scraper": "0.2.6",
-        "turnmark/scraper-fukuoka": "0.2.6"
-    },
-    "support": {
-        "issues": "https://github.com/turnmark/turnmark/issues",
-        "source": "https://github.com/turnmark/turnmark"
     },
     "$schema": "https://getcomposer.org/schema.json"
 }
