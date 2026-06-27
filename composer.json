@@ -56,8 +56,8 @@
         }
     },
     "replace": {
-        "turnmark/scraper": "0.2.5",
-        "turnmark/scraper-fukuoka": "0.2.5"
+        "turnmark/scraper": "0.2.6",
+        "turnmark/scraper-fukuoka": "0.2.6"
     },
     "support": {
         "issues": "https://github.com/turnmark/turnmark/issues",

@@ -1,6 +1,11 @@
 # Changelog
 
-## Unreleased
+## 0.2.6 - 2026-06-27
+
+- style: improve progress bar output in bulk methods
+- feat: add progress bar start message to bulk methods
+- fix: improve progress bar time estimation accuracy in bulk methods
+- chore: update CHANGELOG.md
 
 ## 0.2.5 - 2026-06-27
 
