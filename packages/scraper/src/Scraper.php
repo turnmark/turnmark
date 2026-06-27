@@ -101,7 +101,13 @@ final class Scraper
     ): array {
         $response = [];
 
+        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
+
         foreach (array_unique($stadiumNumbers) as $stadiumNumber) {
+            if (!in_array($stadiumNumber, $activeStadiumNumbers, true)) {
+                continue;
+            }
+
             foreach (array_unique($raceNumbers) as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     self::scrapeProgram($date, $stadiumNumber, $raceNumber, $httpBrowser);
@@ -147,7 +153,13 @@ final class Scraper
     ): array {
         $response = [];
 
+        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
+
         foreach (array_unique($stadiumNumbers) as $stadiumNumber) {
+            if (!in_array($stadiumNumber, $activeStadiumNumbers, true)) {
+                continue;
+            }
+
             foreach (array_unique($raceNumbers) as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     self::scrapePreview($date, $stadiumNumber, $raceNumber, $httpBrowser);
@@ -193,7 +205,13 @@ final class Scraper
     ): array {
         $response = [];
 
+        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
+
         foreach (array_unique($stadiumNumbers) as $stadiumNumber) {
+            if (!in_array($stadiumNumber, $activeStadiumNumbers, true)) {
+                continue;
+            }
+
             foreach (array_unique($raceNumbers) as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     self::scrapeResult($date, $stadiumNumber, $raceNumber, $httpBrowser);
@@ -239,7 +257,13 @@ final class Scraper
     ): array {
         $response = [];
 
+        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
+
         foreach (array_unique($stadiumNumbers) as $stadiumNumber) {
+            if (!in_array($stadiumNumber, $activeStadiumNumbers, true)) {
+                continue;
+            }
+
             foreach (array_unique($raceNumbers) as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     self::scrapeOdds($date, $stadiumNumber, $raceNumber, $httpBrowser);
