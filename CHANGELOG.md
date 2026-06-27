@@ -1,6 +1,10 @@
 # Changelog
 
-## Unreleased
+## 0.2.4 - 2026-06-27
+
+- chore: update composer.json
+- perf: only scrape active stadiums in bulk methods
+- chore: update CHANGELOG.md
 
 ## 0.2.3 - 2026-06-27
 
