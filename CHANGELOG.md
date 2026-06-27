@@ -1,6 +1,12 @@
 # Changelog
 
-## Unreleased
+## 0.2.5 - 2026-06-27
+
+- feat: add progress bar to bulk methods
+- chore: update composer.json
+- chore: update composer.json
+- feat: add progress bar to bulk methods
+- chore: update CHANGELOG.md
 
 ## 0.2.4 - 2026-06-27
 
