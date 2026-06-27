@@ -7,8 +7,6 @@ namespace Turnmark\Scraper\Fukuoka\Tests;
 use Carbon\CarbonImmutable as Carbon;
 
 /**
- * @psalm-import-type Date from \Turnmark\Scraper\Fukuoka\Tests\ScraperPsalmType
- * @psalm-import-type StadiumNumber from \Turnmark\Scraper\Fukuoka\Tests\ScraperPsalmType
  * @psalm-import-type Arguments from \Turnmark\Scraper\Fukuoka\Tests\ScraperPsalmType
  * @psalm-import-type BatchArguments from \Turnmark\Scraper\Fukuoka\Tests\ScraperPsalmType
  * @psalm-import-type Expected from \Turnmark\Scraper\Fukuoka\Tests\ScraperPsalmType

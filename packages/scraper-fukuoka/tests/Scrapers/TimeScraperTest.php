@@ -10,8 +10,8 @@ use PHPUnit\Framework\TestCase;
 use Turnmark\Scraper\Fukuoka\Scrapers\TimeScraper;
 
 /**
- * @psalm-import-type Arguments from \Turnmark\Scraper\Tests\ScraperPsalmType
- * @psalm-import-type Expected from \Turnmark\Scraper\Tests\ScraperPsalmType
+ * @psalm-import-type Arguments from \Turnmark\Scraper\Fukuoka\Tests\ScraperPsalmType
+ * @psalm-import-type Expected from \Turnmark\Scraper\Fukuoka\Tests\ScraperPsalmType
  *
  * @author shimomo
  */
