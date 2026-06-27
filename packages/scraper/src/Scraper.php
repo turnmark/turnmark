@@ -137,6 +137,7 @@ final class Scraper
         $progressBar->finish();
         $output->writeln('');
         $output->writeln("<info>✅ 出走表のスクレイピングが完了しました（{$totalSteps}件）</info>");
+        $output->writeln('');
 
         return $response;
     }
@@ -205,6 +206,7 @@ final class Scraper
         $progressBar->finish();
         $output->writeln('');
         $output->writeln("<info>✅ 直前情報のスクレイピングが完了しました（{$totalSteps}件）</info>");
+        $output->writeln('');
 
         return $response;
     }
@@ -273,6 +275,7 @@ final class Scraper
         $progressBar->finish();
         $output->writeln('');
         $output->writeln("<info>✅ 結果のスクレイピングが完了しました（{$totalSteps}件）</info>");
+        $output->writeln('');
 
         return $response;
     }
@@ -341,6 +344,7 @@ final class Scraper
         $progressBar->finish();
         $output->writeln('');
         $output->writeln("<info>✅ オッズのスクレイピングが完了しました（{$totalSteps}件）</info>");
+        $output->writeln('');
 
         return $response;
     }
