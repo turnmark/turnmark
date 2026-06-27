@@ -9,8 +9,8 @@
     findUnusedCode="false"
 >
     <projectFiles>
-        <directory name="packages/scraper/src"/>
-        <directory name="packages/scraper/tests"/>
+        <directory name="packages/*/src"/>
+        <directory name="packages/*/tests"/>
     </projectFiles>
 
     <stubs>
