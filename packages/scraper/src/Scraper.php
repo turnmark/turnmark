@@ -111,7 +111,11 @@ final class Scraper
 
         $uniqueStadiumNumbers = array_unique($stadiumNumbers);
         $uniqueRaceNumbers = array_unique($raceNumbers);
-        $totalSteps = count($uniqueStadiumNumbers) * count($uniqueRaceNumbers);
+
+        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
+        $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
+
+        $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
 
         $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
         $progressBar = new ProgressBar($output, $totalSteps);
@@ -120,15 +124,7 @@ final class Scraper
         );
         $progressBar->start();
 
-        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
-
-        foreach ($uniqueStadiumNumbers as $stadiumNumber) {
-            if (!in_array($stadiumNumber, $activeStadiumNumbers, true)) {
-                $progressBar->advance();
-
-                continue;
-            }
-
+        foreach ($activeUniqueStadiumNumbers as $stadiumNumber) {
             foreach ($uniqueRaceNumbers as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     self::scrapeProgram($date, $stadiumNumber, $raceNumber, $httpBrowser);
@@ -182,7 +178,11 @@ final class Scraper
 
         $uniqueStadiumNumbers = array_unique($stadiumNumbers);
         $uniqueRaceNumbers = array_unique($raceNumbers);
-        $totalSteps = count($uniqueStadiumNumbers) * count($uniqueRaceNumbers);
+
+        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
+        $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
+
+        $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
 
         $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
         $progressBar = new ProgressBar($output, $totalSteps);
@@ -191,15 +191,7 @@ final class Scraper
         );
         $progressBar->start();
 
-        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
-
-        foreach ($uniqueStadiumNumbers as $stadiumNumber) {
-            if (!in_array($stadiumNumber, $activeStadiumNumbers, true)) {
-                $progressBar->advance();
-
-                continue;
-            }
-
+        foreach ($activeUniqueStadiumNumbers as $stadiumNumber) {
             foreach ($uniqueRaceNumbers as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     self::scrapePreview($date, $stadiumNumber, $raceNumber, $httpBrowser);
@@ -253,7 +245,11 @@ final class Scraper
 
         $uniqueStadiumNumbers = array_unique($stadiumNumbers);
         $uniqueRaceNumbers = array_unique($raceNumbers);
-        $totalSteps = count($uniqueStadiumNumbers) * count($uniqueRaceNumbers);
+
+        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
+        $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
+
+        $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
 
         $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
         $progressBar = new ProgressBar($output, $totalSteps);
@@ -262,15 +258,7 @@ final class Scraper
         );
         $progressBar->start();
 
-        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
-
         foreach ($uniqueStadiumNumbers as $stadiumNumber) {
-            if (!in_array($stadiumNumber, $activeStadiumNumbers, true)) {
-                $progressBar->advance();
-
-                continue;
-            }
-
             foreach ($uniqueRaceNumbers as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     self::scrapeResult($date, $stadiumNumber, $raceNumber, $httpBrowser);
@@ -324,7 +312,11 @@ final class Scraper
 
         $uniqueStadiumNumbers = array_unique($stadiumNumbers);
         $uniqueRaceNumbers = array_unique($raceNumbers);
-        $totalSteps = count($uniqueStadiumNumbers) * count($uniqueRaceNumbers);
+
+        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
+        $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
+
+        $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
 
         $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
         $progressBar = new ProgressBar($output, $totalSteps);
@@ -333,15 +325,7 @@ final class Scraper
         );
         $progressBar->start();
 
-        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
-
-        foreach ($uniqueStadiumNumbers as $stadiumNumber) {
-            if (!in_array($stadiumNumber, $activeStadiumNumbers, true)) {
-                $progressBar->advance();
-
-                continue;
-            }
-
+        foreach ($activeUniqueStadiumNumbers as $stadiumNumber) {
             foreach ($uniqueRaceNumbers as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     self::scrapeOdds($date, $stadiumNumber, $raceNumber, $httpBrowser);
