@@ -1,5 +1,7 @@
 # Changelog
 
+## Unreleased
+
 ## 0.2.8 - 2026-06-28
 
 - style: clean up code style
