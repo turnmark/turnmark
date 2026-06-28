@@ -1,5 +1,7 @@
 # Changelog
 
+## Unreleased
+
 ## 0.2.14 - 2026-06-28
 
 - ci: update .github/workflows/split.yml
