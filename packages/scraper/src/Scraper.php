@@ -103,21 +103,21 @@ final class Scraper
      */
     public static function scrapeProgramBulk(
         DateTimeInterface|string $date,
-        array $stadiumNumbers = self::STADIUM_NUMBERS,
-        array $raceNumbers = self::RACE_NUMBERS,
+        array $stadiumNumbers = [],
+        array $raceNumbers = [],
         ?HttpBrowser $httpBrowser = null,
     ): array {
         $response = [];
 
-        $uniqueStadiumNumbers = array_unique($stadiumNumbers);
-        $uniqueRaceNumbers = array_unique($raceNumbers);
+        $uniqueStadiumNumbers = array_unique($stadiumNumbers ?: self::getStadiumNumbers());
+        $uniqueRaceNumbers = array_unique($raceNumbers ?: self::getRaceNumbers());
 
         $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
         $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
 
         $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
 
-        $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $output = self::getShowProgress() ? new ConsoleOutput() : new NullOutput();
         $output->writeln('<info>📊 出走表のスクレイピングを開始します</info>');
         $progressBar = new ProgressBar($output, $totalSteps);
         $progressBar->setFormat(
@@ -172,21 +172,21 @@ final class Scraper
      */
     public static function scrapePreviewBulk(
         DateTimeInterface|string $date,
-        array $stadiumNumbers = self::STADIUM_NUMBERS,
-        array $raceNumbers = self::RACE_NUMBERS,
+        array $stadiumNumbers = [],
+        array $raceNumbers = [],
         ?HttpBrowser $httpBrowser = null,
     ): array {
         $response = [];
 
-        $uniqueStadiumNumbers = array_unique($stadiumNumbers);
-        $uniqueRaceNumbers = array_unique($raceNumbers);
+        $uniqueStadiumNumbers = array_unique($stadiumNumbers ?: self::getStadiumNumbers());
+        $uniqueRaceNumbers = array_unique($raceNumbers ?: self::getRaceNumbers());
 
         $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
         $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
 
         $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
 
-        $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $output = self::getShowProgress() ? new ConsoleOutput() : new NullOutput();
         $output->writeln('<info>📊 直前情報のスクレイピングを開始します</info>');
         $progressBar = new ProgressBar($output, $totalSteps);
         $progressBar->setFormat(
@@ -241,21 +241,21 @@ final class Scraper
      */
     public static function scrapeResultBulk(
         DateTimeInterface|string $date,
-        array $stadiumNumbers = self::STADIUM_NUMBERS,
-        array $raceNumbers = self::RACE_NUMBERS,
+        array $stadiumNumbers = [],
+        array $raceNumbers = [],
         ?HttpBrowser $httpBrowser = null,
     ): array {
         $response = [];
 
-        $uniqueStadiumNumbers = array_unique($stadiumNumbers);
-        $uniqueRaceNumbers = array_unique($raceNumbers);
+        $uniqueStadiumNumbers = array_unique($stadiumNumbers ?: self::getStadiumNumbers());
+        $uniqueRaceNumbers = array_unique($raceNumbers ?: self::getRaceNumbers());
 
         $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
         $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
 
         $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
 
-        $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $output = self::getShowProgress() ? new ConsoleOutput() : new NullOutput();
         $output->writeln('<info>📊 結果のスクレイピングを開始します</info>');
         $progressBar = new ProgressBar($output, $totalSteps);
         $progressBar->setFormat(
@@ -310,21 +310,21 @@ final class Scraper
      */
     public static function scrapeOddsBulk(
         DateTimeInterface|string $date,
-        array $stadiumNumbers = self::STADIUM_NUMBERS,
-        array $raceNumbers = self::RACE_NUMBERS,
+        array $stadiumNumbers = [],
+        array $raceNumbers = [],
         ?HttpBrowser $httpBrowser = null,
     ): array {
         $response = [];
 
-        $uniqueStadiumNumbers = array_unique($stadiumNumbers);
-        $uniqueRaceNumbers = array_unique($raceNumbers);
+        $uniqueStadiumNumbers = array_unique($stadiumNumbers ?: self::getStadiumNumbers());
+        $uniqueRaceNumbers = array_unique($raceNumbers ?: self::getRaceNumbers());
 
         $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
         $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
 
         $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
 
-        $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $output = self::getShowProgress() ? new ConsoleOutput() : new NullOutput();
         $output->writeln('<info>📊 オッズのスクレイピングを開始します</info>');
         $progressBar = new ProgressBar($output, $totalSteps);
         $progressBar->setFormat(
@@ -364,11 +364,35 @@ final class Scraper
     }
 
     /**
+     * @return bool
+     */
+    public static function getShowProgress(): bool
+    {
+        return self::$showProgress;
+    }
+
+    /**
      * @param bool $showProgress
      * @return void
      */
     public static function setShowProgress(bool $showProgress): void
     {
         self::$showProgress = $showProgress;
+    }
+
+    /**
+     * @return non-empty-list<int<1, 24>>
+     */
+    public static function getStadiumNumbers(): array
+    {
+        return self::STADIUM_NUMBERS;
+    }
+
+    /**
+     * @return non-empty-list<int<1, 12>>
+     */
+    public static function getRaceNumbers(): array
+    {
+        return self::RACE_NUMBERS;
     }
 }
