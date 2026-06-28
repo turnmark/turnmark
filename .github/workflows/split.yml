@@ -58,6 +58,11 @@ jobs:
           git fetch "${REMOTE}" main || true
           git push "${REMOTE}" "${SHA}:refs/heads/main" --force
 
+          echo "✓ Branch pushed at $(date)"
+
+      - name: Wait After Branch Push
+        run: sleep 30
+
       - name: Push Tag
         env:
           GH_TOKEN: ${{ secrets.TURNMARK_ACCESS_TOKEN }}
@@ -76,11 +81,23 @@ jobs:
           git push "${REMOTE}" "refs/tags/${TAG}"
           git tag -d "${TAG}"
 
+          echo "✓ Tag pushed at $(date)"
+
+      - name: Wait After Tag Push
+        run: sleep 30
+
       - name: Create Release
         env:
           GH_TOKEN: ${{ secrets.TURNMARK_ACCESS_TOKEN }}
         run: |
+          if gh release view "${{ env.TAG }}" --repo "turnmark/${{ matrix.package.name }}" 2>/dev/null; then
+            echo "Release already exists, skipping..."
+            exit 0
+          fi
+
           gh release create "${{ env.TAG }}" \
             --repo "turnmark/${{ matrix.package.name }}" \
             --title "${{ env.TAG }}" \
             --notes "Release ${{ env.TAG }}"
+
+          echo "✓ Release created at $(date)"
