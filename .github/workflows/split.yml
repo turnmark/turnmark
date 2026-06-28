@@ -75,6 +75,15 @@ jobs:
           git push "${REMOTE}" "refs/tags/${TAG}"
           git tag -d "${TAG}"
 
+      - name: Create Release
+        env:
+          GH_TOKEN: ${{ secrets.TURNMARK_ACCESS_TOKEN }}
+        run: |
+          gh release create "${{ env.TAG }}" \
+            --repo "turnmark/${{ matrix.package.name }}" \
+            --title "${{ env.TAG }}" \
+            --notes "Release ${{ env.TAG }}"
+
       - name: Trigger Packagist Update
         env:
           PACKAGIST_TOKEN: ${{ secrets.TURNMARK_PACKAGIST_TOKEN }}
