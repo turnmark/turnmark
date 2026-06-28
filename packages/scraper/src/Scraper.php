@@ -379,7 +379,7 @@ final class Scraper
         );
         $progressBar->start();
 
-        foreach ($uniqueStadiumNumbers as $stadiumNumber) {
+        foreach ($activeUniqueStadiumNumbers as $stadiumNumber) {
             foreach ($uniqueRaceNumbers as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     self::scrapeResult($date, $stadiumNumber, $raceNumber, $httpBrowser);
