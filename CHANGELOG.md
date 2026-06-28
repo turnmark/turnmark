@@ -1,6 +1,16 @@
 # Changelog
 
-## Unreleased
+## 0.2.8 - 2026-06-28
+
+- style: clean up code style
+- refactor: clean up code
+- refactor: clean up code
+- refactor: clean up code
+- docs: update README.md
+- docs: add assets/logos/turnmark_01.png
+- docs: add README.md
+- ci: add .github/workflows/keepalive.yml
+- chore: update CHANGELOG.md
 
 ## 0.2.7 - 2026-06-27
 
