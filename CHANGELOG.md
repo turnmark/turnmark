@@ -1,6 +1,11 @@
 # Changelog
 
-## Unreleased
+## 0.2.10 - 2026-06-28
+
+- docs: update README.md
+- refactor: clean up code
+- ci: update .github/workflows/split.yml
+- chore: update CHANGELOG.md
 
 ## 0.2.9 - 2026-06-28
 
