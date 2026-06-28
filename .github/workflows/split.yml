@@ -46,7 +46,7 @@ jobs:
           echo "sha=$SHA" >> "$GITHUB_OUTPUT"
           echo "Split SHA: $SHA"
 
-      - name: Push Repository
+      - name: Push Branch
         env:
           GH_TOKEN: ${{ secrets.TURNMARK_ACCESS_TOKEN }}
         run: |
@@ -56,6 +56,14 @@ jobs:
 
           git fetch "${REMOTE}" main || true
           git push "${REMOTE}" "${SHA}:refs/heads/main" --force
+
+      - name: Push Tag
+        env:
+          GH_TOKEN: ${{ secrets.TURNMARK_ACCESS_TOKEN }}
+        run: |
+          REPO=${{ matrix.package.name }}
+          SHA=${{ steps.split.outputs.sha }}
+          REMOTE=https://github.com/turnmark/${REPO}.git
 
           if git ls-remote --tags "${REMOTE}" "refs/tags/${TAG}" | grep -q .; then
             echo "Tag already exists."
