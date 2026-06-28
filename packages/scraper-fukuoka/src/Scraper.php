@@ -9,8 +9,8 @@ use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\NullOutput;
-use Turnmark\Scraper\Converters\Converter;
 use Turnmark\Scraper\Fukuoka\Scrapers\TimeScraper;
+use Turnmark\Scraper\Scraper as BoatraceScraper;
 use Turnmark\Scraper\Validators\Validator;
 
 /**
@@ -18,49 +18,6 @@ use Turnmark\Scraper\Validators\Validator;
  */
 final class Scraper
 {
-    /**
-     * @var ?float
-     */
-    private static ?float $lastThrottleAt = null;
-
-    /**
-     * @var bool
-     */
-    private static bool $showProgress = false;
-
-    /**
-     * @var float
-     */
-    private const float MIN_CALL_INTERVAL_SECONDS = 3.0;
-
-    /**
-     * @var non-empty-list<int<1, 12>>
-     */
-    private const array RACE_NUMBERS = [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
-    ];
-
-    /**
-     * @return void
-     */
-    public static function throttle(): void
-    {
-        if (self::$lastThrottleAt !== null) {
-            $elapsedSeconds = microtime(true) - self::$lastThrottleAt;
-            $remainingSeconds = self::MIN_CALL_INTERVAL_SECONDS - $elapsedSeconds;
-
-            if ($remainingSeconds > 0) {
-                $sleepMicroseconds = Converter::toIntStrict(
-                    $remainingSeconds * 1_000_000.0
-                );
-
-                usleep($sleepMicroseconds);
-            }
-        }
-
-        self::$lastThrottleAt = microtime(true);
-    }
-
     /**
      * @param \DateTimeInterface|non-empty-string $date
      * @param int<1, 12> $raceNumber
@@ -72,7 +29,7 @@ final class Scraper
         int $raceNumber,
         ?HttpBrowser $httpBrowser = null
     ): array {
-        self::throttle();
+        BoatraceScraper::throttle();
 
         Validator::validateRaceNumber($raceNumber);
 
@@ -87,15 +44,15 @@ final class Scraper
      */
     public static function scrapeTimeBulk(
         DateTimeInterface|string $date,
-        array $raceNumbers = self::RACE_NUMBERS,
+        array $raceNumbers = [],
         ?HttpBrowser $httpBrowser = null,
     ): array {
         $response = [];
 
-        $uniqueRaceNumbers = array_unique($raceNumbers);
+        $uniqueRaceNumbers = array_unique($raceNumbers ?: BoatraceScraper::getRaceNumbers());
         $totalSteps = count($uniqueRaceNumbers);
 
-        $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $output = BoatraceScraper::getShowProgress() ? new ConsoleOutput() : new NullOutput();
         $progressBar = new ProgressBar($output, $totalSteps);
         $progressBar->setFormat(
             ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
@@ -110,14 +67,5 @@ final class Scraper
         }
 
         return $response;
-    }
-
-    /**
-     * @param bool $showProgress
-     * @return void
-     */
-    public static function setShowProgress(bool $showProgress): void
-    {
-        self::$showProgress = $showProgress;
     }
 }
