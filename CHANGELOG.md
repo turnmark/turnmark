@@ -1,6 +1,9 @@
 # Changelog
 
-## Unreleased
+## 0.2.18 - 2026-06-28
+
+- ci: update .github/workflows/split.yml
+- chore: update CHANGELOG.md
 
 ## 0.2.17 - 2026-06-28
 
