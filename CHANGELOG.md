@@ -1,5 +1,7 @@
 # Changelog
 
+## Unreleased
+
 ## 0.2.9 - 2026-06-28
 
 - feat: add unknown case to Place enum
