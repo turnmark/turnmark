@@ -1,5 +1,7 @@
 # Changelog
 
+## Unreleased
+
 ## 0.2.10 - 2026-06-28
 
 - docs: update README.md
