@@ -11,6 +11,7 @@ use Turnmark\Scraper\Contracts\Scraper;
 use Turnmark\Scraper\Factories\HttpBrowserFactory;
 use Turnmark\Scraper\Filters\Filter;
 use Turnmark\Scraper\Filters\OddsFilter;
+use Turnmark\Scraper\Scraper as BoatraceScraper;
 
 /**
  * @author shimomo
@@ -51,13 +52,13 @@ final class OddsScraper implements Scraper
         $response = [];
 
         $response += self::scrapeTrifecta($date, $stadiumNumber, $raceNumber, $httpBrowser);
-        \Turnmark\Scraper\Scraper::throttle();
+        BoatraceScraper::throttle();
         $response += self::scrapeTrio($date, $stadiumNumber, $raceNumber, $httpBrowser);
-        \Turnmark\Scraper\Scraper::throttle();
+        BoatraceScraper::throttle();
         $response += self::scrapeExactaAndQuinella($date, $stadiumNumber, $raceNumber, $httpBrowser);
-        \Turnmark\Scraper\Scraper::throttle();
+        BoatraceScraper::throttle();
         $response += self::scrapeQuinellaPlace($date, $stadiumNumber, $raceNumber, $httpBrowser);
-        \Turnmark\Scraper\Scraper::throttle();
+        BoatraceScraper::throttle();
         $response += self::scrapeWinAndPlace($date, $stadiumNumber, $raceNumber, $httpBrowser);
 
         return $response;
