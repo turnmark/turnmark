@@ -27,6 +27,7 @@ enum Place: int
     case F = 14;
     case L = 15;
     case 欠 = 16;
+    case _ = 17;
 
     /**
      * @return non-empty-string
@@ -50,6 +51,7 @@ enum Place: int
             self::F => 'フライング',
             self::L => '出遅れ',
             self::欠 => '欠場',
+            self::_ => '_',
         };
     }
 
@@ -75,6 +77,7 @@ enum Place: int
             self::F => 'F',
             self::L => 'L',
             self::欠 => '欠',
+            self::_ => '_',
         };
     }
 
