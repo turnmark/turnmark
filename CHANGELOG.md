@@ -1,5 +1,7 @@
 # Changelog
 
+## Unreleased
+
 ## 0.2.11 - 2026-06-28
 
 - fix: improve progress bar time estimation accuracy in bulk methods
