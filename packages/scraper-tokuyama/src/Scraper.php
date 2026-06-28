@@ -19,18 +19,6 @@ use Turnmark\Scraper\Validators\Validator;
 final class Scraper
 {
     /**
-     * @var bool
-     */
-    private static bool $showProgress = false;
-
-    /**
-     * @var non-empty-list<int<1, 12>>
-     */
-    private const array RACE_NUMBERS = [
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
-    ];
-
-    /**
      * @param \DateTimeInterface|non-empty-string $date
      * @param int<1, 12> $raceNumber
      * @param ?\Symfony\Component\BrowserKit\HttpBrowser $httpBrowser
@@ -56,15 +44,15 @@ final class Scraper
      */
     public static function scrapeTimeBulk(
         DateTimeInterface|string $date,
-        array $raceNumbers = self::RACE_NUMBERS,
+        array $raceNumbers = [],
         ?HttpBrowser $httpBrowser = null,
     ): array {
         $response = [];
 
-        $uniqueRaceNumbers = array_unique($raceNumbers);
+        $uniqueRaceNumbers = array_unique($raceNumbers ?: BoatraceScraper::getRaceNumbers());
         $totalSteps = count($uniqueRaceNumbers);
 
-        $output = self::$showProgress ? new ConsoleOutput() : new NullOutput();
+        $output = BoatraceScraper::getShowProgress() ? new ConsoleOutput() : new NullOutput();
         $progressBar = new ProgressBar($output, $totalSteps);
         $progressBar->setFormat(
             ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
@@ -79,14 +67,5 @@ final class Scraper
         }
 
         return $response;
-    }
-
-    /**
-     * @param bool $showProgress
-     * @return void
-     */
-    public static function setShowProgress(bool $showProgress): void
-    {
-        self::$showProgress = $showProgress;
     }
 }
