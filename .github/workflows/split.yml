@@ -79,7 +79,7 @@ jobs:
         env:
           PACKAGIST_TOKEN: ${{ secrets.TURNMARK_PACKAGIST_TOKEN }}
         run: |
-          curl --fail --silent --show-error \
+          sleep 10 && curl --fail --silent --show-error \
             -X POST https://packagist.org/api/update-package \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer shimomo:${PACKAGIST_TOKEN}" \
