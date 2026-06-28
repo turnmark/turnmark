@@ -1,6 +1,9 @@
 # Changelog
 
-## Unreleased
+## 0.2.9 - 2026-06-28
+
+- feat: add unknown case to Place enum
+- chore: update CHANGELOG.md
 
 ## 0.2.8 - 2026-06-28
 
