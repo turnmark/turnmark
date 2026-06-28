@@ -74,3 +74,13 @@ jobs:
           git tag -a "${TAG}" "${SHA}" -m "${TAG}"
           git push "${REMOTE}" "refs/tags/${TAG}"
           git tag -d "${TAG}"
+
+      - name: Trigger Packagist Update
+        env:
+          PACKAGIST_TOKEN: ${{ secrets.TURNMARK_PACKAGIST_TOKEN }}
+        run: |
+          curl --fail --silent --show-error \
+            -X POST https://packagist.org/api/update-package \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer shimomo:${PACKAGIST_TOKEN}" \
+            -d "{\"repository\":\"https://github.com/turnmark/${{ matrix.package.name }}\"}"
