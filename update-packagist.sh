@@ -2,7 +2,7 @@
 
 set -eu
 
-PACKAGIST_TOKEN="647a90c72b63289d1eb8499dca917e05a6ef7dce"
+PACKAGIST_TOKEN=""
 
 PACKAGE_NAMES="
 scraper
