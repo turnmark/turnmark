@@ -37,3 +37,17 @@ jobs:
           tag: ${{ github.ref_name }}
           user_name: github-actions[bot]
           user_email: github-actions[bot]@users.noreply.github.com
+
+      - name: Create Release ${{ matrix.package }}
+        env:
+          GH_TOKEN: ${{ secrets.TURNMARK_ACCESS_TOKEN }}
+        run: |
+          if gh release view "${{ github.ref_name }}" --repo "turnmark/${{ matrix.package }}" 2>/dev/null; then
+            echo 'Release already exists.'
+            exit 0
+          fi
+
+          gh release create "${{ github.ref_name }}" \
+            --repo "turnmark/${{ matrix.package }}" \
+            --title "${{ github.ref_name }}" \
+            --notes "Release ${{ github.ref_name }}"
