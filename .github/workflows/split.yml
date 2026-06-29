@@ -50,17 +50,4 @@ jobs:
           gh release create "${{ github.ref_name }}" \
             --repo "turnmark/${{ matrix.package }}" \
             --title "${{ github.ref_name }}" \
-            --generate-notes \
-            --notes "
-              ## Package
-
-              ${{ matrix.package }}
-
-              This package is automatically split from the monorepo.
-
-              Install:
-
-              \`\`\`bash
-              composer require turnmark/${{ matrix.package }}
-              \`\`\`
-            "
+            --generate-notes
