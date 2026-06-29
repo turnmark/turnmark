@@ -60,10 +60,10 @@
         }
     },
     "replace": {
-        "turnmark/scraper": "0.2.26",
-        "turnmark/scraper-fukuoka": "0.2.26",
-        "turnmark/scraper-tamagawa": "0.2.26",
-        "turnmark/scraper-tokuyama": "0.2.26"
+        "turnmark/scraper": "0.2.27",
+        "turnmark/scraper-fukuoka": "0.2.27",
+        "turnmark/scraper-tamagawa": "0.2.27",
+        "turnmark/scraper-tokuyama": "0.2.27"
     },
     "support": {
         "issues": "https://github.com/turnmark/turnmark/issues",

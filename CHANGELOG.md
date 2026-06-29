@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.2.27 - 2026-06-29
+
+- chore: update CHANGELOG.md
 
 ## 0.2.26 - 2026-06-29
 
