@@ -23,10 +23,6 @@ for dir in packages/*; do
         "split-$package:main" \
         --force
 
-    git push \
-        "git@github.com:turnmark/$package.git" \
-        "${version}"
-
     gh release create \
         "$version" \
         --repo "turnmark/$package" \
