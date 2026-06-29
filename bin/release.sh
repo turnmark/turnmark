@@ -23,11 +23,5 @@ for dir in packages/*; do
         "split-$package:main" \
         --force
 
-    gh release create \
-        "$version" \
-        --repo "turnmark/$package" \
-        --generate-notes \
-        || true
-
     git branch -D "split-$package"
 done
