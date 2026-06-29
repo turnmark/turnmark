@@ -17,6 +17,7 @@ jobs:
         package:
           - scraper
           - scraper-fukuoka
+          - scraper-tamagawa
           - scraper-tokuyama
     steps:
       - name: Checkout Repository
