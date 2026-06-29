@@ -1,6 +1,12 @@
 # Changelog
 
-## Unreleased
+## 0.2.28 - 2026-06-29
+
+- ci: update .github/workflows/split.yml
+- chore: update composer.json
+- chore: update composer.json
+- feat: add scraper mikuni packages
+- chore: update CHANGELOG.md
 
 ## 0.2.27 - 2026-06-29
 
