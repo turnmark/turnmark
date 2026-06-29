@@ -1,22 +1,26 @@
 {
     "name": "turnmark/turnmark",
     "description": "Turnmark",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
         "boatrace",
         "library",
         "turnmark"
     ],
-    "license": "MIT",
     "authors": [
         {
             "name": "shimomo",
             "email": "turnmark@shimomo.net"
         }
     ],
-    "type": "library",
+    "support": {
+        "issues": "https://github.com/turnmark/turnmark/issues",
+        "source": "https://github.com/turnmark/turnmark"
+    },
     "require": {
-        "nesbot/carbon": "^3.8.4",
         "php": "^8.4",
+        "nesbot/carbon": "^3.8.4",
         "symfony/browser-kit": "^8.0",
         "symfony/console": "^8.0",
         "symfony/css-selector": "^8.0",
@@ -28,21 +32,12 @@
         "symplify/monorepo-builder": "^12.0",
         "vimeo/psalm": "^6.0"
     },
-    "autoload": {
-        "psr-4": {
-            "Turnmark\\Scraper\\": "packages/scraper/src/",
-            "Turnmark\\Scraper\\Fukuoka\\": "packages/scraper-fukuoka/src/",
-            "Turnmark\\Scraper\\Tamagawa\\": "packages/scraper-tamagawa/src/",
-            "Turnmark\\Scraper\\Tokuyama\\": "packages/scraper-tokuyama/src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Turnmark\\Scraper\\Fukuoka\\Tests\\": "packages/scraper-fukuoka/tests/",
-            "Turnmark\\Scraper\\Tamagawa\\Tests\\": "packages/scraper-tamagawa/tests/",
-            "Turnmark\\Scraper\\Tests\\": "packages/scraper/tests/",
-            "Turnmark\\Scraper\\Tokuyama\\Tests\\": "packages/scraper-tokuyama/tests/"
-        }
+    "replace": {
+        "turnmark/scraper": "0.2.27",
+        "turnmark/scraper-fukuoka": "0.2.27",
+        "turnmark/scraper-mikuni": "self.version",
+        "turnmark/scraper-tamagawa": "0.2.27",
+        "turnmark/scraper-tokuyama": "0.2.27"
     },
     "repositories": [
         {
@@ -54,20 +49,36 @@
             }
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Turnmark\\Scraper\\": "packages/scraper/src/",
+            "Turnmark\\Scraper\\Fukuoka\\": "packages/scraper-fukuoka/src/",
+            "Turnmark\\Scraper\\Mikuni\\": "packages/scraper-mikuni/src/",
+            "Turnmark\\Scraper\\Tamagawa\\": "packages/scraper-tamagawa/src/",
+            "Turnmark\\Scraper\\Tokuyama\\": "packages/scraper-tokuyama/src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Turnmark\\Scraper\\Fukuoka\\Tests\\": "packages/scraper-fukuoka/tests/",
+            "Turnmark\\Scraper\\Mikuni\\Tests\\": "packages/scraper-mikuni/tests/",
+            "Turnmark\\Scraper\\Tamagawa\\Tests\\": "packages/scraper-tamagawa/tests/",
+            "Turnmark\\Scraper\\Tests\\": "packages/scraper/tests/",
+            "Turnmark\\Scraper\\Tokuyama\\Tests\\": "packages/scraper-tokuyama/tests/"
+        }
+    },
     "config": {
         "allow-plugins": {
             "ergebnis/composer-normalize": true
         }
     },
-    "replace": {
-        "turnmark/scraper": "0.2.27",
-        "turnmark/scraper-fukuoka": "0.2.27",
-        "turnmark/scraper-tamagawa": "0.2.27",
-        "turnmark/scraper-tokuyama": "0.2.27"
-    },
-    "support": {
-        "issues": "https://github.com/turnmark/turnmark/issues",
-        "source": "https://github.com/turnmark/turnmark"
+    "scripts": {
+        "sync:monorepo": [
+            "monorepo-builder merge",
+            "@composer update",
+            "@composer normalize"
+        ],
+        "test": "phpunit"
     },
     "$schema": "https://getcomposer.org/schema.json"
 }
