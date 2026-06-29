@@ -17,6 +17,7 @@ jobs:
         package:
           - scraper
           - scraper-fukuoka
+          - scraper-mikuni
           - scraper-tamagawa
           - scraper-tokuyama
     steps:
