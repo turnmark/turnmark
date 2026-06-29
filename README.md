@@ -14,6 +14,8 @@ Turnmark は、ボートレース（ 競艇 ）関連のパッケージを開発
 |---------|-------------|-----------|
 | `turnmark/scraper` | ボートレース公式サイトのスクレイピング | https://packagist.org/packages/turnmark/scraper |
 | `turnmark/scraper-fukuoka` | ボートレース福岡公式サイトのスクレイピング | https://packagist.org/packages/turnmark/scraper-fukuoka |
+| `turnmark/scraper-mikuni` | ボートレース三国公式サイトのスクレイピング | https://packagist.org/packages/turnmark/scraper-mikuni |
+| `turnmark/scraper-tamagawa` | ボートレース多摩川公式サイトのスクレイピング | https://packagist.org/packages/turnmark/scraper-tamagawa |
 | `turnmark/scraper-tokuyama` | ボートレース徳山公式サイトのスクレイピング | https://packagist.org/packages/turnmark/scraper-tokuyama |
 
 ## 🗂️ リポジトリ構造
@@ -25,6 +27,8 @@ Turnmark は、ボートレース（ 競艇 ）関連のパッケージを開発
 ├── packages/
 │   ├── scraper/
 │   ├── scraper-fukuoka/
+│   ├── scraper-mikuni/
+│   ├── scraper-tamagawa/
 │   └── scraper-tokuyama/
 ├── .editorconfig
 ├── .gitignore
