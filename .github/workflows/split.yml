@@ -35,5 +35,5 @@ jobs:
           repository_name: ${{ matrix.package }}
           branch: main
           tag: ${{ github.ref_name }}
-          user-name: github-actions[bot]
-          user-email: github-actions[bot]@users.noreply.github.com
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
