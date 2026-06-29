@@ -1,6 +1,11 @@
 # Changelog
 
-## Unreleased
+## 0.2.26 - 2026-06-29
+
+- ci: update .github/workflows/split.yml
+- chore: update composer.json
+- feat: add scraper tamagawa packages
+- chore: update CHANGELOG.md
 
 ## 0.2.25 - 2026-06-29
 
