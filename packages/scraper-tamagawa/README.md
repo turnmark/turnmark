@@ -10,7 +10,7 @@ Turnmark Scraper Tamagawa は、ボートレース多摩川の公式サイトか
 ## 📦 Requirements
 
 - php: ^8.4
-- turnmark/scraper: ^0.2
+- turnmark/scraper: ^0.3
 
 ## 💾 Installation
 
