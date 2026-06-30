@@ -70,11 +70,11 @@
         }
     },
     "replace": {
-        "turnmark/scraper": "0.2.62",
-        "turnmark/scraper-fukuoka": "0.2.62",
-        "turnmark/scraper-mikuni": "0.2.62",
-        "turnmark/scraper-tamagawa": "0.2.62",
-        "turnmark/scraper-tokuyama": "0.2.62"
+        "turnmark/scraper": "0.2.61",
+        "turnmark/scraper-fukuoka": "0.2.61",
+        "turnmark/scraper-mikuni": "0.2.61",
+        "turnmark/scraper-tamagawa": "0.2.61",
+        "turnmark/scraper-tokuyama": "0.2.61"
     },
     "support": {
         "issues": "https://github.com/turnmark/turnmark/issues",
