@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## [0.2.63] - 2026-06-30
+
+- chore: update CHANGELOG.md
+
+
+## [0.2.63] - 2026-06-30
+
+- chore: update CHANGELOG.md
+
+
 ## 0.2.62 - 2026-06-30
 
 ## [0.2.62] - 2026-06-30
