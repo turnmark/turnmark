@@ -35,7 +35,6 @@ Turnmark は、ボートレース（ 競艇 ）関連のパッケージを開発
 ├── CHANGELOG.md
 ├── composer.json
 ├── LICENSE
-├── monorepo-builder.php
 ├── phpunit.xml.dist
 ├── psalm.xml.dist
 └── README.md
