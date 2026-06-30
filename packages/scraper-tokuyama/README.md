@@ -10,7 +10,7 @@ Turnmark Scraper Tokuyama は、ボートレース徳山の公式サイトから
 ## 📦 Requirements
 
 - php: ^8.4
-- turnmark/scraper: ^0.2
+- turnmark/scraper: ^0.3
 
 ## 💾 Installation
 
