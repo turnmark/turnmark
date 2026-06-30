@@ -2,6 +2,28 @@
 
 ## Unreleased
 
+## [0.3.0] - 2026-06-30
+
+- docs: update README.md
+- docs: update README.md
+- docs: update README.md
+- docs: update README.md
+- docs: update README.md
+- docs: update README.md
+- docs: add assets/icons/turnmark_02.png
+- docs: add assets/icons/turnmark_01.png
+- chore: update .gitignore
+- docs: remove assets/buika_512_512.png
+- docs: remove assets/buika_1254_1254.png
+- docs: update assets/logos/turnmark_01.png
+- docs: update README.md
+- chore: remove composer_old.json
+- chore: remove monorepo-builder.php
+- ci: remove .github/workflows/validate.yml
+- chore: update composer.json
+- chore: update CHANGELOG.md
+
+
 ## [0.2.66] - 2026-06-30
 
 - chore: update CHANGELOG.md
