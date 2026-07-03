@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+## [0.3.1] - 2026-07-03
+
+- docs: update README.md
+- refactor: use %d for numeric sprintf arguments
+- fix: prevent payouts scraping failure in specific scenarios
+- chore: update composer.json
+- chore: update CHANGELOG.md
+
+
 ## [0.3.0] - 2026-06-30
 
 - docs: update README.md
