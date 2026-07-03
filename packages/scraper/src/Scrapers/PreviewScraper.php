@@ -63,32 +63,32 @@ final class PreviewScraper implements Scraper
             self::$baseLevel = 1;
         }
 
-        $windSpeedFormat = '%s/div[2]/div[%s]/div[2]/div[2]/div[1]/div[3]/div/span[2]';
+        $windSpeedFormat = '%s/div[2]/div[%d]/div[2]/div[2]/div[1]/div[3]/div/span[2]';
         $windSpeedXPath = sprintf($windSpeedFormat, self::$baseXPath, self::$baseLevel + 5);
         $windSpeedSource = Filter::byXPath($scraper, $windSpeedXPath);
         $windSpeed = PreviewParser::parseWindSpeed($windSpeedSource);
 
-        $windDirectionFormat = '%s/div[2]/div[%s]/div[2]/div[2]/div[1]/div[4]/p';
+        $windDirectionFormat = '%s/div[2]/div[%d]/div[2]/div[2]/div[1]/div[4]/p';
         $windDirectionXPath = sprintf($windDirectionFormat, self::$baseXPath, self::$baseLevel + 5);
         $windDirectionSource = WindDirectionFilter::byXPath($scraper, $windDirectionXPath);
         $windDirection = PreviewParser::parseWindDirection($windDirectionSource);
 
-        $waveHeightFormat = '%s/div[2]/div[%s]/div[2]/div[2]/div[1]/div[6]/div/span[2]';
+        $waveHeightFormat = '%s/div[2]/div[%d]/div[2]/div[2]/div[1]/div[6]/div/span[2]';
         $waveHeightXPath = sprintf($waveHeightFormat, self::$baseXPath, self::$baseLevel + 5);
         $waveHeightSource = Filter::byXPath($scraper, $waveHeightXPath);
         $waveHeight = PreviewParser::parseWaveHeight($waveHeightSource);
 
-        $weatherFormat = '%s/div[2]/div[%s]/div[2]/div[2]/div[1]/div[2]/div/span';
+        $weatherFormat = '%s/div[2]/div[%d]/div[2]/div[2]/div[1]/div[2]/div/span';
         $weatherXPath = sprintf($weatherFormat, self::$baseXPath, self::$baseLevel + 5);
         $weatherSource = Filter::byXPath($scraper, $weatherXPath);
         $weather = PreviewParser::parseWeather($weatherSource);
 
-        $airTemperatureFormat = '%s/div[2]/div[%s]/div[2]/div[2]/div[1]/div[1]/div/span[2]';
+        $airTemperatureFormat = '%s/div[2]/div[%d]/div[2]/div[2]/div[1]/div[1]/div/span[2]';
         $airTemperatureXPath = sprintf($airTemperatureFormat, self::$baseXPath, self::$baseLevel + 5);
         $airTemperatureSource = Filter::byXPath($scraper, $airTemperatureXPath);
         $airTemperature = PreviewParser::parseAirTemperature($airTemperatureSource);
 
-        $waterTemperatureFormat = '%s/div[2]/div[%s]/div[2]/div[2]/div[1]/div[5]/div/span[2]';
+        $waterTemperatureFormat = '%s/div[2]/div[%d]/div[2]/div[2]/div[1]/div[5]/div/span[2]';
         $waterTemperatureXPath = sprintf($waterTemperatureFormat, self::$baseXPath, self::$baseLevel + 5);
         $waterTemperatureSource = Filter::byXPath($scraper, $waterTemperatureXPath);
         $waterTemperature = PreviewParser::parseWaterTemperature($waterTemperatureSource);
@@ -120,14 +120,14 @@ final class PreviewScraper implements Scraper
         $response = ['racers' => []];
 
         foreach (range(1, 6) as $index) {
-            $entryNumberFormat = '%s/div[2]/div[%s]/div[2]/div[1]/table/tbody/tr[%s]/td/div/span[1]';
+            $entryNumberFormat = '%s/div[2]/div[%d]/div[2]/div[1]/table/tbody/tr[%s]/td/div/span[1]';
             $entryNumberXPath = sprintf($entryNumberFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $entryNumberSource = Filter::byXPath($scraper, $entryNumberXPath);
             $entryNumber = Parser::parseEntryNumber($entryNumberSource);
 
             $course = ['course_number' => $index];
 
-            $startTimingFormat = '%s/div[2]/div[%s]/div[2]/div[1]/table/tbody/tr[%s]/td/div/span[3]';
+            $startTimingFormat = '%s/div[2]/div[%d]/div[2]/div[1]/table/tbody/tr[%s]/td/div/span[3]';
             $startTimingXPath = sprintf($startTimingFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $startTimingSource = Filter::byXPath($scraper, $startTimingXPath);
             $startTiming = PreviewParser::parseStartTiming($startTimingSource);
@@ -145,27 +145,27 @@ final class PreviewScraper implements Scraper
         }
 
         foreach (range(1, 6) as $index) {
-            $entryNumberFormat = '%s/div[2]/div[%s]/div[1]/div[1]/table/tbody[%s]/tr[1]/td[1]';
+            $entryNumberFormat = '%s/div[2]/div[%d]/div[1]/div[1]/table/tbody[%s]/tr[1]/td[1]';
             $entryNumberXPath = sprintf($entryNumberFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $entryNumberSource = Filter::byXPath($scraper, $entryNumberXPath);
             $entryNumber = Parser::parseEntryNumber($entryNumberSource);
 
-            $weightFormat = '%s/div[2]/div[%s]/div[1]/div[1]/table/tbody[%s]/tr[1]/td[4]';
+            $weightFormat = '%s/div[2]/div[%d]/div[1]/div[1]/table/tbody[%s]/tr[1]/td[4]';
             $weightXPath = sprintf($weightFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $weightSource = Filter::byXPath($scraper, $weightXPath);
             $weight = PreviewParser::parseWeight($weightSource);
 
-            $weightAdjustmentFormat = '%s/div[2]/div[%s]/div[1]/div[1]/table/tbody[%s]/tr[3]/td[1]';
+            $weightAdjustmentFormat = '%s/div[2]/div[%d]/div[1]/div[1]/table/tbody[%s]/tr[3]/td[1]';
             $weightAdjustmentXPath = sprintf($weightAdjustmentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $weightAdjustmentSource = Filter::byXPath($scraper, $weightAdjustmentXPath);
             $weightAdjustment = PreviewParser::parseWeightAdjustment($weightAdjustmentSource);
 
-            $exhibitionTimeFormat = '%s/div[2]/div[%s]/div[1]/div[1]/table/tbody[%s]/tr[1]/td[5]';
+            $exhibitionTimeFormat = '%s/div[2]/div[%d]/div[1]/div[1]/table/tbody[%s]/tr[1]/td[5]';
             $exhibitionTimeXPath = sprintf($exhibitionTimeFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $exhibitionTimeSource = Filter::byXPath($scraper, $exhibitionTimeXPath);
             $exhibitionTime = PreviewParser::parseExhibitionTime($exhibitionTimeSource);
 
-            $tiltAdjustmentFormat = '%s/div[2]/div[%s]/div[1]/div[1]/table/tbody[%s]/tr[1]/td[6]';
+            $tiltAdjustmentFormat = '%s/div[2]/div[%d]/div[1]/div[1]/table/tbody[%s]/tr[1]/td[6]';
             $tiltAdjustmentXPath = sprintf($tiltAdjustmentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $tiltAdjustmentSource = Filter::byXPath($scraper, $tiltAdjustmentXPath);
             $tiltAdjustment = PreviewParser::parseTiltAdjustment($tiltAdjustmentSource);

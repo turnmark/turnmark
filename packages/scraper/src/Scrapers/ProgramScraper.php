@@ -84,7 +84,7 @@ final class ProgramScraper implements Scraper
         $titleSource = Filter::byXPath($scraper, $titleXPath);
         $title = ProgramParser::parseTitle($titleSource);
 
-        $subtitleAndDistanceFormat = '%s/div[2]/div[%s]/h3';
+        $subtitleAndDistanceFormat = '%s/div[2]/div[%d]/h3';
         $subtitleAndDistanceXPath = sprintf($subtitleAndDistanceFormat, self::$baseXPath, self::$baseLevel + 3);
         $subtitleAndDistanceSource = Filter::byXPath($scraper, $subtitleAndDistanceXPath);
         $subtitleAndDistance = ProgramParser::parseSubtitleAndDistance($subtitleAndDistanceSource);
@@ -206,47 +206,47 @@ final class ProgramScraper implements Scraper
         $response = ['racers' => []];
 
         foreach (range(1, 6) as $index) {
-            $entryNumberFormat = '%s/div[2]/div[%s]/table/tbody[%s]/tr[1]/td[1]';
+            $entryNumberFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[1]';
             $entryNumberXPath = sprintf($entryNumberFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $entryNumberSource = Filter::byXPath($scraper, $entryNumberXPath);
             $entryNumber = Parser::parseEntryNumber($entryNumberSource);
 
-            $nameFormat = '%s/div[2]/div[%s]/table/tbody[%s]/tr[1]/td[3]/div[2]/a';
+            $nameFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[3]/div[2]/a';
             $nameXPath = sprintf($nameFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $nameSource = Filter::byXPath($scraper, $nameXPath);
             $name = Parser::parseName($nameSource);
 
-            $numberAndRankNumberFormat = '%s/div[2]/div[%s]/table/tbody[%s]/tr[1]/td[3]/div[1]';
+            $numberAndRankNumberFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[3]/div[1]';
             $numberAndRankNumberXPath = sprintf($numberAndRankNumberFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $numberAndRankNumberSource = Filter::byXPath($scraper, $numberAndRankNumberXPath);
             $numberAndRankNumber = ProgramParser::parseNumberAndRankNumber($numberAndRankNumberSource);
 
-            $branchNumberAndBirthplaceNumberAndAgeAndWeightFormat = '%s/div[2]/div[%s]/table/tbody[%s]/tr[1]/td[3]/div[3]';
+            $branchNumberAndBirthplaceNumberAndAgeAndWeightFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[3]/div[3]';
             $branchNumberAndBirthplaceNumberAndAgeAndWeightXPath = sprintf($branchNumberAndBirthplaceNumberAndAgeAndWeightFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $branchNumberAndBirthplaceNumberAndAgeAndWeightSource = Filter::byXPath($scraper, $branchNumberAndBirthplaceNumberAndAgeAndWeightXPath);
             $branchNumberAndBirthplaceNumberAndAgeAndWeight = ProgramParser::parseBranchNumberAndBirthplaceNumberAndAgeAndWeight($branchNumberAndBirthplaceNumberAndAgeAndWeightSource);
 
-            $flyingCountAndLateCountAndAverageStartTimingFormat = '%s/div[2]/div[%s]/table/tbody[%s]/tr[1]/td[4]';
+            $flyingCountAndLateCountAndAverageStartTimingFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[4]';
             $flyingCountAndLateCountAndAverageStartTimingXPath = sprintf($flyingCountAndLateCountAndAverageStartTimingFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $flyingCountAndLateCountAndAverageStartTimingSource = Filter::byXPath($scraper, $flyingCountAndLateCountAndAverageStartTimingXPath);
             $flyingCountAndLateCountAndAverageStartTiming = ProgramParser::parseFlyingCountAndLateCountAndAverageStartTiming($flyingCountAndLateCountAndAverageStartTimingSource);
 
-            $nationalTop123PercentFormat = '%s/div[2]/div[%s]/table/tbody[%s]/tr[1]/td[5]';
+            $nationalTop123PercentFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[5]';
             $nationalTop123PercentXPath = sprintf($nationalTop123PercentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $nationalTop123PercentSource = Filter::byXPath($scraper, $nationalTop123PercentXPath);
             $nationalTop123Percent = ProgramParser::parseNationalTop123Percent($nationalTop123PercentSource);
 
-            $localTop123PercentFormat = '%s/div[2]/div[%s]/table/tbody[%s]/tr[1]/td[6]';
+            $localTop123PercentFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[6]';
             $localTop123PercentXPath = sprintf($localTop123PercentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $localTop123PercentSource = Filter::byXPath($scraper, $localTop123PercentXPath);
             $localTop123Percent = ProgramParser::parseLocalTop123Percent($localTop123PercentSource);
 
-            $motorNumberAndMotorTop23PercentFormat = '%s/div[2]/div[%s]/table/tbody[%s]/tr[1]/td[7]';
+            $motorNumberAndMotorTop23PercentFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[7]';
             $motorNumberAndMotorTop23PercentXPath = sprintf($motorNumberAndMotorTop23PercentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $motorNumberAndMotorTop23PercentSource = Filter::byXPath($scraper, $motorNumberAndMotorTop23PercentXPath);
             $motorNumberANDMotorTop23Percent = ProgramParser::parseMotorNumberAndMotorTop23Percent($motorNumberAndMotorTop23PercentSource);
 
-            $boatNumberAndBoatTop23PercentFormat = '%s/div[2]/div[%s]/table/tbody[%s]/tr[1]/td[8]';
+            $boatNumberAndBoatTop23PercentFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[8]';
             $boatNumberAndMotorTop23PercentXPath = sprintf($boatNumberAndBoatTop23PercentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $boatNumberAndBoatTop23PercentSource = Filter::byXPath($scraper, $boatNumberAndMotorTop23PercentXPath);
             $boatNumberANDBoatTop23Percent = ProgramParser::parseBoatNumberAndBoatTop23Percent($boatNumberAndBoatTop23PercentSource);
