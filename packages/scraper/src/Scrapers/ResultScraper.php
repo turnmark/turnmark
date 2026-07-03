@@ -246,38 +246,38 @@ final class ResultScraper implements Scraper
     {
         return [
             'trifecta' => self::scrapeCombinations($scraper, [
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[1]/tr[1]/td[2]/div/div/span[%d]',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[1]/tr[2]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[1]/tr[1]/td[2]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[1]/tr[2]/td[1]/div/div/span[%d]',
             ], range(1, 5)),
             'trio' => self::scrapeCombinations($scraper, [
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[2]/tr[1]/td[2]/div/div/span[%d]',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[2]/tr[2]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[2]/tr[1]/td[2]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[2]/tr[2]/td[1]/div/div/span[%d]',
             ], range(1, 5)),
             'exacta' => self::scrapeCombinations($scraper, [
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[3]/tr[1]/td[2]/div/div/span[%d]',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[3]/tr[2]/td[1]/div/div/span[%d]',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[3]/tr[3]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[3]/tr[1]/td[2]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[3]/tr[2]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[3]/tr[3]/td[1]/div/div/span[%d]',
             ], range(1, 3)),
             'quinella' => self::scrapeCombinations($scraper, [
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[4]/tr[1]/td[2]/div/div/span[%d]',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[4]/tr[2]/td[1]/div/div/span[%d]',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[4]/tr[3]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[4]/tr[1]/td[2]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[4]/tr[2]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[4]/tr[3]/td[1]/div/div/span[%d]',
             ], range(1, 3)),
             'quinella_place' => self::scrapeCombinations($scraper, [
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[5]/tr[1]/td[2]/div/div/span[%d]',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[5]/tr[2]/td[1]/div/div/span[%d]',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[5]/tr[3]/td[1]/div/div/span[%d]',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[5]/tr[4]/td[1]/div/div/span[%d]',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[5]/tr[5]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[1]/td[2]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[2]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[3]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[4]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[5]/td[1]/div/div/span[%d]',
             ], range(1, 3)),
             'win' => self::scrapeCombinations($scraper, [
-                '%s//div[2]/div[6]/div[1]/div/table/tbody[6]/tr[1]/td[2]/div/div/span[%d]',
-                '%s//div[2]/div[6]/div[1]/div/table/tbody[6]/tr[2]/td[1]/div/div/span[%d]',
+                '%s//div[2]/div[%d]/div[1]/div/table/tbody[6]/tr[1]/td[2]/div/div/span[%d]',
+                '%s//div[2]/div[%d]/div[1]/div/table/tbody[6]/tr[2]/td[1]/div/div/span[%d]',
             ], range(1, 1)),
             'place' => self::scrapeCombinations($scraper, [
-                '%s//div[2]/div[6]/div[1]/div/table/tbody[7]/tr[1]/td[2]/div/div/span[%d]',
-                '%s//div[2]/div[6]/div[1]/div/table/tbody[7]/tr[2]/td[1]/div/div/span[%d]',
-                '%s//div[2]/div[6]/div[1]/div/table/tbody[7]/tr[3]/td[1]/div/div/span[%d]',
+                '%s//div[2]/div[%d]/div[1]/div/table/tbody[7]/tr[1]/td[2]/div/div/span[%d]',
+                '%s//div[2]/div[%d]/div[1]/div/table/tbody[7]/tr[2]/td[1]/div/div/span[%d]',
+                '%s//div[2]/div[%d]/div[1]/div/table/tbody[7]/tr[3]/td[1]/div/div/span[%d]',
             ], range(1, 1)),
         ];
     }
@@ -296,7 +296,7 @@ final class ResultScraper implements Scraper
             $values = [];
 
             foreach ($indexes as $index) {
-                $values[] = Filter::byXPath($scraper, sprintf($template, self::$baseXPath, $index));
+                $values[] = Filter::byXPath($scraper, sprintf($template, self::$baseXPath, self::$baseLevel + 6, $index));
             }
 
             $response[] = implode($values);
@@ -321,38 +321,38 @@ final class ResultScraper implements Scraper
     {
         return [
             'trifecta' => self::scrapeAmounts($scraper, [
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[1]/tr[1]/td[3]/span',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[1]/tr[2]/td[2]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[1]/tr[1]/td[3]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[1]/tr[2]/td[2]/span',
             ]),
             'trio' => self::scrapeAmounts($scraper, [
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[2]/tr[1]/td[3]/span',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[2]/tr[2]/td[2]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[2]/tr[1]/td[3]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[2]/tr[2]/td[2]/span',
             ]),
             'exacta' => self::scrapeAmounts($scraper, [
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[3]/tr[1]/td[3]/span',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[3]/tr[2]/td[2]/span',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[3]/tr[3]/td[2]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[3]/tr[1]/td[3]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[3]/tr[2]/td[2]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[3]/tr[3]/td[2]/span',
             ]),
             'quinella' => self::scrapeAmounts($scraper, [
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[4]/tr[1]/td[3]/span',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[4]/tr[2]/td[2]/span',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[4]/tr[3]/td[2]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[4]/tr[1]/td[3]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[4]/tr[2]/td[2]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[4]/tr[3]/td[2]/span',
             ]),
             'quinella_place' => self::scrapeAmounts($scraper, [
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[5]/tr[1]/td[3]/span',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[5]/tr[2]/td[2]/span',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[5]/tr[3]/td[2]/span',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[5]/tr[4]/td[2]/span',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[5]/tr[5]/td[2]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[1]/td[3]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[2]/td[2]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[3]/td[2]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[4]/td[2]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[5]/td[2]/span',
             ]),
             'win' => self::scrapeAmounts($scraper, [
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[6]/tr[1]/td[3]/span',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[6]/tr[2]/td[2]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[6]/tr[1]/td[3]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[6]/tr[2]/td[2]/span',
             ]),
             'place' => self::scrapeAmounts($scraper, [
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[7]/tr[1]/td[3]/span',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[7]/tr[2]/td[2]/span',
-                '%s/div[2]/div[6]/div[1]/div/table/tbody[7]/tr[3]/td[2]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[7]/tr[1]/td[3]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[7]/tr[2]/td[2]/span',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[7]/tr[3]/td[2]/span',
             ]),
         ];
     }
@@ -365,7 +365,7 @@ final class ResultScraper implements Scraper
     private static function scrapeAmounts(Crawler $scraper, array $templates): array
     {
         return array_map(function (string $template) use ($scraper) {
-            $value = Filter::byXPath($scraper, sprintf($template, self::$baseXPath));
+            $value = Filter::byXPath($scraper, sprintf($template, self::$baseXPath, self::$baseLevel + 6));
 
             $value = str_replace(',', '', str_replace('¥', '', $value ?? ''));
 
