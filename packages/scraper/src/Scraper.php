@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Turnmark\Scraper;
 
 use DateTimeInterface;
+use InvalidArgumentException;
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Output\ConsoleOutput;
@@ -23,11 +24,6 @@ use Turnmark\Scraper\Validators\Validator;
 final class Scraper
 {
     /**
-     * @var float
-     */
-    private const float MIN_CALL_INTERVAL_SECONDS = 3.0;
-
-    /**
      * @var non-empty-list<int<1, 24>>
      */
     private const array STADIUM_NUMBERS = [
@@ -41,6 +37,16 @@ final class Scraper
     private const array RACE_NUMBERS = [
         1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
     ];
+
+    /**
+     * @var float
+     */
+    private const float DEFAULT_MIN_CALL_INTERVAL_SECONDS = 3.0;
+
+    /**
+     * @var float
+     */
+    private static float $minCallIntervalSeconds = self::DEFAULT_MIN_CALL_INTERVAL_SECONDS;
 
     /**
      * @var ?float
@@ -69,6 +75,27 @@ final class Scraper
     }
 
     /**
+     * @return float
+     */
+    public static function getMinCallIntervalSeconds(): float
+    {
+        return self::$minCallIntervalSeconds;
+    }
+
+    /**
+     * @param float $seconds
+     * @return void
+     */
+    public static function setMinCallIntervalSeconds(float $seconds): void
+    {
+        if ($seconds < 1.0) {
+            throw new InvalidArgumentException('interval must be 1 or greater.');
+        }
+
+        self::$minCallIntervalSeconds = $seconds;
+    }
+
+    /**
      * @return bool
      */
     public static function getShowProgress(): bool
@@ -92,7 +119,7 @@ final class Scraper
     {
         if (self::$lastThrottleAt !== null) {
             $elapsedSeconds = microtime(true) - self::$lastThrottleAt;
-            $remainingSeconds = self::MIN_CALL_INTERVAL_SECONDS - $elapsedSeconds;
+            $remainingSeconds = self::$minCallIntervalSeconds - $elapsedSeconds;
 
             if ($remainingSeconds > 0) {
                 $sleepMicroseconds = Converter::toIntStrict(
