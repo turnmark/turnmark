@@ -1,9 +1,10 @@
 # 🚤 Turnmark Scraper Tokuyama
 
-[![test](https://github.com/turnmark/turnmark/actions/workflows/test.yml/badge.svg)](https://github.com/turnmark/turnmark/actions/workflows/test.yml)
 [![php](https://poser.pugx.org/turnmark/scraper-tokuyama/require/php)](https://packagist.org/packages/turnmark/scraper-tokuyama)
 [![stable](https://poser.pugx.org/turnmark/scraper-tokuyama/v/stable)](https://packagist.org/packages/turnmark/scraper-tokuyama)
 [![license](https://poser.pugx.org/turnmark/scraper-tokuyama/license)](https://packagist.org/packages/turnmark/scraper-tokuyama)
+
+[![test](https://github.com/turnmark/turnmark/actions/workflows/test.yml/badge.svg)](https://github.com/turnmark/turnmark/actions/workflows/test.yml)
 
 Turnmark Scraper Tokuyama は、ボートレース徳山の公式サイトからオリジナル展示タイムをスクレイピングするための PHP ライブラリです。
 
