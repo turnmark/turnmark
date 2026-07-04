@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## [0.4.0] - 2026-07-05
+
+- docs: update README.md
+- docs: update README.md
+- docs: update README.md
+- docs: update README.md
+- docs: update README.md
+- feat!: always include racers with null placeholders
+- chore: update CHANGELOG.md
+
+
 ## [0.3.2] - 2026-07-04
 
 - docs: update README.md
