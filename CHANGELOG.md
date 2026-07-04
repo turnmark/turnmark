@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+## [0.3.2] - 2026-07-04
+
+- docs: update README.md
+- docs: update README.md
+- docs: update README.md
+- docs: update README.md
+- docs: update README.md
+- feat: make scraping throttle interval configurable
+- chore: update CHANGELOG.md
+
+
 ## [0.3.1] - 2026-07-03
 
 - docs: update README.md
