@@ -132,6 +132,11 @@ final class PreviewScraper implements Scraper
             $startTimingSource = Filter::byXPath($scraper, $startTimingXPath);
             $startTiming = PreviewParser::parseStartTiming($startTimingSource);
 
+            if (!isset($entryNumber['entry_number'])) {
+                $entryNumber['entry_number'] = $index;
+                $course['course_number'] = null;
+            }
+
             $entryNumberKey = $entryNumber['entry_number'];
 
             if (!in_array($entryNumberKey, range(1, 6), true)) {
@@ -169,6 +174,10 @@ final class PreviewScraper implements Scraper
             $tiltAdjustmentXPath = sprintf($tiltAdjustmentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $tiltAdjustmentSource = Filter::byXPath($scraper, $tiltAdjustmentXPath);
             $tiltAdjustment = PreviewParser::parseTiltAdjustment($tiltAdjustmentSource);
+
+            if (!isset($entryNumber['entry_number'])) {
+                $entryNumber['entry_number'] = $index;
+            }
 
             $entryNumberKey = $entryNumber['entry_number'];
 

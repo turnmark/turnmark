@@ -251,7 +251,11 @@ final class ProgramScraper implements Scraper
             $boatNumberAndBoatTop23PercentSource = Filter::byXPath($scraper, $boatNumberAndMotorTop23PercentXPath);
             $boatNumberANDBoatTop23Percent = ProgramParser::parseBoatNumberAndBoatTop23Percent($boatNumberAndBoatTop23PercentSource);
 
-            $entryNumberKey = $entryNumber['entry_number'];
+            if (!isset($entryNumber['entry_number'])) {
+                $entryNumber['entry_number'] = $index;
+            }
+
+            $entryNumberKey = $entryNumber['entry_number'] ?? $index;
 
             if (!in_array($entryNumberKey, range(1, 6), true)) {
                 continue;

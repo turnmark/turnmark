@@ -140,6 +140,11 @@ final class ResultScraper implements Scraper
             $startTimingSource = Filter::byXPath($scraper, $startTimingXPath);
             $startTiming = ResultParser::parseStartTiming($startTimingSource);
 
+            if (!isset($entryNumber['entry_number'])) {
+                $entryNumber['entry_number'] = $index;
+                $course['course_number'] = null;
+            }
+
             $entryNumberKey = $entryNumber['entry_number'];
 
             if (!in_array($entryNumberKey, range(1, 6), true)) {
@@ -172,6 +177,10 @@ final class ResultScraper implements Scraper
             $nameXPath = sprintf($nameFormat, self::$baseXPath, self::$baseLevel + 5, $index);
             $nameSource = Filter::byXPath($scraper, $nameXPath);
             $name = Parser::parseName($nameSource);
+
+            if (!isset($entryNumber['entry_number'])) {
+                $entryNumber['entry_number'] = $index;
+            }
 
             $entryNumberKey = $entryNumber['entry_number'];
 
