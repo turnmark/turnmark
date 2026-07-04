@@ -1,9 +1,10 @@
 # 🚤 Turnmark Scraper
 
-[![test](https://github.com/turnmark/turnmark/actions/workflows/test.yml/badge.svg)](https://github.com/turnmark/turnmark/actions/workflows/test.yml)
 [![php](https://poser.pugx.org/turnmark/scraper/require/php)](https://packagist.org/packages/turnmark/scraper)
 [![stable](https://poser.pugx.org/turnmark/scraper/v/stable)](https://packagist.org/packages/turnmark/scraper)
 [![license](https://poser.pugx.org/turnmark/scraper/license)](https://packagist.org/packages/turnmark/scraper)
+
+[![test](https://github.com/turnmark/turnmark/actions/workflows/test.yml/badge.svg)](https://github.com/turnmark/turnmark/actions/workflows/test.yml)
 
 Turnmark Scraper は、ボートレースの公式サイトから出走表、直前情報、オッズ、結果をスクレイピングするための PHP ライブラリです。
 
