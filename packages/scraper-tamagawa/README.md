@@ -1,9 +1,10 @@
 # 🚤 Turnmark Scraper Tamagawa
 
-[![test](https://github.com/turnmark/turnmark/actions/workflows/test.yml/badge.svg)](https://github.com/turnmark/turnmark/actions/workflows/test.yml)
 [![php](https://poser.pugx.org/turnmark/scraper-tamagawa/require/php)](https://packagist.org/packages/turnmark/scraper-tamagawa)
 [![stable](https://poser.pugx.org/turnmark/scraper-tamagawa/v/stable)](https://packagist.org/packages/turnmark/scraper-tamagawa)
 [![license](https://poser.pugx.org/turnmark/scraper-tamagawa/license)](https://packagist.org/packages/turnmark/scraper-tamagawa)
+
+[![test](https://github.com/turnmark/turnmark/actions/workflows/test.yml/badge.svg)](https://github.com/turnmark/turnmark/actions/workflows/test.yml)
 
 Turnmark Scraper Tamagawa は、ボートレース多摩川の公式サイトからオリジナル展示タイムをスクレイピングするための PHP ライブラリです。
 
