@@ -1,9 +1,10 @@
 # 🚤 Turnmark Scraper Fukuoka
 
-[![test](https://github.com/turnmark/turnmark/actions/workflows/test.yml/badge.svg)](https://github.com/turnmark/turnmark/actions/workflows/test.yml)
 [![php](https://poser.pugx.org/turnmark/scraper-fukuoka/require/php)](https://packagist.org/packages/turnmark/scraper-fukuoka)
 [![stable](https://poser.pugx.org/turnmark/scraper-fukuoka/v/stable)](https://packagist.org/packages/turnmark/scraper-fukuoka)
 [![license](https://poser.pugx.org/turnmark/scraper-fukuoka/license)](https://packagist.org/packages/turnmark/scraper-fukuoka)
+
+[![test](https://github.com/turnmark/turnmark/actions/workflows/test.yml/badge.svg)](https://github.com/turnmark/turnmark/actions/workflows/test.yml)
 
 Turnmark Scraper Fukuoka は、ボートレース福岡の公式サイトからオリジナル展示タイムをスクレイピングするための PHP ライブラリです。
 
