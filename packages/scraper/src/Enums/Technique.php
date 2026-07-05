@@ -27,7 +27,7 @@ enum Technique: int
     }
 
     /**
-     * @param string $name
+     * @param ?string $name
      * @return ?self
      * @throws \ValueError
      */

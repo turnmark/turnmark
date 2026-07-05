@@ -38,7 +38,7 @@ enum Rank: int
     }
 
     /**
-     * @param string $name
+     * @param ?string $name
      * @return ?self
      * @throws \ValueError
      */
@@ -60,7 +60,7 @@ enum Rank: int
     }
 
     /**
-     * @param string $shortName
+     * @param ?string $shortName
      * @return ?self
      * @throws \ValueError
      */

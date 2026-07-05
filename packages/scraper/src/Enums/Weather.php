@@ -42,7 +42,7 @@ enum Weather: int
     }
 
     /**
-     * @param string $name
+     * @param ?string $name
      * @return ?self
      * @throws \ValueError
      */
@@ -64,7 +64,7 @@ enum Weather: int
     }
 
     /**
-     * @param string $shortName
+     * @param ?string $shortName
      * @return ?self
      * @throws \ValueError
      */

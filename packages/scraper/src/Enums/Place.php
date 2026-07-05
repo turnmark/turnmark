@@ -82,7 +82,7 @@ enum Place: int
     }
 
     /**
-     * @param string $name
+     * @param ?string $name
      * @return ?self
      * @throws \ValueError
      */
@@ -104,7 +104,7 @@ enum Place: int
     }
 
     /**
-     * @param string $shortName
+     * @param ?string $shortName
      * @return ?self
      * @throws \ValueError
      */
