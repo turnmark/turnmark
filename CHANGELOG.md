@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## [0.5.0] - 2026-07-05
+
+- fix!: rename top_1_percent to win_rate
+- docs: update PHPDoc comments
+- chore: update CHANGELOG.md
+
+
 ## [0.4.1] - 2026-07-05
 
 - fix: prevent single bad value from discarding entire bulk scrape
