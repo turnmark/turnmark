@@ -204,13 +204,13 @@ final class ResultScraper implements Scraper
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @return array{
      *     payouts?: array{
-     *         trifecta?: list<array{combination: non-empty-string, amount: int<0, max>}>,
-     *         trio?: list<array{combination: non-empty-string, amount: int<0, max>}>,
-     *         exacta?: list<array{combination: non-empty-string, amount: int<0, max>}>,
-     *         quinella?: list<array{combination: non-empty-string, amount: int<0, max>}>,
-     *         quinella_place?: list<array{combination: non-empty-string, amount: int<0, max>}>,
-     *         win?: list<array{combination: non-empty-string, amount: int<0, max>}>,
-     *         place?: list<array{combination: non-empty-string, amount: int<0, max>}>,
+     *         trifecta?: list<array{combination: non-empty-string, amount: non-negative-int}>,
+     *         trio?: list<array{combination: non-empty-string, amount: non-negative-int}>,
+     *         exacta?: list<array{combination: non-empty-string, amount: non-negative-int}>,
+     *         quinella?: list<array{combination: non-empty-string, amount: non-negative-int}>,
+     *         quinella_place?: list<array{combination: non-empty-string, amount: non-negative-int}>,
+     *         win?: list<array{combination: non-empty-string, amount: non-negative-int}>,
+     *         place?: list<array{combination: non-empty-string, amount: non-negative-int}>,
      *     }
      * }
      */
@@ -294,7 +294,7 @@ final class ResultScraper implements Scraper
     /**
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @param list<non-empty-string> $templates
-     * @param list<int<0, max>> $indexes
+     * @param list<non-negative-int> $indexes
      * @return list<string>
      */
     private static function scrapeCombinations(Crawler $scraper, array $templates, array $indexes): array
@@ -317,13 +317,13 @@ final class ResultScraper implements Scraper
     /**
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @return array{
-     *     trifecta: list<?int<0, max>>,
-     *     trio: list<?int<0, max>>,
-     *     exacta: list<?int<0, max>>,
-     *     quinella: list<?int<0, max>>,
-     *     quinella_place: list<?int<0, max>>,
-     *     win: list<?int<0, max>>,
-     *     place: list<?int<0, max>>,
+     *     trifecta: list<?non-negative-int>,
+     *     trio: list<?non-negative-int>,
+     *     exacta: list<?non-negative-int>,
+     *     quinella: list<?non-negative-int>,
+     *     quinella_place: list<?non-negative-int>,
+     *     win: list<?non-negative-int>,
+     *     place: list<?non-negative-int>,
      * }
      */
     private static function scrapeAllAmounts(Crawler $scraper): array
@@ -369,7 +369,7 @@ final class ResultScraper implements Scraper
     /**
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @param list<non-empty-string> $templates
-     * @return list<?int<0, max>>
+     * @return list<?non-negative-int>
      */
     private static function scrapeAmounts(Crawler $scraper, array $templates): array
     {
