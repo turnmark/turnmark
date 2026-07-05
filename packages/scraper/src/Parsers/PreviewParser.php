@@ -140,7 +140,9 @@ final class PreviewParser
         }
 
         return array_combine(self::WIND_DIRECTION_NUMBER_KEYS, [
-            Converter::toString(WindDirection::tryFrom(Converter::toIntStrict($value))?->name),
+            Converter::toString(
+                Converter::toEnumOrNull(fn() => WindDirection::fromValue(Converter::toIntStrict($value)))?->name
+            ),
             Converter::toInt($value),
         ]);
     }
@@ -179,7 +181,7 @@ final class PreviewParser
 
         return array_combine(self::WEATHER_KEYS, [
             Converter::toString($value),
-            Converter::toInt(Weather::fromName($value)?->value),
+            Converter::toInt(Converter::toEnumOrNull(fn() => Weather::fromName($value))?->value),
         ]);
     }
 

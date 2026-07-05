@@ -58,4 +58,26 @@ enum WindDirection: int
             "{$name} is not a valid name for enum " . self::class
         );
     }
+
+    /**
+     * @param ?int $value
+     * @return ?self
+     * @throws \ValueError
+     */
+    public static function fromValue(?int $value): ?self
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        $case = self::tryFrom($value);
+
+        if ($case === null) {
+            throw new ValueError(
+                "{$value} is not a valid value for enum " . self::class
+            );
+        }
+
+        return $case;
+    }
 }

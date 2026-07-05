@@ -204,7 +204,7 @@ final class ProgramParser
         return array_combine(self::NUMBER_AND_RANK_NUMBER_KEYS, [
             Converter::toInt($numberSource),
             Converter::toString($rankNumberSource),
-            Converter::toInt(Rank::fromShortName($rankNumberSource)?->value),
+            Converter::toInt(Converter::toEnumOrNull(fn() => Rank::fromShortName($rankNumberSource))?->value),
         ]);
     }
 
@@ -249,9 +249,9 @@ final class ProgramParser
 
         return array_combine(self::BRANCH_NUMBER_AND_BIRTHPLACE_NUMBER_AND_AGE_AND_WEIGHT_KEYS, [
             Converter::toString($branchNumberSource),
-            Converter::toInt(Prefecture::fromShortName($branchNumberSource)?->value),
+            Converter::toInt(Converter::toEnumOrNull(fn() => Prefecture::fromShortName($branchNumberSource))?->value),
             Converter::toString($birthplaceNumberSource),
-            Converter::toInt(Prefecture::fromShortName($birthplaceNumberSource)?->value),
+            Converter::toInt(Converter::toEnumOrNull(fn() => Prefecture::fromShortName($birthplaceNumberSource))?->value),
             Converter::toString($ageSource),
             Converter::toInt($ageSource),
             Converter::toString($weightSource),

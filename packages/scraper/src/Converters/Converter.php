@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Turnmark\Scraper\Converters;
 
+use ValueError;
+
 /**
  * @author shimomo
  */
@@ -140,5 +142,21 @@ final class Converter
         }
 
         return $response;
+    }
+
+    /**
+     * @template T of \UnitEnum
+     * @param callable(): ?T $resolver
+     * @return ?T
+     */
+    public static function toEnumOrNull(callable $resolver): ?object
+    {
+        try {
+            return $resolver();
+        } catch (ValueError $error) {
+            echo $error->getMessage() . PHP_EOL;
+
+            return null;
+        }
     }
 }

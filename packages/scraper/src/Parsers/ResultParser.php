@@ -120,7 +120,9 @@ final class ResultParser
         }
 
         return array_combine(self::WIND_DIRECTION_NUMBER_KEYS, [
-            Converter::toString(WindDirection::tryFrom(Converter::toIntStrict($value))?->name),
+            Converter::toString(
+                Converter::toEnumOrNull(fn() => WindDirection::fromValue(Converter::toIntStrict($value)))?->name
+            ),
             Converter::toInt($value),
         ]);
     }
@@ -159,7 +161,7 @@ final class ResultParser
 
         return array_combine(self::WEATHER_KEYS, [
             Converter::toString($value),
-            Converter::toInt(Weather::fromName($value)?->value),
+            Converter::toInt(Converter::toEnumOrNull(fn() => Weather::fromName($value))?->value),
         ]);
     }
 
@@ -216,7 +218,7 @@ final class ResultParser
 
         return array_combine(self::TECHNIQUE_KEYS, [
             Converter::toString($value),
-            Converter::toInt(Technique::fromName($value)?->value),
+            Converter::toInt(Converter::toEnumOrNull(fn() => Technique::fromName($value))?->value),
         ]);
     }
 
@@ -267,7 +269,7 @@ final class ResultParser
 
         return array_combine(self::PLACE_KEYS, [
             Converter::toString($value),
-            Converter::toInt(Place::fromShortName($value)?->value),
+            Converter::toInt(Converter::toEnumOrNull(fn() => Place::fromShortName($value))?->value),
         ]);
     }
 
