@@ -186,10 +186,10 @@ final class ProgramScraper implements Scraper
      *         late_count_source?: ?string,
      *         late_count?: ?int,
      *         average_start_timing?: ?float,
-     *         national_top_1_percent?: ?float,
+     *         national_win_rate?: ?float,
      *         national_top_2_percent?: ?float,
      *         national_top_3_percent?: ?float,
-     *         local_top_1_percent?: ?float,
+     *         local_win_rate?: ?float,
      *         local_top_2_percent?: ?float,
      *         local_top_3_percent?: ?float,
      *         motor_number?: ?int,
@@ -231,15 +231,15 @@ final class ProgramScraper implements Scraper
             $flyingCountAndLateCountAndAverageStartTimingSource = Filter::byXPath($scraper, $flyingCountAndLateCountAndAverageStartTimingXPath);
             $flyingCountAndLateCountAndAverageStartTiming = ProgramParser::parseFlyingCountAndLateCountAndAverageStartTiming($flyingCountAndLateCountAndAverageStartTimingSource);
 
-            $nationalTop123PercentFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[5]';
-            $nationalTop123PercentXPath = sprintf($nationalTop123PercentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
-            $nationalTop123PercentSource = Filter::byXPath($scraper, $nationalTop123PercentXPath);
-            $nationalTop123Percent = ProgramParser::parseNationalTop123Percent($nationalTop123PercentSource);
+            $nationalWinRateAndNationalTop23PercentFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[5]';
+            $nationalWinRateAndNationalTop23PercentXPath = sprintf($nationalWinRateAndNationalTop23PercentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $nationalWinRateAndNationalTop23PercentSource = Filter::byXPath($scraper, $nationalWinRateAndNationalTop23PercentXPath);
+            $nationalWinRateAndNationalTop23Percent = ProgramParser::parseNationalWinRateAndNationalTop23Percent($nationalWinRateAndNationalTop23PercentSource);
 
-            $localTop123PercentFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[6]';
-            $localTop123PercentXPath = sprintf($localTop123PercentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
-            $localTop123PercentSource = Filter::byXPath($scraper, $localTop123PercentXPath);
-            $localTop123Percent = ProgramParser::parseLocalTop123Percent($localTop123PercentSource);
+            $localWinRateAndLocalTop23PercentFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[6]';
+            $localWinRateAndLocalTop23PercentXPath = sprintf($localWinRateAndLocalTop23PercentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $localWinRateAndLocalTop23PercentSource = Filter::byXPath($scraper, $localWinRateAndLocalTop23PercentXPath);
+            $localWinRateAndLocalTop23Percent = ProgramParser::parseLocalWinRateAndLocalTop23Percent($localWinRateAndLocalTop23PercentSource);
 
             $motorNumberAndMotorTop23PercentFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[7]';
             $motorNumberAndMotorTop23PercentXPath = sprintf($motorNumberAndMotorTop23PercentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
@@ -267,8 +267,8 @@ final class ProgramScraper implements Scraper
             $response['racers'][$entryNumberKey] += $numberAndRankNumber;
             $response['racers'][$entryNumberKey] += $branchNumberAndBirthplaceNumberAndAgeAndWeight;
             $response['racers'][$entryNumberKey] += $flyingCountAndLateCountAndAverageStartTiming;
-            $response['racers'][$entryNumberKey] += $nationalTop123Percent;
-            $response['racers'][$entryNumberKey] += $localTop123Percent;
+            $response['racers'][$entryNumberKey] += $nationalWinRateAndNationalTop23Percent;
+            $response['racers'][$entryNumberKey] += $localWinRateAndLocalTop23Percent;
             $response['racers'][$entryNumberKey] += $motorNumberANDMotorTop23Percent;
             $response['racers'][$entryNumberKey] += $boatNumberANDBoatTop23Percent;
         }

@@ -75,8 +75,8 @@ final class ProgramParser
     /**
      * @var non-empty-list<non-empty-string>
      */
-    private const array NATIONAL_TOP_1_2_3_PERCENT_KEYS = [
-        'national_top_1_percent',
+    private const array NATIONAL_WIN_RATE_AND_NATIONAL_TOP_2_3_PERCENT_KEYS = [
+        'national_win_rate',
         'national_top_2_percent',
         'national_top_3_percent',
     ];
@@ -84,8 +84,8 @@ final class ProgramParser
     /**
      * @var non-empty-list<non-empty-string>
      */
-    private const array LOCAL_TOP_1_2_3_PERCENT_KEYS = [
-        'local_top_1_percent',
+    private const array LOCAL_WIN_RATE_AND_LOCAL_TOP_2_3_PERCENT_KEYS = [
+        'local_win_rate',
         'local_top_2_percent',
         'local_top_3_percent',
     ];
@@ -293,25 +293,25 @@ final class ProgramParser
     /**
      * @param ?string $value
      * @return array{
-     *     national_top_1_percent: ?float,
+     *     national_win_rate: ?float,
      *     national_top_2_percent: ?float,
      *     national_top_3_percent: ?float,
      * }
      */
-    public static function parseNationalTop123Percent(?string $value): array
+    public static function parseNationalWinRateAndNationalTop23Percent(?string $value): array
     {
         if ($value === null || $value === '') {
-            return array_fill_keys(self::NATIONAL_TOP_1_2_3_PERCENT_KEYS, null);
+            return array_fill_keys(self::NATIONAL_WIN_RATE_AND_NATIONAL_TOP_2_3_PERCENT_KEYS, null);
         }
 
         $values = self::splitAndTrim($value, ' ');
 
-        $nationalTop1Percent = array_shift($values);
+        $nationalWinRate = array_shift($values);
         $nationalTop2Percent = array_shift($values);
         $nationalTop3Percent = array_shift($values);
 
-        return array_combine(self::NATIONAL_TOP_1_2_3_PERCENT_KEYS, [
-            Converter::toFloat($nationalTop1Percent),
+        return array_combine(self::NATIONAL_WIN_RATE_AND_NATIONAL_TOP_2_3_PERCENT_KEYS, [
+            Converter::toFloat($nationalWinRate),
             Converter::toFloat($nationalTop2Percent),
             Converter::toFloat($nationalTop3Percent),
         ]);
@@ -320,25 +320,25 @@ final class ProgramParser
     /**
      * @param ?string $value
      * @return array{
-     *     local_top_1_percent: ?float,
+     *     local_win_rate: ?float,
      *     local_top_2_percent: ?float,
      *     local_top_3_percent: ?float,
      * }
      */
-    public static function parseLocalTop123Percent(?string $value): array
+    public static function parseLocalWinRateAndLocalTop23Percent(?string $value): array
     {
         if ($value === null || $value === '') {
-            return array_fill_keys(self::LOCAL_TOP_1_2_3_PERCENT_KEYS, null);
+            return array_fill_keys(self::LOCAL_WIN_RATE_AND_LOCAL_TOP_2_3_PERCENT_KEYS, null);
         }
 
         $values = self::splitAndTrim($value, ' ');
 
-        $localTop1Percent = array_shift($values);
+        $localWinRate = array_shift($values);
         $localTop2Percent = array_shift($values);
         $localTop3Percent = array_shift($values);
 
-        return array_combine(self::LOCAL_TOP_1_2_3_PERCENT_KEYS, [
-            Converter::toFloat($localTop1Percent),
+        return array_combine(self::LOCAL_WIN_RATE_AND_LOCAL_TOP_2_3_PERCENT_KEYS, [
+            Converter::toFloat($localWinRate),
             Converter::toFloat($localTop2Percent),
             Converter::toFloat($localTop3Percent),
         ]);
