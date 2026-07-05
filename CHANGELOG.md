@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## [0.4.1] - 2026-07-05
+
+- fix: prevent single bad value from discarding entire bulk scrape
+- chore: update CHANGELOG.md
+
+
 ## [0.4.0] - 2026-07-05
 
 - docs: update README.md
