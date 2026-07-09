@@ -29,12 +29,12 @@ jobs:
         with:
           php-version: ${{ matrix.php-version }}
 
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-progress --with="phpunit/phpunit:${{ matrix.phpunit-version }}"
 
       - name: Run PHPUnit ${{ matrix.phpunit-version }}
