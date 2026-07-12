@@ -2,6 +2,24 @@
 
 ## Unreleased
 
+## [0.5.1] - 2026-07-12
+
+- chore: update composer.json
+- chore: update composer.json
+- chore: update composer.json
+- chore: update composer.json
+- chore: update composer.json
+- chore: update composer.json
+- chore: update spoofed browser headers to match current Google Chrome behavior
+- ci: update .github/workflows/test.yml
+- ci: update .github/workflows/psalm.yml
+- ci: update .github/workflows/keepalive.yml
+- ci: update .github/workflows/audit.yml
+- ci: update .github/dependabot.yml
+- docs: update PHPDoc comments
+- chore: update CHANGELOG.md
+
+
 ## [0.5.0] - 2026-07-05
 
 - fix!: rename top_1_percent to win_rate
