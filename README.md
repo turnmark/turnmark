@@ -8,7 +8,9 @@ Turnmark は、ボートレース（競艇）関連のパッケージを開発�
 
 各パッケージは独立した GitHub リポジトリへ分割されており、Packagist から個別にインストールできます。
 
-## 📦 パッケージ
+---
+
+## パッケージ
 
 | Package | Description | Packagist |
 |---------|-------------|-----------|
@@ -18,7 +20,9 @@ Turnmark は、ボートレース（競艇）関連のパッケージを開発�
 | `turnmark/scraper-tamagawa` | ボートレース多摩川公式サイトのスクレイピング | https://packagist.org/packages/turnmark/scraper-tamagawa |
 | `turnmark/scraper-tokuyama` | ボートレース徳山公式サイトのスクレイピング | https://packagist.org/packages/turnmark/scraper-tokuyama |
 
-## 🗂️ リポジトリ構造
+---
+
+## リポジトリ構造
 
 ```
 .
@@ -45,6 +49,8 @@ Turnmark は、ボートレース（競艇）関連のパッケージを開発�
 
 リリース時には、それぞれ専用リポジトリへ同期され Packagist で公開されます。
 
-## 📄 ライセンス
+---
+
+## ライセンス
 
 Turnmark は [MIT license](LICENSE) の元で公開されています。
