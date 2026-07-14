@@ -11,12 +11,12 @@ use ValueError;
  */
 enum Grade: int
 {
-    case SG = 100;
-    case G1 = 200;
-    case PG1 = 210;
-    case G2 = 300;
-    case G3 = 400;
-    case IPPAN = 500;
+    case SG = 1;
+    case G1 = 2;
+    case G2 = 3;
+    case G3 = 4;
+    case IPPAN = 5;
+    case PG1 = 6;
 
     /**
      * @return non-empty-string
