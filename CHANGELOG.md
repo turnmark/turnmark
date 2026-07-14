@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+## [0.6.0] - 2026-07-15
+
+- refactor: redesign Weather enum
+- refactor: redesign Rank enum
+- refactor: redesign Prefecture enum
+- refactor: redesign Place enum
+- refactor: redesign Grade enum
+- docs: update README.md
+- docs: update README.md
+- chore: update CHANGELOG.md
+
+
 ## [0.5.1] - 2026-07-12
 
 - chore: update composer.json
