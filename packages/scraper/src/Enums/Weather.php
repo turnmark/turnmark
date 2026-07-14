@@ -12,25 +12,19 @@ use ValueError;
 enum Weather: int
 {
     case 晴 = 1;
-    case 曇 = 2;
+    case 曇り = 2;
     case 雨 = 3;
     case 雪 = 4;
     case 霧 = 5;
-    case 台 = 6;
+    case 台風 = 6;
+    case その他 = 99;
 
     /**
      * @return non-empty-string
      */
     public function name(): string
     {
-        return match ($this) {
-            Weather::晴 => '晴',
-            Weather::曇 => '曇り',
-            Weather::雨 => '雨',
-            Weather::雪 => '雪',
-            Weather::霧 => '霧',
-            Weather::台 => '台風',
-        };
+        return $this->name;
     }
 
     /**
@@ -38,7 +32,15 @@ enum Weather: int
      */
     public function shortName(): string
     {
-        return $this->name;
+        return match ($this) {
+            Weather::晴 => '晴',
+            Weather::曇り => '曇',
+            Weather::雨 => '雨',
+            Weather::雪 => '雪',
+            Weather::霧 => '霧',
+            Weather::台風 => '台',
+            Weather::その他 => '他',
+        };
     }
 
     /**
