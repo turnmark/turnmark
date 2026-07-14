@@ -11,22 +11,17 @@ use ValueError;
  */
 enum Rank: int
 {
-    case A1 = 1;
-    case A2 = 2;
-    case B1 = 3;
-    case B2 = 4;
+    case A1級 = 1;
+    case A2級 = 2;
+    case B1級 = 3;
+    case B2級 = 4;
 
     /**
      * @return non-empty-string
      */
     public function name(): string
     {
-        return match ($this) {
-            self::A1 => 'A1級',
-            self::A2 => 'A2級',
-            self::B1 => 'B1級',
-            self::B2 => 'B2級',
-        };
+        return $this->name;
     }
 
     /**
@@ -34,7 +29,12 @@ enum Rank: int
      */
     public function shortName(): string
     {
-        return $this->name;
+        return match ($this) {
+            self::A1級 => 'A1',
+            self::A2級 => 'A2',
+            self::B1級 => 'B1',
+            self::B2級 => 'B2',
+        };
     }
 
     /**
