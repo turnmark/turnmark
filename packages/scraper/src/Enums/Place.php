@@ -11,23 +11,23 @@ use ValueError;
  */
 enum Place: int
 {
-    case P1 = 1;
-    case P2 = 2;
-    case P3 = 3;
-    case P4 = 4;
-    case P5 = 5;
-    case P6 = 6;
-    case 妨 = 7;
-    case エ = 8;
-    case 転 = 9;
-    case 落 = 10;
-    case 沈 = 11;
-    case 不 = 12;
-    case 失 = 13;
-    case F = 14;
-    case L = 15;
-    case 欠 = 16;
-    case _ = 17;
+    case 一着 = 1;
+    case 二着 = 2;
+    case 三着 = 3;
+    case 四着 = 4;
+    case 五着 = 5;
+    case 六着 = 6;
+    case 妨害失格 = 7;
+    case エンスト失格 = 8;
+    case 転覆失格 = 9;
+    case 落水失格 = 10;
+    case 沈没失格 = 11;
+    case 不完走失格 = 12;
+    case 失格 = 13;
+    case フライング = 14;
+    case 出遅れ = 15;
+    case 欠場 = 16;
+    case その他 = 99;
 
     /**
      * @return non-empty-string
@@ -35,23 +35,23 @@ enum Place: int
     public function name(): string
     {
         return match ($this) {
-            self::P1 => '1着',
-            self::P2 => '2着',
-            self::P3 => '3着',
-            self::P4 => '4着',
-            self::P5 => '5着',
-            self::P6 => '6着',
-            self::妨 => '妨害失格',
-            self::エ => 'エンスト失格',
-            self::転 => '転覆失格',
-            self::落 => '落水失格',
-            self::沈 => '沈没失格',
-            self::不 => '不完走失格',
-            self::失 => '失格',
-            self::F => 'フライング',
-            self::L => '出遅れ',
-            self::欠 => '欠場',
-            self::_ => '_',
+            self::一着 => '1着',
+            self::二着 => '2着',
+            self::三着 => '3着',
+            self::四着 => '4着',
+            self::五着 => '5着',
+            self::六着 => '6着',
+            self::妨害失格 => '妨害失格',
+            self::エンスト失格 => 'エンスト失格',
+            self::転覆失格 => '転覆失格',
+            self::落水失格 => '落水失格',
+            self::沈没失格 => '沈没失格',
+            self::不完走失格 => '不完走失格',
+            self::失格 => '失格',
+            self::フライング => 'フライング',
+            self::出遅れ => '出遅れ',
+            self::欠場 => '欠場',
+            self::その他 => '_',
         };
     }
 
@@ -61,23 +61,23 @@ enum Place: int
     public function shortName(): string
     {
         return match ($this) {
-            self::P1 => '1',
-            self::P2 => '2',
-            self::P3 => '3',
-            self::P4 => '4',
-            self::P5 => '5',
-            self::P6 => '6',
-            self::妨 => '妨',
-            self::エ => 'エ',
-            self::転 => '転',
-            self::落 => '落',
-            self::沈 => '沈',
-            self::不 => '不',
-            self::失 => '失',
-            self::F => 'F',
-            self::L => 'L',
-            self::欠 => '欠',
-            self::_ => '_',
+            self::一着 => '1',
+            self::二着 => '2',
+            self::三着 => '3',
+            self::四着 => '4',
+            self::五着 => '5',
+            self::六着 => '6',
+            self::妨害失格 => '妨',
+            self::エンスト失格 => 'エ',
+            self::転覆失格 => '転',
+            self::落水失格 => '落',
+            self::沈没失格 => '沈',
+            self::不完走失格 => '不',
+            self::失格 => '失',
+            self::フライング => 'F',
+            self::出遅れ => 'L',
+            self::欠場 => '欠',
+            self::その他 => '_',
         };
     }
 
