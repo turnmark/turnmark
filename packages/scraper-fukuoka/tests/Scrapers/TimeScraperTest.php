@@ -24,7 +24,7 @@ final class TimeScraperTest extends TestCase
      */
     #[Test]
     #[DataProviderExternal(TimeScraperDataProvider::class, 'scrapeProvider')]
-    public function testScrape(array $arguments, array $expected): void
+    public function scrape(array $arguments, array $expected): void
     {
         $this->assertSame($expected, TimeScraper::scrape(...$arguments));
     }
