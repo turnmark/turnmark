@@ -11,7 +11,7 @@ Turnmark Scraper Tokuyama は、ボートレース徳山の公式サイトから
 ## 📦 Requirements
 
 - php: ^8.4
-- turnmark/scraper: ^0.3
+- turnmark/scraper: ^0.7.0
 
 ## 💾 Installation
 
@@ -27,6 +27,8 @@ composer require turnmark/scraper-tokuyama
 |---|---|
 | オリジナル展示タイムを取得<br>`Scraper::scrapeTime($date, $raceNumber)` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$raceNumber` : 1〜12 |
 | オリジナル展示タイムを一括取得<br>`BatchScraper::scrapeTime($date [, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
+
+一括取得時のプログレスバー表示や呼び出し間隔は、`Turnmark\Scraper\Scraper` の `setShowProgress()` / `setMinCallIntervalSeconds()` で設定します。
 
 ### 基本的な使い方
 
