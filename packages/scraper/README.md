@@ -29,14 +29,29 @@ composer require turnmark/scraper
 
 | メソッド | 引数 |
 |---|---|
+| 開催場を取得<br>`Scraper::scrapeStadium($date)` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列 |
 | 出走表を取得<br>`Scraper::scrapeProgram($date, $stadiumNumber, $raceNumber)` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumber` : 1〜24<br>`$raceNumber` : 1〜12 |
 | 出走表を一括取得<br>`BatchScraper::scrapeProgram($date [, $stadiumNumbers, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumbers` : [1〜24]（省略時は全場）<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
-| 直前情報を取得<br>`Scraper::scrapePreview($date = null, $stadiumNumber = null, $raceNumber = null)` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumber` : 1〜24<br>`$raceNumber` : 1〜12 |
+| 直前情報を取得<br>`Scraper::scrapePreview($date, $stadiumNumber, $raceNumber)` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumber` : 1〜24<br>`$raceNumber` : 1〜12 |
 | 直前情報を一括取得<br>`BatchScraper::scrapePreview($date [, $stadiumNumbers, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumbers` : [1〜24]（省略時は全場）<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
-| オッズを取得<br>`Scraper::scrapeOdds($date = null, $stadiumNumber = null, $raceNumber = null)` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumber` : 1〜24<br>`$raceNumber` : 1〜12 |
+| オッズを取得<br>`Scraper::scrapeOdds($date, $stadiumNumber, $raceNumber)` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumber` : 1〜24<br>`$raceNumber` : 1〜12 |
 | オッズを一括取得<br>`BatchScraper::scrapeOdds($date [, $stadiumNumbers, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumbers` : [1〜24]（省略時は全場）<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
-| 結果を取得<br>`Scraper::scrapeResult($date = null, $stadiumNumber = null, $raceNumber = null)` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumber` : 1〜24<br>`$raceNumber` : 1〜12 |
+| 結果を取得<br>`Scraper::scrapeResult($date, $stadiumNumber, $raceNumber)` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumber` : 1〜24<br>`$raceNumber` : 1〜12 |
 | 結果を一括取得<br>`BatchScraper::scrapeResult($date [, $stadiumNumbers, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumbers` : [1〜24]（省略時は全場）<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
+
+一括取得（`BatchScraper`）は、指定日に開催されている場のみを対象に、`Scraper` の単発メソッドを順に呼び出します。
+
+### 設定・ユーティリティ
+
+| メソッド | 説明 |
+|---|---|
+| `Scraper::setShowProgress($showProgress)` | 一括取得時のプログレスバー表示を切り替えます（既定 : `false`）<br>`$showProgress` : bool |
+| `Scraper::getShowProgress()` | 現在のプログレスバー表示設定を返します |
+| `Scraper::setMinCallIntervalSeconds($seconds)` | スクレイピングの最小呼び出し間隔を設定します（既定 : `3.0`）<br>`$seconds` : 1.0 以上の float（未満は `ValueError`） |
+| `Scraper::getMinCallIntervalSeconds()` | 現在の最小呼び出し間隔を返します |
+| `Scraper::getStadiumNumbers()` | 全場番号 [1〜24] を返します |
+| `Scraper::getRaceNumbers()` | 全レース番号 [1〜12] を返します |
+| `Scraper::throttle()` | 最小呼び出し間隔に従って待機します |
 
 ### 基本的な使い方
 
@@ -47,6 +62,12 @@ require __DIR__ . '/vendor/autoload.php';
 
 use Turnmark\Scraper\BatchScraper;
 use Turnmark\Scraper\Scraper;
+
+// 一括取得の進捗を表示する（任意）
+Scraper::setShowProgress(true);
+
+// 開催場を取得
+$stadiums = Scraper::scrapeStadium('2026-05-31');
 
 // 出走表を取得
 $program = Scraper::scrapeProgram('2026-05-31', 6, 12);
@@ -85,7 +106,7 @@ Array
     [race_number] => 12
     [closed_at] => 2026-05-31 16:35:00
     [grade_number_source] => SGa
-    [grade_number] => 100
+    [grade_number] => 1
     [title] => 第53回ボートレースオールスター
     [subtitle] => 優勝戦
     [distance_source] => 1800m
@@ -114,10 +135,10 @@ Array
                     [late_count_source] => L0
                     [late_count] => 0
                     [average_start_timing] => 0.15
-                    [national_top_1_percent] => 6.7
+                    [national_win_rate] => 6.7
                     [national_top_2_percent] => 42.02
                     [national_top_3_percent] => 58.82
-                    [local_top_1_percent] => 7.71
+                    [local_win_rate] => 7.71
                     [local_top_2_percent] => 58.82
                     [local_top_3_percent] => 70.59
                     [motor_number] => 23
@@ -148,10 +169,10 @@ Array
                     [late_count_source] => L0
                     [late_count] => 0
                     [average_start_timing] => 0.14
-                    [national_top_1_percent] => 7.93
+                    [national_win_rate] => 7.93
                     [national_top_2_percent] => 63.85
                     [national_top_3_percent] => 75.38
-                    [local_top_1_percent] => 7.4
+                    [local_win_rate] => 7.4
                     [local_top_2_percent] => 60
                     [local_top_3_percent] => 70
                     [motor_number] => 61
@@ -182,10 +203,10 @@ Array
                     [late_count_source] => L0
                     [late_count] => 0
                     [average_start_timing] => 0.12
-                    [national_top_1_percent] => 7.68
+                    [national_win_rate] => 7.68
                     [national_top_2_percent] => 60.83
                     [national_top_3_percent] => 72.5
-                    [local_top_1_percent] => 8.62
+                    [local_win_rate] => 8.62
                     [local_top_2_percent] => 73.08
                     [local_top_3_percent] => 84.62
                     [motor_number] => 3
@@ -216,10 +237,10 @@ Array
                     [late_count_source] => L0
                     [late_count] => 0
                     [average_start_timing] => 0.12
-                    [national_top_1_percent] => 7.5
+                    [national_win_rate] => 7.5
                     [national_top_2_percent] => 49.59
                     [national_top_3_percent] => 71.54
-                    [local_top_1_percent] => 8.06
+                    [local_win_rate] => 8.06
                     [local_top_2_percent] => 64.71
                     [local_top_3_percent] => 82.35
                     [motor_number] => 2
@@ -250,10 +271,10 @@ Array
                     [late_count_source] => L0
                     [late_count] => 0
                     [average_start_timing] => 0.12
-                    [national_top_1_percent] => 7.44
+                    [national_win_rate] => 7.44
                     [national_top_2_percent] => 47.22
                     [national_top_3_percent] => 70.37
-                    [local_top_1_percent] => 7.91
+                    [local_win_rate] => 7.91
                     [local_top_2_percent] => 72.73
                     [local_top_3_percent] => 90.91
                     [motor_number] => 1
@@ -284,10 +305,10 @@ Array
                     [late_count_source] => L0
                     [late_count] => 0
                     [average_start_timing] => 0.13
-                    [national_top_1_percent] => 6.77
+                    [national_win_rate] => 6.77
                     [national_top_2_percent] => 41.88
                     [national_top_3_percent] => 61.54
-                    [local_top_1_percent] => 5.53
+                    [local_win_rate] => 5.53
                     [local_top_2_percent] => 29.41
                     [local_top_3_percent] => 41.18
                     [motor_number] => 62
@@ -1072,7 +1093,7 @@ Array
 
 </details>
 
-### Scraper::scrapeResults()
+### Scraper::scrapeResult()
 
 ```php
 // 例: ボートレースの公式サイトから 2026年05月31日 の 浜名湖 12 レースの結果を取得
