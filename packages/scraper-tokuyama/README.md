@@ -26,7 +26,7 @@ composer require turnmark/scraper-tokuyama
 | メソッド | 引数 |
 |---|---|
 | オリジナル展示タイムを取得<br>`Scraper::scrapeTime($date, $raceNumber)` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$raceNumber` : 1〜12 |
-| オリジナル展示タイムを一括取得<br>`Scraper::scrapeTimeBulk($date [, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
+| オリジナル展示タイムを一括取得<br>`BatchScraper::scrapeTime($date [, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
 
 ### 基本的な使い方
 
@@ -35,11 +35,12 @@ composer require turnmark/scraper-tokuyama
 
 require __DIR__ . '/vendor/autoload.php';
 
+use Turnmark\Scraper\Tokuyama\BatchScraper;
 use Turnmark\Scraper\Tokuyama\Scraper;
 
 // オリジナル展示タイムを取得
 $time = Scraper::scrapeTime('2026-06-25', 12);
-$timeBulk = Scraper::scrapeTimeBulk('2026-06-25', [10, 11, 12]);
+$timeBatch = BatchScraper::scrapeTime('2026-06-25', [10, 11, 12]);
 ```
 
 ### Scraper::scrapeTime()
