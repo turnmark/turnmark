@@ -19,12 +19,12 @@ final class StadiumScraper
     /**
      * @var non-empty-string
      */
-    private static string $baseUrl = 'https://www.boatrace.jp';
+    private const string BASE_URL = 'https://www.boatrace.jp';
 
     /**
      * @param \DateTimeInterface|non-empty-string $date
      * @param ?\Symfony\Component\BrowserKit\HttpBrowser $httpBrowser
-     * @return array<int<1, 24>, mixed>
+     * @return array<int<1, 24>, non-empty-string>
      */
     public static function scrape(
         DateTimeInterface|string $date,
@@ -33,7 +33,7 @@ final class StadiumScraper
         $date = Carbon::parse($date);
 
         $scraperFormat = '%s/owpc/pc/race/index?hd=%s';
-        $scraperUrl = sprintf($scraperFormat, self::$baseUrl, $date->format('Ymd'));
+        $scraperUrl = sprintf($scraperFormat, self::BASE_URL, $date->format('Ymd'));
         $scraper = ($httpBrowser ?? HttpBrowserFactory::create())->request('GET', $scraperUrl);
 
         $stadiums = $scraper

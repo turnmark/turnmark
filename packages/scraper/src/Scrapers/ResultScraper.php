@@ -24,12 +24,12 @@ final class ResultScraper implements Scraper
     /**
      * @var non-empty-string
      */
-    private static string $baseUrl = 'https://www.boatrace.jp';
+    private const string BASE_URL = 'https://www.boatrace.jp';
 
     /**
      * @var non-empty-string
      */
-    private static string $baseXPath = 'descendant-or-self::body/main/div/div/div';
+    private const string BASE_XPATH = 'descendant-or-self::body/main/div/div/div';
 
     /**
      * @var int<0, 1>
@@ -53,11 +53,11 @@ final class ResultScraper implements Scraper
         $date = Carbon::parse($date);
 
         $scraperFormat = '%s/owpc/pc/race/raceresult?hd=%s&jcd=%02d&rno=%d';
-        $scraperUrl = sprintf($scraperFormat, self::$baseUrl, $date->format('Ymd'), $stadiumNumber, $raceNumber);
+        $scraperUrl = sprintf($scraperFormat, self::BASE_URL, $date->format('Ymd'), $stadiumNumber, $raceNumber);
         $scraper = ($httpBrowser ?? HttpBrowserFactory::create())->request('GET', $scraperUrl);
 
         $levelFormat = '%s/div[2]/div[3]/ul/li';
-        $levelXPath = sprintf($levelFormat, self::$baseXPath);
+        $levelXPath = sprintf($levelFormat, self::BASE_XPATH);
 
         self::$baseLevel = 0;
         if (Filter::byXPath($scraper, $levelXPath) !== null) {
@@ -65,37 +65,37 @@ final class ResultScraper implements Scraper
         }
 
         $windSpeedFormat = '%s/div[2]/div[%d]/div[2]/div[1]/div[1]/div/div[1]/div[3]/div/span[2]';
-        $windSpeedXPath = sprintf($windSpeedFormat, self::$baseXPath, self::$baseLevel + 6);
+        $windSpeedXPath = sprintf($windSpeedFormat, self::BASE_XPATH, self::$baseLevel + 6);
         $windSpeedSource = Filter::byXPath($scraper, $windSpeedXPath);
         $windSpeed = ResultParser::parseWindSpeed($windSpeedSource);
 
         $windDirectionFormat = '%s/div[2]/div[%d]/div[2]/div[1]/div[1]/div/div[1]/div[4]/p';
-        $windDirectionXPath = sprintf($windDirectionFormat, self::$baseXPath, self::$baseLevel + 6);
+        $windDirectionXPath = sprintf($windDirectionFormat, self::BASE_XPATH, self::$baseLevel + 6);
         $windDirectionSource = WindDirectionFilter::byXPath($scraper, $windDirectionXPath);
         $windDirection = ResultParser::parseWindDirection($windDirectionSource);
 
         $waveHeightFormat = '%s/div[2]/div[%d]/div[2]/div[1]/div[1]/div/div[1]/div[6]/div/span[2]';
-        $waveHeightXPath = sprintf($waveHeightFormat, self::$baseXPath, self::$baseLevel + 6);
+        $waveHeightXPath = sprintf($waveHeightFormat, self::BASE_XPATH, self::$baseLevel + 6);
         $waveHeightSource = Filter::byXPath($scraper, $waveHeightXPath);
         $waveHeight = ResultParser::parseWaveHeight($waveHeightSource);
 
         $weatherFormat = '%s/div[2]/div[%d]/div[2]/div[1]/div[1]/div/div[1]/div[2]/div/span';
-        $weatherXPath = sprintf($weatherFormat, self::$baseXPath, self::$baseLevel + 6);
+        $weatherXPath = sprintf($weatherFormat, self::BASE_XPATH, self::$baseLevel + 6);
         $weatherSource = Filter::byXPath($scraper, $weatherXPath);
         $weather = ResultParser::parseWeather($weatherSource);
 
         $airTemperatureFormat = '%s/div[2]/div[%d]/div[2]/div[1]/div[1]/div/div[1]/div[1]/div/span[2]';
-        $airTemperatureXPath = sprintf($airTemperatureFormat, self::$baseXPath, self::$baseLevel + 6);
+        $airTemperatureXPath = sprintf($airTemperatureFormat, self::BASE_XPATH, self::$baseLevel + 6);
         $airTemperatureSource = Filter::byXPath($scraper, $airTemperatureXPath);
         $airTemperature = ResultParser::parseAirTemperature($airTemperatureSource);
 
         $waterTemperatureFormat = '%s/div[2]/div[%d]/div[2]/div[1]/div[1]/div/div[1]/div[5]/div/span[2]';
-        $waterTemperatureXPath = sprintf($waterTemperatureFormat, self::$baseXPath, self::$baseLevel + 6);
+        $waterTemperatureXPath = sprintf($waterTemperatureFormat, self::BASE_XPATH, self::$baseLevel + 6);
         $waterTemperatureSource = Filter::byXPath($scraper, $waterTemperatureXPath);
         $waterTemperature = ResultParser::parseWaterTemperature($waterTemperatureSource);
 
         $techniqueFormat = '%s/div[2]/div[%d]/div[2]/div[1]/div[2]/div[2]/table/tbody/tr/td';
-        $techniqueXPath = sprintf($techniqueFormat, self::$baseXPath, self::$baseLevel + 6);
+        $techniqueXPath = sprintf($techniqueFormat, self::BASE_XPATH, self::$baseLevel + 6);
         $techniqueSource = Filter::byXPath($scraper, $techniqueXPath);
         $technique = ResultParser::parseTechnique($techniqueSource);
 
@@ -129,14 +129,14 @@ final class ResultScraper implements Scraper
 
         foreach (range(1, 6) as $index) {
             $entryNumberFormat = '%s/div[2]/div[%d]/div[2]/div/table/tbody/tr[%s]/td/div/span[1]';
-            $entryNumberXPath = sprintf($entryNumberFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $entryNumberXPath = sprintf($entryNumberFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $entryNumberSource = Filter::byXPath($scraper, $entryNumberXPath);
             $entryNumber = Parser::parseEntryNumber($entryNumberSource);
 
             $course = ['course_number' => $index];
 
             $startTimingFormat = '%s/div[2]/div[%d]/div[2]/div/table/tbody/tr[%s]/td/div/span[3]/span';
-            $startTimingXPath = sprintf($startTimingFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $startTimingXPath = sprintf($startTimingFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $startTimingSource = Filter::byXPath($scraper, $startTimingXPath);
             $startTiming = ResultParser::parseStartTiming($startTimingSource);
 
@@ -159,22 +159,22 @@ final class ResultScraper implements Scraper
 
         foreach (range(1, 6) as $index) {
             $placeFormat = '%s/div[2]/div[%d]/div[1]/div/table/tbody[%s]/tr/td[1]';
-            $placeXPath = sprintf($placeFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $placeXPath = sprintf($placeFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $placeSource = Filter::byXPath($scraper, $placeXPath);
             $place = ResultParser::parsePlace($placeSource);
 
             $entryNumberFormat = '%s/div[2]/div[%d]/div[1]/div/table/tbody[%s]/tr/td[2]';
-            $entryNumberXPath = sprintf($entryNumberFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $entryNumberXPath = sprintf($entryNumberFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $entryNumberSource = Filter::byXPath($scraper, $entryNumberXPath);
             $entryNumber = Parser::parseEntryNumber($entryNumberSource);
 
             $numberFormat = '%s/div[2]/div[%d]/div[1]/div/table/tbody[%s]/tr/td[3]/span[1]';
-            $numberXPath = sprintf($numberFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $numberXPath = sprintf($numberFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $numberSource = Filter::byXPath($scraper, $numberXPath);
             $number = Parser::parseNumber($numberSource);
 
             $nameFormat = '%s/div[2]/div[%d]/div[1]/div/table/tbody[%s]/tr/td[3]/span[2]';
-            $nameXPath = sprintf($nameFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $nameXPath = sprintf($nameFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $nameSource = Filter::byXPath($scraper, $nameXPath);
             $name = Parser::parseName($nameSource);
 
@@ -305,7 +305,7 @@ final class ResultScraper implements Scraper
             $values = [];
 
             foreach ($indexes as $index) {
-                $values[] = Filter::byXPath($scraper, sprintf($template, self::$baseXPath, self::$baseLevel + 6, $index));
+                $values[] = Filter::byXPath($scraper, sprintf($template, self::BASE_XPATH, self::$baseLevel + 6, $index));
             }
 
             $response[] = implode($values);
@@ -374,7 +374,7 @@ final class ResultScraper implements Scraper
     private static function scrapeAmounts(Crawler $scraper, array $templates): array
     {
         return array_map(function (string $template) use ($scraper) {
-            $value = Filter::byXPath($scraper, sprintf($template, self::$baseXPath, self::$baseLevel + 6));
+            $value = Filter::byXPath($scraper, sprintf($template, self::BASE_XPATH, self::$baseLevel + 6));
 
             $value = str_replace(',', '', str_replace('¥', '', $value ?? ''));
 

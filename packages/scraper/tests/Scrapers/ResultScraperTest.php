@@ -24,7 +24,7 @@ final class ResultScraperTest extends TestCase
      */
     #[Test]
     #[DataProviderExternal(ResultScraperDataProvider::class, 'scrapeProvider')]
-    public function testScrape(array $arguments, array $expected): void
+    public function scrape(array $arguments, array $expected): void
     {
         $this->assertSame($expected, ResultScraper::scrape(...$arguments));
     }

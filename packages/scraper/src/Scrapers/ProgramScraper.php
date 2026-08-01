@@ -24,12 +24,12 @@ final class ProgramScraper implements Scraper
     /**
      * @var non-empty-string
      */
-    private static string $baseUrl = 'https://www.boatrace.jp';
+    private const string BASE_URL = 'https://www.boatrace.jp';
 
     /**
      * @var non-empty-string
      */
-    private static string $baseXPath = 'descendant-or-self::body/main/div/div/div';
+    private const string BASE_XPATH = 'descendant-or-self::body/main/div/div/div';
 
     /**
      * @var int<0, 1>
@@ -53,11 +53,11 @@ final class ProgramScraper implements Scraper
         $date = Carbon::parse($date);
 
         $scraperFormat = '%s/owpc/pc/race/racelist?hd=%s&jcd=%02d&rno=%d';
-        $scraperUrl = sprintf($scraperFormat, self::$baseUrl, $date->format('Ymd'), $stadiumNumber, $raceNumber);
+        $scraperUrl = sprintf($scraperFormat, self::BASE_URL, $date->format('Ymd'), $stadiumNumber, $raceNumber);
         $scraper = ($httpBrowser ?? HttpBrowserFactory::create())->request('GET', $scraperUrl);
 
         $levelFormat = '%s/div[2]/div[3]/ul/li';
-        $levelXPath = sprintf($levelFormat, self::$baseXPath);
+        $levelXPath = sprintf($levelFormat, self::BASE_XPATH);
 
         self::$baseLevel = 0;
         if (Filter::byXPath($scraper, $levelXPath) !== null) {
@@ -65,7 +65,7 @@ final class ProgramScraper implements Scraper
         }
 
         $closeTimeFormat = '%s/div[2]/div[2]/table/tbody/tr[1]/td[%s]';
-        $closeTimeXPath = sprintf($closeTimeFormat, self::$baseXPath, $raceNumber + 1);
+        $closeTimeXPath = sprintf($closeTimeFormat, self::BASE_XPATH, $raceNumber + 1);
         $closeTimeSource = Filter::byXPath($scraper, $closeTimeXPath);
 
         $closedAt = null;
@@ -75,17 +75,17 @@ final class ProgramScraper implements Scraper
         }
 
         $gradeFormat = '%s/div[1]/div/div[2]';
-        $gradeXPath = sprintf($gradeFormat, self::$baseXPath);
+        $gradeXPath = sprintf($gradeFormat, self::BASE_XPATH);
         $gradeSource = GradeFilter::byXPath($scraper, $gradeXPath);
         $grade = ProgramParser::parseGrade($gradeSource);
 
         $titleFormat = '%s/div[1]/div/div[2]/h2';
-        $titleXPath = sprintf($titleFormat, self::$baseXPath);
+        $titleXPath = sprintf($titleFormat, self::BASE_XPATH);
         $titleSource = Filter::byXPath($scraper, $titleXPath);
         $title = ProgramParser::parseTitle($titleSource);
 
         $subtitleAndDistanceFormat = '%s/div[2]/div[%d]/h3';
-        $subtitleAndDistanceXPath = sprintf($subtitleAndDistanceFormat, self::$baseXPath, self::$baseLevel + 3);
+        $subtitleAndDistanceXPath = sprintf($subtitleAndDistanceFormat, self::BASE_XPATH, self::$baseLevel + 3);
         $subtitleAndDistanceSource = Filter::byXPath($scraper, $subtitleAndDistanceXPath);
         $subtitleAndDistance = ProgramParser::parseSubtitleAndDistance($subtitleAndDistanceSource);
 
@@ -118,7 +118,7 @@ final class ProgramScraper implements Scraper
         $dayNumberSourceFormat = '%s/div[2]/div[1]/ul/li[%s]/span/span';
 
         foreach (range(1, 14) as $index) {
-            $dayNumberSourceXPath = sprintf($dayNumberSourceFormat, self::$baseXPath, $index);
+            $dayNumberSourceXPath = sprintf($dayNumberSourceFormat, self::BASE_XPATH, $index);
             $dayNumberSource = Filter::byXPath($scraper, $dayNumberSourceXPath);
 
             if ($dayNumberSource !== null) {
@@ -147,7 +147,7 @@ final class ProgramScraper implements Scraper
         $previousDayNumberSourceFormat = '%s/div[2]/div[1]/ul/li[%s]/a/span';
 
         foreach (range(1, 14) as $previousIndex) {
-            $previousDayNumberSourceXPath = sprintf($previousDayNumberSourceFormat, self::$baseXPath, $index - $previousIndex);
+            $previousDayNumberSourceXPath = sprintf($previousDayNumberSourceFormat, self::BASE_XPATH, $index - $previousIndex);
             $previousDayNumberSource = Filter::byXPath($scraper, $previousDayNumberSourceXPath);
 
             if ($previousDayNumberSource === null) {
@@ -207,47 +207,47 @@ final class ProgramScraper implements Scraper
 
         foreach (range(1, 6) as $index) {
             $entryNumberFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[1]';
-            $entryNumberXPath = sprintf($entryNumberFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $entryNumberXPath = sprintf($entryNumberFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $entryNumberSource = Filter::byXPath($scraper, $entryNumberXPath);
             $entryNumber = Parser::parseEntryNumber($entryNumberSource);
 
             $nameFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[3]/div[2]/a';
-            $nameXPath = sprintf($nameFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $nameXPath = sprintf($nameFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $nameSource = Filter::byXPath($scraper, $nameXPath);
             $name = Parser::parseName($nameSource);
 
             $numberAndRankNumberFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[3]/div[1]';
-            $numberAndRankNumberXPath = sprintf($numberAndRankNumberFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $numberAndRankNumberXPath = sprintf($numberAndRankNumberFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $numberAndRankNumberSource = Filter::byXPath($scraper, $numberAndRankNumberXPath);
             $numberAndRankNumber = ProgramParser::parseNumberAndRankNumber($numberAndRankNumberSource);
 
             $branchNumberAndBirthplaceNumberAndAgeAndWeightFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[3]/div[3]';
-            $branchNumberAndBirthplaceNumberAndAgeAndWeightXPath = sprintf($branchNumberAndBirthplaceNumberAndAgeAndWeightFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $branchNumberAndBirthplaceNumberAndAgeAndWeightXPath = sprintf($branchNumberAndBirthplaceNumberAndAgeAndWeightFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $branchNumberAndBirthplaceNumberAndAgeAndWeightSource = Filter::byXPath($scraper, $branchNumberAndBirthplaceNumberAndAgeAndWeightXPath);
             $branchNumberAndBirthplaceNumberAndAgeAndWeight = ProgramParser::parseBranchNumberAndBirthplaceNumberAndAgeAndWeight($branchNumberAndBirthplaceNumberAndAgeAndWeightSource);
 
             $flyingCountAndLateCountAndAverageStartTimingFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[4]';
-            $flyingCountAndLateCountAndAverageStartTimingXPath = sprintf($flyingCountAndLateCountAndAverageStartTimingFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $flyingCountAndLateCountAndAverageStartTimingXPath = sprintf($flyingCountAndLateCountAndAverageStartTimingFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $flyingCountAndLateCountAndAverageStartTimingSource = Filter::byXPath($scraper, $flyingCountAndLateCountAndAverageStartTimingXPath);
             $flyingCountAndLateCountAndAverageStartTiming = ProgramParser::parseFlyingCountAndLateCountAndAverageStartTiming($flyingCountAndLateCountAndAverageStartTimingSource);
 
             $nationalWinRateAndNationalTop23PercentFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[5]';
-            $nationalWinRateAndNationalTop23PercentXPath = sprintf($nationalWinRateAndNationalTop23PercentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $nationalWinRateAndNationalTop23PercentXPath = sprintf($nationalWinRateAndNationalTop23PercentFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $nationalWinRateAndNationalTop23PercentSource = Filter::byXPath($scraper, $nationalWinRateAndNationalTop23PercentXPath);
             $nationalWinRateAndNationalTop23Percent = ProgramParser::parseNationalWinRateAndNationalTop23Percent($nationalWinRateAndNationalTop23PercentSource);
 
             $localWinRateAndLocalTop23PercentFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[6]';
-            $localWinRateAndLocalTop23PercentXPath = sprintf($localWinRateAndLocalTop23PercentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $localWinRateAndLocalTop23PercentXPath = sprintf($localWinRateAndLocalTop23PercentFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $localWinRateAndLocalTop23PercentSource = Filter::byXPath($scraper, $localWinRateAndLocalTop23PercentXPath);
             $localWinRateAndLocalTop23Percent = ProgramParser::parseLocalWinRateAndLocalTop23Percent($localWinRateAndLocalTop23PercentSource);
 
             $motorNumberAndMotorTop23PercentFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[7]';
-            $motorNumberAndMotorTop23PercentXPath = sprintf($motorNumberAndMotorTop23PercentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $motorNumberAndMotorTop23PercentXPath = sprintf($motorNumberAndMotorTop23PercentFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $motorNumberAndMotorTop23PercentSource = Filter::byXPath($scraper, $motorNumberAndMotorTop23PercentXPath);
             $motorNumberANDMotorTop23Percent = ProgramParser::parseMotorNumberAndMotorTop23Percent($motorNumberAndMotorTop23PercentSource);
 
             $boatNumberAndBoatTop23PercentFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[8]';
-            $boatNumberAndMotorTop23PercentXPath = sprintf($boatNumberAndBoatTop23PercentFormat, self::$baseXPath, self::$baseLevel + 5, $index);
+            $boatNumberAndMotorTop23PercentXPath = sprintf($boatNumberAndBoatTop23PercentFormat, self::BASE_XPATH, self::$baseLevel + 5, $index);
             $boatNumberAndBoatTop23PercentSource = Filter::byXPath($scraper, $boatNumberAndMotorTop23PercentXPath);
             $boatNumberANDBoatTop23Percent = ProgramParser::parseBoatNumberAndBoatTop23Percent($boatNumberAndBoatTop23PercentSource);
 

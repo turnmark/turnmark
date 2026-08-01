@@ -24,7 +24,7 @@ final class ProgramScraperTest extends TestCase
      */
     #[Test]
     #[DataProviderExternal(ProgramScraperDataProvider::class, 'scrapeProvider')]
-    public function testScrape(array $arguments, array $expected): void
+    public function scrape(array $arguments, array $expected): void
     {
         $this->assertSame($expected, ProgramScraper::scrape(...$arguments));
     }

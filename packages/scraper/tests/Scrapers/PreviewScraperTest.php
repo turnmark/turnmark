@@ -24,7 +24,7 @@ final class PreviewScraperTest extends TestCase
      */
     #[Test]
     #[DataProviderExternal(PreviewScraperDataProvider::class, 'scrapeProvider')]
-    public function testScrape(array $arguments, array $expected): void
+    public function scrape(array $arguments, array $expected): void
     {
         $this->assertSame($expected, PreviewScraper::scrape(...$arguments));
     }

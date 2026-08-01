@@ -14,7 +14,7 @@ final class Normalizer
     /**
      * @var array<non-empty-string, bool>
      */
-    private static array $defaultOptions = [
+    private const array DEFAULT_OPTIONS = [
         'shouldRemoveAllSpaces' => false,
         'shouldRemoveAllNumbers' => false,
         'shouldRemoveAllNotNumbers' => false,
@@ -49,7 +49,7 @@ final class Normalizer
         }
 
         $options = array_merge(
-            self::$defaultOptions,
+            self::DEFAULT_OPTIONS,
             Converter::toCamelCaseKeys($options)
         );
 

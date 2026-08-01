@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Turnmark\Scraper;
 
 use DateTimeInterface;
-use InvalidArgumentException;
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Turnmark\Scraper\Converters\Converter;
 use Turnmark\Scraper\Scrapers\OddsScraper;
@@ -14,6 +13,7 @@ use Turnmark\Scraper\Scrapers\ProgramScraper;
 use Turnmark\Scraper\Scrapers\ResultScraper;
 use Turnmark\Scraper\Scrapers\StadiumScraper;
 use Turnmark\Scraper\Validators\Validator;
+use ValueError;
 
 /**
  * @author shimomo
@@ -82,11 +82,14 @@ final class Scraper
     /**
      * @param float $seconds
      * @return void
+     * @throws \ValueError
      */
     public static function setMinCallIntervalSeconds(float $seconds): void
     {
         if ($seconds < 1.0) {
-            throw new InvalidArgumentException('interval must be 1 or greater.');
+            throw new ValueError(
+                sprintf('$seconds must be 1 or greater, %s given.', $seconds)
+            );
         }
 
         self::$minCallIntervalSeconds = $seconds;
@@ -133,7 +136,7 @@ final class Scraper
     /**
      * @param \DateTimeInterface|non-empty-string $date
      * @param ?\Symfony\Component\BrowserKit\HttpBrowser $httpBrowser
-     * @return array<int<1, 24>, mixed>
+     * @return array<int<1, 24>, non-empty-string>
      */
     public static function scrapeStadium(
         DateTimeInterface|string $date,
