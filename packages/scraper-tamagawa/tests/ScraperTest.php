@@ -11,9 +11,7 @@ use Turnmark\Scraper\Tamagawa\Scraper;
 
 /**
  * @psalm-import-type Arguments from \Turnmark\Scraper\Tamagawa\Tests\ScraperPsalmType
- * @psalm-import-type BatchArguments from \Turnmark\Scraper\Tamagawa\Tests\ScraperPsalmType
  * @psalm-import-type Expected from \Turnmark\Scraper\Tamagawa\Tests\ScraperPsalmType
- * @psalm-import-type ExpectedByRaceNumber from \Turnmark\Scraper\Tamagawa\Tests\ScraperPsalmType
  *
  * @author shimomo
  */
@@ -29,17 +27,5 @@ final class ScraperTest extends TestCase
     public function scrapeTime(array $arguments, array $expected): void
     {
         $this->assertSame($expected, Scraper::scrapeTime(...$arguments));
-    }
-
-    /**
-     * @param BatchArguments $arguments
-     * @param ExpectedByRaceNumber $expected
-     * @return void
-     */
-    #[Test]
-    #[DataProviderExternal(ScraperDataProvider::class, 'scrapeTimeBulkProvider')]
-    public function scrapeTimeBulk(array $arguments, array $expected): void
-    {
-        $this->assertSame($expected, Scraper::scrapeTimeBulk(...$arguments));
     }
 }
