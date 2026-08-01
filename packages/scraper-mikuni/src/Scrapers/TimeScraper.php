@@ -8,19 +8,19 @@ use Carbon\CarbonImmutable as Carbon;
 use DateTimeInterface;
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\DomCrawler\Crawler;
+use Turnmark\Scraper\Contracts\LocalScraper;
 use Turnmark\Scraper\Factories\HttpBrowserFactory;
-use Turnmark\Scraper\Mikuni\Contracts\Scraper;
 use Turnmark\Scraper\Normalizers\Normalizer;
 
 /**
  * @author shimomo
  */
-final class TimeScraper implements Scraper
+final class TimeScraper implements LocalScraper
 {
     /**
      * @var non-empty-string
      */
-    private static string $baseUrl = 'https://www.boatrace-mikuni.jp';
+    private const string BASE_URL = 'https://www.boatrace-mikuni.jp';
 
     /**
      * @param \DateTimeInterface|non-empty-string $date
@@ -37,7 +37,7 @@ final class TimeScraper implements Scraper
         $date = Carbon::parse($date);
 
         $scraperFormat = '%s/modules/yosou/group-%s.php?day=%s&race=%d%s';
-        $scraperUrl = sprintf($scraperFormat, self::$baseUrl, 'cyokuzen', $date->format('Ymd'), $raceNumber, '&kind=2');
+        $scraperUrl = sprintf($scraperFormat, self::BASE_URL, 'cyokuzen', $date->format('Ymd'), $raceNumber, '&kind=2');
         $scraper = ($httpBrowser ?? HttpBrowserFactory::create())->request('GET', $scraperUrl);
 
         $names = $scraper->filter('.com-rname')->each(fn(Crawler $node): string => $node->text());
