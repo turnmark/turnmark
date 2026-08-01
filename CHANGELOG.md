@@ -2,6 +2,27 @@
 
 ## Unreleased
 
+## [0.7.0] - 2026-08-02
+
+- docs: update README.md
+- docs: update README.md
+- docs: update README.md
+- docs: update README.md
+- docs: update README.md
+- refactor!: consolidate contracts and clean up code
+- refactor!: consolidate contracts and clean up code
+- refactor!: consolidate contracts and clean up code
+- refactor!: consolidate contracts and clean up code
+- refactor!: consolidate contracts and clean up code
+- refactor!: move bulk methods to BatchScraper
+- refactor!: move bulk methods to BatchScraper
+- refactor!: move bulk methods to BatchScraper
+- refactor!: move bulk methods to BatchScraper
+- refactor!: move bulk methods to BatchScraper
+- refactor: redesign Place enum
+- chore: update CHANGELOG.md
+
+
 ## [0.6.0] - 2026-07-15
 
 - refactor: redesign Weather enum
