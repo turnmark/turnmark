@@ -7,9 +7,6 @@ namespace Turnmark\Scraper;
 use DateTimeInterface;
 use InvalidArgumentException;
 use Symfony\Component\BrowserKit\HttpBrowser;
-use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Output\ConsoleOutput;
-use Symfony\Component\Console\Output\NullOutput;
 use Turnmark\Scraper\Converters\Converter;
 use Turnmark\Scraper\Scrapers\OddsScraper;
 use Turnmark\Scraper\Scrapers\PreviewScraper;
@@ -170,54 +167,6 @@ final class Scraper
 
     /**
      * @param \DateTimeInterface|non-empty-string $date
-     * @param list<int<1, 24>> $stadiumNumbers
-     * @param list<int<1, 12>> $raceNumbers
-     * @param ?\Symfony\Component\BrowserKit\HttpBrowser $httpBrowser
-     * @return array<int<1, 24>, array<int<1, 12>, array<non-empty-string, mixed>>>
-     */
-    public static function scrapeProgramBulk(
-        DateTimeInterface|string $date,
-        array $stadiumNumbers = [],
-        array $raceNumbers = [],
-        ?HttpBrowser $httpBrowser = null,
-    ): array {
-        $response = [];
-
-        $uniqueStadiumNumbers = array_unique($stadiumNumbers ?: self::getStadiumNumbers());
-        $uniqueRaceNumbers = array_unique($raceNumbers ?: self::getRaceNumbers());
-
-        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
-        $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
-
-        $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
-
-        $output = self::getShowProgress() ? new ConsoleOutput() : new NullOutput();
-        $output->writeln('<info>📊 出走表のスクレイピングを開始します</info>');
-        $progressBar = new ProgressBar($output, $totalSteps);
-        $progressBar->setFormat(
-            ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
-        );
-        $progressBar->start();
-
-        foreach ($activeUniqueStadiumNumbers as $stadiumNumber) {
-            foreach ($uniqueRaceNumbers as $raceNumber) {
-                $response[$stadiumNumber][$raceNumber] =
-                    self::scrapeProgram($date, $stadiumNumber, $raceNumber, $httpBrowser);
-
-                $progressBar->advance();
-            }
-        }
-
-        $progressBar->finish();
-        $output->writeln('');
-        $output->writeln("<info>✅ 出走表のスクレイピングが完了しました（{$totalSteps}件）</info>");
-        $output->writeln('');
-
-        return $response;
-    }
-
-    /**
-     * @param \DateTimeInterface|non-empty-string $date
      * @param int<1, 24> $stadiumNumber
      * @param int<1, 12> $raceNumber
      * @param ?\Symfony\Component\BrowserKit\HttpBrowser $httpBrowser
@@ -235,54 +184,6 @@ final class Scraper
         Validator::validateRaceNumber($raceNumber);
 
         return PreviewScraper::scrape($date, $stadiumNumber, $raceNumber, $httpBrowser);
-    }
-
-    /**
-     * @param \DateTimeInterface|non-empty-string $date
-     * @param list<int<1, 24>> $stadiumNumbers
-     * @param list<int<1, 12>> $raceNumbers
-     * @param ?\Symfony\Component\BrowserKit\HttpBrowser $httpBrowser
-     * @return array<int<1, 24>, array<int<1, 12>, array<non-empty-string, mixed>>>
-     */
-    public static function scrapePreviewBulk(
-        DateTimeInterface|string $date,
-        array $stadiumNumbers = [],
-        array $raceNumbers = [],
-        ?HttpBrowser $httpBrowser = null,
-    ): array {
-        $response = [];
-
-        $uniqueStadiumNumbers = array_unique($stadiumNumbers ?: self::getStadiumNumbers());
-        $uniqueRaceNumbers = array_unique($raceNumbers ?: self::getRaceNumbers());
-
-        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
-        $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
-
-        $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
-
-        $output = self::getShowProgress() ? new ConsoleOutput() : new NullOutput();
-        $output->writeln('<info>📊 直前情報のスクレイピングを開始します</info>');
-        $progressBar = new ProgressBar($output, $totalSteps);
-        $progressBar->setFormat(
-            ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
-        );
-        $progressBar->start();
-
-        foreach ($activeUniqueStadiumNumbers as $stadiumNumber) {
-            foreach ($uniqueRaceNumbers as $raceNumber) {
-                $response[$stadiumNumber][$raceNumber] =
-                    self::scrapePreview($date, $stadiumNumber, $raceNumber, $httpBrowser);
-
-                $progressBar->advance();
-            }
-        }
-
-        $progressBar->finish();
-        $output->writeln('');
-        $output->writeln("<info>✅ 直前情報のスクレイピングが完了しました（{$totalSteps}件）</info>");
-        $output->writeln('');
-
-        return $response;
     }
 
     /**
@@ -308,54 +209,6 @@ final class Scraper
 
     /**
      * @param \DateTimeInterface|non-empty-string $date
-     * @param list<int<1, 24>> $stadiumNumbers
-     * @param list<int<1, 12>> $raceNumbers
-     * @param ?\Symfony\Component\BrowserKit\HttpBrowser $httpBrowser
-     * @return array<int<1, 24>, array<int<1, 12>, array<non-empty-string, mixed>>>
-     */
-    public static function scrapeOddsBulk(
-        DateTimeInterface|string $date,
-        array $stadiumNumbers = [],
-        array $raceNumbers = [],
-        ?HttpBrowser $httpBrowser = null,
-    ): array {
-        $response = [];
-
-        $uniqueStadiumNumbers = array_unique($stadiumNumbers ?: self::getStadiumNumbers());
-        $uniqueRaceNumbers = array_unique($raceNumbers ?: self::getRaceNumbers());
-
-        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
-        $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
-
-        $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
-
-        $output = self::getShowProgress() ? new ConsoleOutput() : new NullOutput();
-        $output->writeln('<info>📊 オッズのスクレイピングを開始します</info>');
-        $progressBar = new ProgressBar($output, $totalSteps);
-        $progressBar->setFormat(
-            ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
-        );
-        $progressBar->start();
-
-        foreach ($activeUniqueStadiumNumbers as $stadiumNumber) {
-            foreach ($uniqueRaceNumbers as $raceNumber) {
-                $response[$stadiumNumber][$raceNumber] =
-                    self::scrapeOdds($date, $stadiumNumber, $raceNumber, $httpBrowser);
-
-                $progressBar->advance();
-            }
-        }
-
-        $progressBar->finish();
-        $output->writeln('');
-        $output->writeln("<info>✅ オッズのスクレイピングが完了しました（{$totalSteps}件）</info>");
-        $output->writeln('');
-
-        return $response;
-    }
-
-    /**
-     * @param \DateTimeInterface|non-empty-string $date
      * @param int<1, 24> $stadiumNumber
      * @param int<1, 12> $raceNumber
      * @param ?\Symfony\Component\BrowserKit\HttpBrowser $httpBrowser
@@ -373,53 +226,5 @@ final class Scraper
         Validator::validateRaceNumber($raceNumber);
 
         return ResultScraper::scrape($date, $stadiumNumber, $raceNumber, $httpBrowser);
-    }
-
-    /**
-     * @param \DateTimeInterface|non-empty-string $date
-     * @param list<int<1, 24>> $stadiumNumbers
-     * @param list<int<1, 12>> $raceNumbers
-     * @param ?\Symfony\Component\BrowserKit\HttpBrowser $httpBrowser
-     * @return array<int<1, 24>, array<int<1, 12>, array<non-empty-string, mixed>>>
-     */
-    public static function scrapeResultBulk(
-        DateTimeInterface|string $date,
-        array $stadiumNumbers = [],
-        array $raceNumbers = [],
-        ?HttpBrowser $httpBrowser = null,
-    ): array {
-        $response = [];
-
-        $uniqueStadiumNumbers = array_unique($stadiumNumbers ?: self::getStadiumNumbers());
-        $uniqueRaceNumbers = array_unique($raceNumbers ?: self::getRaceNumbers());
-
-        $activeStadiumNumbers = array_keys(self::scrapeStadium($date));
-        $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
-
-        $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
-
-        $output = self::getShowProgress() ? new ConsoleOutput() : new NullOutput();
-        $output->writeln('<info>📊 結果のスクレイピングを開始します</info>');
-        $progressBar = new ProgressBar($output, $totalSteps);
-        $progressBar->setFormat(
-            ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
-        );
-        $progressBar->start();
-
-        foreach ($activeUniqueStadiumNumbers as $stadiumNumber) {
-            foreach ($uniqueRaceNumbers as $raceNumber) {
-                $response[$stadiumNumber][$raceNumber] =
-                    self::scrapeResult($date, $stadiumNumber, $raceNumber, $httpBrowser);
-
-                $progressBar->advance();
-            }
-        }
-
-        $progressBar->finish();
-        $output->writeln('');
-        $output->writeln("<info>✅ 結果のスクレイピングが完了しました（{$totalSteps}件）</info>");
-        $output->writeln('');
-
-        return $response;
     }
 }

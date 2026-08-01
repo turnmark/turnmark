@@ -30,13 +30,13 @@ composer require turnmark/scraper
 | メソッド | 引数 |
 |---|---|
 | 出走表を取得<br>`Scraper::scrapeProgram($date, $stadiumNumber, $raceNumber)` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumber` : 1〜24<br>`$raceNumber` : 1〜12 |
-| 出走表を一括取得<br>`Scraper::scrapeProgramBulk($date [, $stadiumNumbers, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumbers` : [1〜24]（省略時は全場）<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
+| 出走表を一括取得<br>`BatchScraper::scrapeProgram($date [, $stadiumNumbers, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumbers` : [1〜24]（省略時は全場）<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
 | 直前情報を取得<br>`Scraper::scrapePreview($date = null, $stadiumNumber = null, $raceNumber = null)` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumber` : 1〜24<br>`$raceNumber` : 1〜12 |
-| 直前情報を一括取得<br>`Scraper::scrapePreviewBulk($date [, $stadiumNumbers, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumbers` : [1〜24]（省略時は全場）<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
+| 直前情報を一括取得<br>`BatchScraper::scrapePreview($date [, $stadiumNumbers, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumbers` : [1〜24]（省略時は全場）<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
 | オッズを取得<br>`Scraper::scrapeOdds($date = null, $stadiumNumber = null, $raceNumber = null)` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumber` : 1〜24<br>`$raceNumber` : 1〜12 |
-| オッズを一括取得<br>`Scraper::scrapeOddsBulk($date [, $stadiumNumbers, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumbers` : [1〜24]（省略時は全場）<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
+| オッズを一括取得<br>`BatchScraper::scrapeOdds($date [, $stadiumNumbers, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumbers` : [1〜24]（省略時は全場）<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
 | 結果を取得<br>`Scraper::scrapeResult($date = null, $stadiumNumber = null, $raceNumber = null)` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumber` : 1〜24<br>`$raceNumber` : 1〜12 |
-| 結果を一括取得<br>`Scraper::scrapeResultBulk($date [, $stadiumNumbers, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumbers` : [1〜24]（省略時は全場）<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
+| 結果を一括取得<br>`BatchScraper::scrapeResult($date [, $stadiumNumbers, $raceNumbers])` | `$date` : DateTimeInterface インスタンスまたは DateTimeInterface 対応日付文字列<br>`$stadiumNumbers` : [1〜24]（省略時は全場）<br>`$raceNumbers` : [1〜12]（省略時は全レース） |
 
 ### 基本的な使い方
 
@@ -45,23 +45,24 @@ composer require turnmark/scraper
 
 require __DIR__ . '/vendor/autoload.php';
 
+use Turnmark\Scraper\BatchScraper;
 use Turnmark\Scraper\Scraper;
 
 // 出走表を取得
 $program = Scraper::scrapeProgram('2026-05-31', 6, 12);
-$programBulk = Scraper::scrapeProgramBulk('2026-05-31', [6], [10, 11, 12]);
+$programBatch = BatchScraper::scrapeProgram('2026-05-31', [6], [10, 11, 12]);
 
 // 直前情報を取得
 $preview = Scraper::scrapePreview('2026-05-31', 6, 12);
-$previewBulk = Scraper::scrapePreviewBulk('2026-05-31', [6], [10, 11, 12]);
+$previewBatch = BatchScraper::scrapePreview('2026-05-31', [6], [10, 11, 12]);
 
 // オッズを取得
 $odds = Scraper::scrapeOdds('2026-05-31', 6, 12);
-$oddsBulk = Scraper::scrapeOddsBulk('2026-05-31', [6], [10, 11, 12]);
+$oddsBatch = BatchScraper::scrapeOdds('2026-05-31', [6], [10, 11, 12]);
 
 // 結果を取得
 $result = Scraper::scrapeResult('2026-05-31', 6, 12);
-$resultBulk = Scraper::scrapeResultBulk('2026-05-31', [6], [10, 11, 12]);
+$resultBatch = BatchScraper::scrapeResult('2026-05-31', [6], [10, 11, 12]);
 ```
 
 ### Scraper::scrapeProgram()
