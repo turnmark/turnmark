@@ -32,11 +32,11 @@
     "vimeo/psalm": "^6.0"
   },
   "replace": {
-    "turnmark/scraper": "0.6.0",
-    "turnmark/scraper-fukuoka": "0.6.0",
-    "turnmark/scraper-mikuni": "0.6.0",
-    "turnmark/scraper-tamagawa": "0.6.0",
-    "turnmark/scraper-tokuyama": "0.6.0"
+    "turnmark/scraper": "0.7.0",
+    "turnmark/scraper-fukuoka": "0.7.0",
+    "turnmark/scraper-mikuni": "0.7.0",
+    "turnmark/scraper-tamagawa": "0.7.0",
+    "turnmark/scraper-tokuyama": "0.7.0"
   },
   "repositories": [
     {
