@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## [0.7.1] - 2026-08-02
+
+- fix: normalize racer keys and guard the result table
+- chore: update CHANGELOG.md
+
+
 ## [0.7.0] - 2026-08-02
 
 - docs: update README.md
