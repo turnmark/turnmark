@@ -31,6 +31,24 @@ final class PreviewScraper implements Scraper
     private const string BASE_XPATH = 'descendant-or-self::body/main/div/div/div';
 
     /**
+     * @var non-empty-list<non-empty-string>
+     */
+    private const array RACER_KEYS = [
+        'entry_number',
+        'course_number',
+        'start_timing_source',
+        'start_timing',
+        'weight_source',
+        'weight',
+        'weight_adjustment_source',
+        'weight_adjustment',
+        'exhibition_time_source',
+        'exhibition_time',
+        'tilt_adjustment_source',
+        'tilt_adjustment',
+    ];
+
+    /**
      * @var int<0, 1>
      */
     private static int $baseLevel = 0;
@@ -117,7 +135,28 @@ final class PreviewScraper implements Scraper
      */
     private static function scrapeRacers(Crawler $scraper): array
     {
+        $racers = self::scrapePreviewTable($scraper);
+
+        $template = array_fill_keys(self::RACER_KEYS, null);
+
         $response = ['racers' => []];
+
+        foreach (range(1, 6) as $entryNumberKey) {
+            $response['racers'][$entryNumberKey] = array_replace($template, [
+                'entry_number' => $entryNumberKey,
+            ], $racers[$entryNumberKey] ?? []);
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param \Symfony\Component\DomCrawler\Crawler $scraper
+     * @return array<int<1, 6>, array<non-empty-string, mixed>>
+     */
+    private static function scrapePreviewTable(Crawler $scraper): array
+    {
+        $response = [];
 
         foreach (range(1, 6) as $index) {
             $entryNumberFormat = '%s/div[2]/div[%d]/div[2]/div[1]/table/tbody/tr[%s]/td/div/span[1]';
@@ -143,10 +182,10 @@ final class PreviewScraper implements Scraper
                 continue;
             }
 
-            $response['racers'][$entryNumberKey] ??= [];
-            $response['racers'][$entryNumberKey] += $entryNumber;
-            $response['racers'][$entryNumberKey] += $course;
-            $response['racers'][$entryNumberKey] += $startTiming;
+            $response[$entryNumberKey] ??= [];
+            $response[$entryNumberKey] += $entryNumber;
+            $response[$entryNumberKey] += $course;
+            $response[$entryNumberKey] += $startTiming;
         }
 
         foreach (range(1, 6) as $index) {
@@ -185,15 +224,13 @@ final class PreviewScraper implements Scraper
                 continue;
             }
 
-            $response['racers'][$entryNumberKey] ??= [];
-            $response['racers'][$entryNumberKey] += $entryNumber;
-            $response['racers'][$entryNumberKey] += $weight;
-            $response['racers'][$entryNumberKey] += $weightAdjustment;
-            $response['racers'][$entryNumberKey] += $exhibitionTime;
-            $response['racers'][$entryNumberKey] += $tiltAdjustment;
+            $response[$entryNumberKey] ??= [];
+            $response[$entryNumberKey] += $entryNumber;
+            $response[$entryNumberKey] += $weight;
+            $response[$entryNumberKey] += $weightAdjustment;
+            $response[$entryNumberKey] += $exhibitionTime;
+            $response[$entryNumberKey] += $tiltAdjustment;
         }
-
-        ksort($response['racers'], SORT_NUMERIC);
 
         return $response;
     }

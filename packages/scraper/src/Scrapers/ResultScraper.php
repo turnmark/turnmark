@@ -10,6 +10,7 @@ use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\DomCrawler\Crawler;
 use Turnmark\Scraper\Contracts\Scraper;
 use Turnmark\Scraper\Converters\Converter;
+use Turnmark\Scraper\Enums\Place;
 use Turnmark\Scraper\Factories\HttpBrowserFactory;
 use Turnmark\Scraper\Filters\Filter;
 use Turnmark\Scraper\Filters\WindDirectionFilter;
@@ -30,6 +31,21 @@ final class ResultScraper implements Scraper
      * @var non-empty-string
      */
     private const string BASE_XPATH = 'descendant-or-self::body/main/div/div/div';
+
+    /**
+     * @var non-empty-list<non-empty-string>
+     */
+    private const array RACER_KEYS = [
+        'entry_number',
+        'course_number',
+        'start_timing_source',
+        'start_timing',
+        'place_number_source',
+        'place_number',
+        'number_source',
+        'number',
+        'name',
+    ];
 
     /**
      * @var int<0, 1>
@@ -125,7 +141,52 @@ final class ResultScraper implements Scraper
      */
     private static function scrapeRacers(Crawler $scraper): array
     {
+        $racers = self::hasResultTable($scraper) ? self::scrapeResultTable($scraper) : [];
+
+        $template = array_fill_keys(self::RACER_KEYS, null);
+
         $response = ['racers' => []];
+
+        foreach (range(1, 6) as $entryNumberKey) {
+            $response['racers'][$entryNumberKey] = array_replace($template, [
+                'entry_number' => $entryNumberKey,
+            ], $racers[$entryNumberKey] ?? []);
+        }
+
+        return $response;
+    }
+
+    /**
+     * The result table is not published for the first few dozen minutes after a race is
+     * confirmed, while the payout table already is. That drops one section from the page and
+     * shifts div[$baseLevel + 5] onto the payout table, so verify the value read as the place
+     * is one the enum knows before trusting the section.
+     *
+     * @param \Symfony\Component\DomCrawler\Crawler $scraper
+     * @return bool
+     */
+    private static function hasResultTable(Crawler $scraper): bool
+    {
+        $placeFormat = '%s/div[2]/div[%d]/div[1]/div/table/tbody[1]/tr/td[1]';
+        $placeXPath = sprintf($placeFormat, self::BASE_XPATH, self::$baseLevel + 5);
+        $placeSource = Filter::byXPath($scraper, $placeXPath);
+
+        if ($placeSource === null) {
+            return false;
+        }
+
+        $shortNames = array_map(fn(Place $case) => $case->shortName(), Place::cases());
+
+        return in_array($placeSource, $shortNames, true);
+    }
+
+    /**
+     * @param \Symfony\Component\DomCrawler\Crawler $scraper
+     * @return array<int<1, 6>, array<non-empty-string, mixed>>
+     */
+    private static function scrapeResultTable(Crawler $scraper): array
+    {
+        $response = [];
 
         foreach (range(1, 6) as $index) {
             $entryNumberFormat = '%s/div[2]/div[%d]/div[2]/div/table/tbody/tr[%s]/td/div/span[1]';
@@ -151,10 +212,10 @@ final class ResultScraper implements Scraper
                 continue;
             }
 
-            $response['racers'][$entryNumberKey] ??= [];
-            $response['racers'][$entryNumberKey] += $entryNumber;
-            $response['racers'][$entryNumberKey] += $course;
-            $response['racers'][$entryNumberKey] += $startTiming;
+            $response[$entryNumberKey] ??= [];
+            $response[$entryNumberKey] += $entryNumber;
+            $response[$entryNumberKey] += $course;
+            $response[$entryNumberKey] += $startTiming;
         }
 
         foreach (range(1, 6) as $index) {
@@ -188,14 +249,12 @@ final class ResultScraper implements Scraper
                 continue;
             }
 
-            $response['racers'][$entryNumberKey] ??= [];
-            $response['racers'][$entryNumberKey] += $entryNumber;
-            $response['racers'][$entryNumberKey] += $place;
-            $response['racers'][$entryNumberKey] += $number;
-            $response['racers'][$entryNumberKey] += $name;
+            $response[$entryNumberKey] ??= [];
+            $response[$entryNumberKey] += $entryNumber;
+            $response[$entryNumberKey] += $place;
+            $response[$entryNumberKey] += $number;
+            $response[$entryNumberKey] += $name;
         }
-
-        ksort($response['racers'], SORT_NUMERIC);
 
         return $response;
     }
