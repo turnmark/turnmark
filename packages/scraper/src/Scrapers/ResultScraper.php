@@ -33,6 +33,11 @@ final class ResultScraper implements Scraper
     private const string BASE_XPATH = 'descendant-or-self::body/main/div/div/div';
 
     /**
+     * @var non-empty-string
+     */
+    private const string SPECIAL_PAYOUT_LABEL = '特払';
+
+    /**
      * @var non-empty-list<non-empty-string>
      */
     private const array RACER_KEYS = [
@@ -263,13 +268,13 @@ final class ResultScraper implements Scraper
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @return array{
      *     payouts?: array{
-     *         trifecta?: list<array{combination: non-empty-string, amount: non-negative-int}>,
-     *         trio?: list<array{combination: non-empty-string, amount: non-negative-int}>,
-     *         exacta?: list<array{combination: non-empty-string, amount: non-negative-int}>,
-     *         quinella?: list<array{combination: non-empty-string, amount: non-negative-int}>,
-     *         quinella_place?: list<array{combination: non-empty-string, amount: non-negative-int}>,
-     *         win?: list<array{combination: non-empty-string, amount: non-negative-int}>,
-     *         place?: list<array{combination: non-empty-string, amount: non-negative-int}>,
+     *         trifecta?: list<array{combination: ?string, amount: non-negative-int, is_special: bool}>,
+     *         trio?: list<array{combination: ?string, amount: non-negative-int, is_special: bool}>,
+     *         exacta?: list<array{combination: ?string, amount: non-negative-int, is_special: bool}>,
+     *         quinella?: list<array{combination: ?string, amount: non-negative-int, is_special: bool}>,
+     *         quinella_place?: list<array{combination: ?string, amount: non-negative-int, is_special: bool}>,
+     *         win?: list<array{combination: ?string, amount: non-negative-int, is_special: bool}>,
+     *         place?: list<array{combination: ?string, amount: non-negative-int, is_special: bool}>,
      *     }
      * }
      */
@@ -286,12 +291,21 @@ final class ResultScraper implements Scraper
                     $response['payouts'][$name] = [];
                 }
 
-                if ($value !== '' && $amounts[$name][$index] !== null) {
-                    $response['payouts'][$name][] = [
-                        'combination' => $value,
-                        'amount' => $amounts[$name][$index],
-                    ];
+                $amount = $amounts[$name][$index] ?? null;
+
+                if ($amount === null) {
+                    continue;
                 }
+
+                if ($value['combination'] === null && !$value['is_special']) {
+                    continue;
+                }
+
+                $response['payouts'][$name][] = [
+                    'combination' => $value['combination'],
+                    'amount' => $amount,
+                    'is_special' => $value['is_special'],
+                ];
             }
         }
 
@@ -301,51 +315,51 @@ final class ResultScraper implements Scraper
     /**
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @return array{
-     *     trifecta: list<string>,
-     *     trio: list<string>,
-     *     exacta: list<string>,
-     *     quinella: list<string>,
-     *     quinella_place: list<string>,
-     *     win: list<string>,
-     *     place: list<string>,
+     *     trifecta: list<array{combination: ?string, is_special: bool}>,
+     *     trio: list<array{combination: ?string, is_special: bool}>,
+     *     exacta: list<array{combination: ?string, is_special: bool}>,
+     *     quinella: list<array{combination: ?string, is_special: bool}>,
+     *     quinella_place: list<array{combination: ?string, is_special: bool}>,
+     *     win: list<array{combination: ?string, is_special: bool}>,
+     *     place: list<array{combination: ?string, is_special: bool}>,
      * }
      */
     private static function scrapeAllCombinations(Crawler $scraper): array
     {
         return [
             'trifecta' => self::scrapeCombinations($scraper, [
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[1]/tr[1]/td[2]/div/div/span[%d]',
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[1]/tr[2]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[1]/tr[1]/td[2]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[1]/tr[2]/td[1]',
             ], range(1, 5)),
             'trio' => self::scrapeCombinations($scraper, [
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[2]/tr[1]/td[2]/div/div/span[%d]',
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[2]/tr[2]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[2]/tr[1]/td[2]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[2]/tr[2]/td[1]',
             ], range(1, 5)),
             'exacta' => self::scrapeCombinations($scraper, [
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[3]/tr[1]/td[2]/div/div/span[%d]',
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[3]/tr[2]/td[1]/div/div/span[%d]',
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[3]/tr[3]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[3]/tr[1]/td[2]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[3]/tr[2]/td[1]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[3]/tr[3]/td[1]',
             ], range(1, 3)),
             'quinella' => self::scrapeCombinations($scraper, [
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[4]/tr[1]/td[2]/div/div/span[%d]',
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[4]/tr[2]/td[1]/div/div/span[%d]',
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[4]/tr[3]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[4]/tr[1]/td[2]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[4]/tr[2]/td[1]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[4]/tr[3]/td[1]',
             ], range(1, 3)),
             'quinella_place' => self::scrapeCombinations($scraper, [
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[1]/td[2]/div/div/span[%d]',
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[2]/td[1]/div/div/span[%d]',
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[3]/td[1]/div/div/span[%d]',
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[4]/td[1]/div/div/span[%d]',
-                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[5]/td[1]/div/div/span[%d]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[1]/td[2]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[2]/td[1]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[3]/td[1]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[4]/td[1]',
+                '%s/div[2]/div[%d]/div[1]/div/table/tbody[5]/tr[5]/td[1]',
             ], range(1, 3)),
             'win' => self::scrapeCombinations($scraper, [
-                '%s//div[2]/div[%d]/div[1]/div/table/tbody[6]/tr[1]/td[2]/div/div/span[%d]',
-                '%s//div[2]/div[%d]/div[1]/div/table/tbody[6]/tr[2]/td[1]/div/div/span[%d]',
+                '%s//div[2]/div[%d]/div[1]/div/table/tbody[6]/tr[1]/td[2]',
+                '%s//div[2]/div[%d]/div[1]/div/table/tbody[6]/tr[2]/td[1]',
             ], range(1, 1)),
             'place' => self::scrapeCombinations($scraper, [
-                '%s//div[2]/div[%d]/div[1]/div/table/tbody[7]/tr[1]/td[2]/div/div/span[%d]',
-                '%s//div[2]/div[%d]/div[1]/div/table/tbody[7]/tr[2]/td[1]/div/div/span[%d]',
-                '%s//div[2]/div[%d]/div[1]/div/table/tbody[7]/tr[3]/td[1]/div/div/span[%d]',
+                '%s//div[2]/div[%d]/div[1]/div/table/tbody[7]/tr[1]/td[2]',
+                '%s//div[2]/div[%d]/div[1]/div/table/tbody[7]/tr[2]/td[1]',
+                '%s//div[2]/div[%d]/div[1]/div/table/tbody[7]/tr[3]/td[1]',
             ], range(1, 1)),
         ];
     }
@@ -354,20 +368,35 @@ final class ResultScraper implements Scraper
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @param list<non-empty-string> $templates
      * @param list<non-negative-int> $indexes
-     * @return list<string>
+     * @return list<array{combination: ?string, is_special: bool}>
      */
     private static function scrapeCombinations(Crawler $scraper, array $templates, array $indexes): array
     {
         $response = [];
 
         foreach ($templates as $template) {
+            $cellXPath = sprintf($template, self::BASE_XPATH, self::$baseLevel + 6);
+
             $values = [];
 
             foreach ($indexes as $index) {
-                $values[] = Filter::byXPath($scraper, sprintf($template, self::BASE_XPATH, self::$baseLevel + 6, $index));
+                $values[] = Filter::byXPath($scraper, sprintf('%s/div/div/span[%d]', $cellXPath, $index));
             }
 
-            $response[] = implode($values);
+            $combination = implode($values);
+
+            if ($combination !== '') {
+                $response[] = ['combination' => $combination, 'is_special' => false];
+
+                continue;
+            }
+
+            $label = Filter::byXPath($scraper, $cellXPath);
+
+            $response[] = [
+                'combination' => null,
+                'is_special' => $label !== null && str_contains($label, self::SPECIAL_PAYOUT_LABEL),
+            ];
         }
 
         return $response;

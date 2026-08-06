@@ -118,54 +118,64 @@ final class ResultScraperDataProvider
                             [
                                 'combination' => '1-5-4',
                                 'amount' => 4430,
+                                'is_special' => false,
                             ],
                         ],
                         'trio' => [
                             [
                                 'combination' => '1=4=5',
                                 'amount' => 1550,
+                                'is_special' => false,
                             ],
                         ],
                         'exacta' => [
                             [
                                 'combination' => '1-5',
                                 'amount' => 950,
+                                'is_special' => false,
                             ],
                         ],
                         'quinella' => [
                             [
                                 'combination' => '1=5',
                                 'amount' => 840,
+                                'is_special' => false,
                             ],
                         ],
                         'quinella_place' => [
                             [
                                 'combination' => '1=5',
                                 'amount' => 320,
+                                'is_special' => false,
                             ],
                             [
                                 'combination' => '1=4',
                                 'amount' => 240,
+                                'is_special' => false,
                             ],
                             [
                                 'combination' => '4=5',
                                 'amount' => 790,
+                                'is_special' => false,
                             ],
                         ],
                         'win' => [
                             [
                                 'combination' => '1',
                                 'amount' => 120,
+                                'is_special' => false,
                             ],
                         ],
                         'place' => [
                             [
                                 'combination' => '1',
                                 'amount' => 110,
+                                'is_special' => false,
                             ],
                             [
                                 'combination' => '5',
                                 'amount' => 360,
+                                'is_special' => false,
                             ],
                         ],
                     ],
@@ -267,6 +277,162 @@ final class ResultScraperDataProvider
                         'quinella_place' => [],
                         'win' => [],
                         'place' => [],
+                    ],
+                ],
+            ],
+            [
+                'arguments' => [Carbon::parse('2026-07-29'), 17, 11],
+                'expected' => [
+                    'date' => '2026-07-29',
+                    'stadium_number' => 17,
+                    'race_number' => 11,
+                    'wind_speed_source' => '2m',
+                    'wind_speed' => 2,
+                    'wind_direction_number_source' => '西',
+                    'wind_direction_number' => 13,
+                    'wave_height_source' => '2cm',
+                    'wave_height' => 2,
+                    'weather_number_source' => '晴',
+                    'weather_number' => 1,
+                    'air_temperature_source' => '30.0℃',
+                    'air_temperature' => 30.0,
+                    'water_temperature_source' => '28.0℃',
+                    'water_temperature' => 28.0,
+                    'technique_number_source' => 'まくり差し',
+                    'technique_number' => 4,
+                    'racers' => [
+                        1 => [
+                            'entry_number' => 1,
+                            'course_number' => 1,
+                            'start_timing_source' => '.12',
+                            'start_timing' => 0.12,
+                            'place_number_source' => '2',
+                            'place_number' => 2,
+                            'number_source' => '4982',
+                            'number' => 4982,
+                            'name' => '中村 将隆',
+                        ],
+                        2 => [
+                            'entry_number' => 2,
+                            'course_number' => 2,
+                            'start_timing_source' => '.14',
+                            'start_timing' => 0.14,
+                            'place_number_source' => '3',
+                            'place_number' => 3,
+                            'number_source' => '3833',
+                            'number' => 3833,
+                            'name' => '中辻 博訓',
+                        ],
+                        3 => [
+                            'entry_number' => 3,
+                            'course_number' => 3,
+                            'start_timing_source' => '.17',
+                            'start_timing' => 0.17,
+                            'place_number_source' => '5',
+                            'place_number' => 5,
+                            'number_source' => '4672',
+                            'number' => 4672,
+                            'name' => '守屋 大地',
+                        ],
+                        4 => [
+                            'entry_number' => 4,
+                            'course_number' => 4,
+                            'start_timing_source' => '.17',
+                            'start_timing' => 0.17,
+                            'place_number_source' => '落',
+                            'place_number' => 10,
+                            'number_source' => '4066',
+                            'number' => 4066,
+                            'name' => '東本 勝利',
+                        ],
+                        5 => [
+                            'entry_number' => 5,
+                            'course_number' => 6,
+                            'start_timing_source' => '.19',
+                            'start_timing' => 0.19,
+                            'place_number_source' => '4',
+                            'place_number' => 4,
+                            'number_source' => '5020',
+                            'number' => 5020,
+                            'name' => '宮村 勇哉',
+                        ],
+                        6 => [
+                            'entry_number' => 6,
+                            'course_number' => 5,
+                            'start_timing_source' => '.14',
+                            'start_timing' => 0.14,
+                            'place_number_source' => '1',
+                            'place_number' => 1,
+                            'number_source' => '4276',
+                            'number' => 4276,
+                            'name' => '鈴木 勝博',
+                        ],
+                    ],
+                    'payouts' => [
+                        'trifecta' => [
+                            [
+                                'combination' => '6-1-2',
+                                'amount' => 65790,
+                                'is_special' => false,
+                            ],
+                        ],
+                        'trio' => [
+                            [
+                                'combination' => '1=2=6',
+                                'amount' => 1190,
+                                'is_special' => false,
+                            ],
+                        ],
+                        'exacta' => [
+                            [
+                                'combination' => '6-1',
+                                'amount' => 13410,
+                                'is_special' => false,
+                            ],
+                        ],
+                        'quinella' => [
+                            [
+                                'combination' => '1=6',
+                                'amount' => 1890,
+                                'is_special' => false,
+                            ],
+                        ],
+                        'quinella_place' => [
+                            [
+                                'combination' => '1=6',
+                                'amount' => 630,
+                                'is_special' => false,
+                            ],
+                            [
+                                'combination' => '2=6',
+                                'amount' => 580,
+                                'is_special' => false,
+                            ],
+                            [
+                                'combination' => '1=2',
+                                'amount' => 230,
+                                'is_special' => false,
+                            ],
+                        ],
+                        'win' => [
+                            [
+                                'combination' => null,
+                                'amount' => 70,
+                                'is_special' => true,
+                            ],
+                        ],
+                        'place' => [
+                            [
+                                'combination' => '6',
+                                'amount' => 1360,
+                                'is_special' => false,
+                            ],
+                            [
+                                'combination' => '1',
+                                'amount' => 360,
+                                'is_special' => false,
+                            ],
+                        ],
                     ],
                 ],
             ],
