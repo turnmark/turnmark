@@ -464,6 +464,9 @@ final class ResultScraper implements Scraper
     }
 
     /**
+     * A missing or blank amount cell is not a payout of zero. Casting it would give one, and the
+     * row would then be reported as if the bet type paid nothing, so it is reported as missing.
+     *
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @param list<non-empty-string> $templates
      * @return list<?non-negative-int>
@@ -473,9 +476,17 @@ final class ResultScraper implements Scraper
         return array_map(function (string $template) use ($scraper) {
             $value = Filter::byXPath($scraper, sprintf($template, self::BASE_XPATH, self::$baseLevel + 6));
 
-            $value = str_replace(',', '', str_replace('¥', '', $value ?? ''));
+            if ($value === null) {
+                return null;
+            }
 
-            $value = Converter::toInt($value);
+            $value = str_replace(',', '', str_replace('¥', '', $value));
+
+            if (!is_numeric($value)) {
+                return null;
+            }
+
+            $value = Converter::toIntStrict($value);
 
             return $value >= 0 ? $value : null;
         }, $templates);
