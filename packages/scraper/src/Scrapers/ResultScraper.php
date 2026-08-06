@@ -281,13 +281,13 @@ final class ResultScraper implements Scraper
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @return array{
      *     payouts?: array{
-     *         trifecta?: list<array{combination: ?string, amount: non-negative-int, label: ?string}>,
-     *         trio?: list<array{combination: ?string, amount: non-negative-int, label: ?string}>,
-     *         exacta?: list<array{combination: ?string, amount: non-negative-int, label: ?string}>,
-     *         quinella?: list<array{combination: ?string, amount: non-negative-int, label: ?string}>,
-     *         quinella_place?: list<array{combination: ?string, amount: non-negative-int, label: ?string}>,
-     *         win?: list<array{combination: ?string, amount: non-negative-int, label: ?string}>,
-     *         place?: list<array{combination: ?string, amount: non-negative-int, label: ?string}>,
+     *         trifecta?: list<array{combination: ?string, amount: ?non-negative-int, label: ?string}>,
+     *         trio?: list<array{combination: ?string, amount: ?non-negative-int, label: ?string}>,
+     *         exacta?: list<array{combination: ?string, amount: ?non-negative-int, label: ?string}>,
+     *         quinella?: list<array{combination: ?string, amount: ?non-negative-int, label: ?string}>,
+     *         quinella_place?: list<array{combination: ?string, amount: ?non-negative-int, label: ?string}>,
+     *         win?: list<array{combination: ?string, amount: ?non-negative-int, label: ?string}>,
+     *         place?: list<array{combination: ?string, amount: ?non-negative-int, label: ?string}>,
      *     }
      * }
      */
@@ -304,19 +304,16 @@ final class ResultScraper implements Scraper
                     $response['payouts'][$name] = [];
                 }
 
-                $amount = $amounts[$name][$index] ?? null;
-
-                if ($amount === null) {
-                    continue;
-                }
-
                 if ($value['combination'] === null && $value['label'] === null) {
                     continue;
                 }
 
+                // A row whose combination reads but whose amount does not points at the page
+                // having shifted rather than at the state of the table. Dropping the row would
+                // take the evidence with it, so it is kept with the amount left missing.
                 $response['payouts'][$name][] = [
                     'combination' => $value['combination'],
-                    'amount' => $amount,
+                    'amount' => $amounts[$name][$index] ?? null,
                     'label' => $value['label'],
                 ];
             }
