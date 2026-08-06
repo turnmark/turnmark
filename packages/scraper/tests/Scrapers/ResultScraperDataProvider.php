@@ -45,6 +45,7 @@ final class ResultScraperDataProvider
                     'water_temperature' => 23.0,
                     'technique_number_source' => '逃げ',
                     'technique_number' => 1,
+                    'remarks' => null,
                     'racers' => [
                         1 => [
                             'entry_number' => 1,
@@ -118,67 +119,68 @@ final class ResultScraperDataProvider
                             [
                                 'combination' => '1-5-4',
                                 'amount' => 4430,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                         ],
                         'trio' => [
                             [
                                 'combination' => '1=4=5',
                                 'amount' => 1550,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                         ],
                         'exacta' => [
                             [
                                 'combination' => '1-5',
                                 'amount' => 950,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                         ],
                         'quinella' => [
                             [
                                 'combination' => '1=5',
                                 'amount' => 840,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                         ],
                         'quinella_place' => [
                             [
                                 'combination' => '1=5',
                                 'amount' => 320,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                             [
                                 'combination' => '1=4',
                                 'amount' => 240,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                             [
                                 'combination' => '4=5',
                                 'amount' => 790,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                         ],
                         'win' => [
                             [
                                 'combination' => '1',
                                 'amount' => 120,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                         ],
                         'place' => [
                             [
                                 'combination' => '1',
                                 'amount' => 110,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                             [
                                 'combination' => '5',
                                 'amount' => 360,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                         ],
                     ],
+                    'refunds' => [],
                 ],
             ],
             [
@@ -201,6 +203,7 @@ final class ResultScraperDataProvider
                     'water_temperature' => null,
                     'technique_number_source' => null,
                     'technique_number' => null,
+                    'remarks' => null,
                     'racers' => [
                         1 => [
                             'entry_number' => 1,
@@ -278,6 +281,7 @@ final class ResultScraperDataProvider
                         'win' => [],
                         'place' => [],
                     ],
+                    'refunds' => [],
                 ],
             ],
             [
@@ -300,6 +304,7 @@ final class ResultScraperDataProvider
                     'water_temperature' => 28.0,
                     'technique_number_source' => 'まくり差し',
                     'technique_number' => 4,
+                    'remarks' => null,
                     'racers' => [
                         1 => [
                             'entry_number' => 1,
@@ -373,67 +378,211 @@ final class ResultScraperDataProvider
                             [
                                 'combination' => '6-1-2',
                                 'amount' => 65790,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                         ],
                         'trio' => [
                             [
                                 'combination' => '1=2=6',
                                 'amount' => 1190,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                         ],
                         'exacta' => [
                             [
                                 'combination' => '6-1',
                                 'amount' => 13410,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                         ],
                         'quinella' => [
                             [
                                 'combination' => '1=6',
                                 'amount' => 1890,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                         ],
                         'quinella_place' => [
                             [
                                 'combination' => '1=6',
                                 'amount' => 630,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                             [
                                 'combination' => '2=6',
                                 'amount' => 580,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                             [
                                 'combination' => '1=2',
                                 'amount' => 230,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                         ],
                         'win' => [
                             [
                                 'combination' => null,
                                 'amount' => 70,
-                                'is_special' => true,
+                                'label' => '特払',
                             ],
                         ],
                         'place' => [
                             [
                                 'combination' => '6',
                                 'amount' => 1360,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                             [
                                 'combination' => '1',
                                 'amount' => 360,
-                                'is_special' => false,
+                                'label' => null,
                             ],
                         ],
                     ],
+                    'refunds' => [],
+                ],
+            ],
+            [
+                'arguments' => [Carbon::parse('2026-07-22'), 9, 10],
+                'expected' => [
+                    'date' => '2026-07-22',
+                    'stadium_number' => 9,
+                    'race_number' => 10,
+                    'wind_speed_source' => '4m',
+                    'wind_speed' => 4,
+                    'wind_direction_number_source' => '東北東',
+                    'wind_direction_number' => 4,
+                    'wave_height_source' => '2cm',
+                    'wave_height' => 2,
+                    'weather_number_source' => '晴',
+                    'weather_number' => 1,
+                    'air_temperature_source' => '37.0℃',
+                    'air_temperature' => 37.0,
+                    'water_temperature_source' => '35.0℃',
+                    'water_temperature' => 35.0,
+                    'technique_number_source' => '恵まれ',
+                    'technique_number' => 6,
+                    'remarks' => '【返還艇あり】',
+                    'racers' => [
+                        1 => [
+                            'entry_number' => 1,
+                            'course_number' => 1,
+                            'start_timing_source' => 'F.03',
+                            'start_timing' => -0.03,
+                            'place_number_source' => 'F',
+                            'place_number' => 14,
+                            'number_source' => '5112',
+                            'number' => 5112,
+                            'name' => '砂長 知輝',
+                        ],
+                        2 => [
+                            'entry_number' => 2,
+                            'course_number' => 2,
+                            'start_timing_source' => '.12',
+                            'start_timing' => 0.12,
+                            'place_number_source' => '2',
+                            'place_number' => 2,
+                            'number_source' => '5289',
+                            'number' => 5289,
+                            'name' => '佃 來紀',
+                        ],
+                        3 => [
+                            'entry_number' => 3,
+                            'course_number' => 3,
+                            'start_timing_source' => '.01',
+                            'start_timing' => 0.01,
+                            'place_number_source' => '1',
+                            'place_number' => 1,
+                            'number_source' => '5275',
+                            'number' => 5275,
+                            'name' => '松田 淳平',
+                        ],
+                        4 => [
+                            'entry_number' => 4,
+                            'course_number' => 4,
+                            'start_timing_source' => 'F.03',
+                            'start_timing' => -0.03,
+                            'place_number_source' => 'F',
+                            'place_number' => 14,
+                            'number_source' => '5141',
+                            'number' => 5141,
+                            'name' => '大澤 風葵',
+                        ],
+                        5 => [
+                            'entry_number' => 5,
+                            'course_number' => 5,
+                            'start_timing_source' => 'F.03',
+                            'start_timing' => -0.03,
+                            'place_number_source' => 'F',
+                            'place_number' => 14,
+                            'number_source' => '4983',
+                            'number' => 4983,
+                            'name' => '前田 篤哉',
+                        ],
+                        6 => [
+                            'entry_number' => 6,
+                            'course_number' => 6,
+                            'start_timing_source' => 'F.09',
+                            'start_timing' => -0.09,
+                            'place_number_source' => 'F',
+                            'place_number' => 14,
+                            'number_source' => '5229',
+                            'number' => 5229,
+                            'name' => '吉川 晴人',
+                        ],
+                    ],
+                    'payouts' => [
+                        'trifecta' => [
+                            [
+                                'combination' => null,
+                                'amount' => 100,
+                                'label' => '不成立',
+                            ],
+                        ],
+                        'trio' => [
+                            [
+                                'combination' => null,
+                                'amount' => 100,
+                                'label' => '不成立',
+                            ],
+                        ],
+                        'exacta' => [
+                            [
+                                'combination' => '3-2',
+                                'amount' => 150,
+                                'label' => null,
+                            ],
+                        ],
+                        'quinella' => [
+                            [
+                                'combination' => null,
+                                'amount' => 100,
+                                'label' => '不成立',
+                            ],
+                        ],
+                        'quinella_place' => [
+                            [
+                                'combination' => null,
+                                'amount' => 100,
+                                'label' => '不成立',
+                            ],
+                        ],
+                        'win' => [
+                            [
+                                'combination' => '3',
+                                'amount' => 180,
+                                'label' => null,
+                            ],
+                        ],
+                        'place' => [
+                            [
+                                'combination' => null,
+                                'amount' => 100,
+                                'label' => '不成立',
+                            ],
+                        ],
+                    ],
+                    'refunds' => [1, 4, 5, 6],
                 ],
             ],
         ];

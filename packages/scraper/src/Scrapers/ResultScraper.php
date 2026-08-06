@@ -33,11 +33,6 @@ final class ResultScraper implements Scraper
     private const string BASE_XPATH = 'descendant-or-self::body/main/div/div/div';
 
     /**
-     * @var non-empty-string
-     */
-    private const string SPECIAL_PAYOUT_LABEL = '特払';
-
-    /**
      * @var non-empty-list<non-empty-string>
      */
     private const array RACER_KEYS = [
@@ -120,6 +115,11 @@ final class ResultScraper implements Scraper
         $techniqueSource = Filter::byXPath($scraper, $techniqueXPath);
         $technique = ResultParser::parseTechnique($techniqueSource);
 
+        $remarksFormat = '%s/div[2]/div[%d]/div[2]/div[2]/table/tbody/tr/td';
+        $remarksXPath = sprintf($remarksFormat, self::BASE_XPATH, self::$baseLevel + 6);
+        $remarksSource = Filter::byXPath($scraper, $remarksXPath);
+        $remarks = ResultParser::parseRemarks($remarksSource);
+
         $response = [];
 
         $response['date'] = $date->format('Y-m-d');
@@ -133,9 +133,11 @@ final class ResultScraper implements Scraper
         $response += $airTemperature;
         $response += $waterTemperature;
         $response += $technique;
+        $response += $remarks;
 
         $response += self::scrapeRacers($scraper);
         $response += self::scrapePayouts($scraper);
+        $response += self::scrapeRefunds($scraper);
 
         return $response;
     }
@@ -268,13 +270,13 @@ final class ResultScraper implements Scraper
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @return array{
      *     payouts?: array{
-     *         trifecta?: list<array{combination: ?string, amount: non-negative-int, is_special: bool}>,
-     *         trio?: list<array{combination: ?string, amount: non-negative-int, is_special: bool}>,
-     *         exacta?: list<array{combination: ?string, amount: non-negative-int, is_special: bool}>,
-     *         quinella?: list<array{combination: ?string, amount: non-negative-int, is_special: bool}>,
-     *         quinella_place?: list<array{combination: ?string, amount: non-negative-int, is_special: bool}>,
-     *         win?: list<array{combination: ?string, amount: non-negative-int, is_special: bool}>,
-     *         place?: list<array{combination: ?string, amount: non-negative-int, is_special: bool}>,
+     *         trifecta?: list<array{combination: ?string, amount: non-negative-int, label: ?string}>,
+     *         trio?: list<array{combination: ?string, amount: non-negative-int, label: ?string}>,
+     *         exacta?: list<array{combination: ?string, amount: non-negative-int, label: ?string}>,
+     *         quinella?: list<array{combination: ?string, amount: non-negative-int, label: ?string}>,
+     *         quinella_place?: list<array{combination: ?string, amount: non-negative-int, label: ?string}>,
+     *         win?: list<array{combination: ?string, amount: non-negative-int, label: ?string}>,
+     *         place?: list<array{combination: ?string, amount: non-negative-int, label: ?string}>,
      *     }
      * }
      */
@@ -297,14 +299,14 @@ final class ResultScraper implements Scraper
                     continue;
                 }
 
-                if ($value['combination'] === null && !$value['is_special']) {
+                if ($value['combination'] === null && $value['label'] === null) {
                     continue;
                 }
 
                 $response['payouts'][$name][] = [
                     'combination' => $value['combination'],
                     'amount' => $amount,
-                    'is_special' => $value['is_special'],
+                    'label' => $value['label'],
                 ];
             }
         }
@@ -315,13 +317,13 @@ final class ResultScraper implements Scraper
     /**
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @return array{
-     *     trifecta: list<array{combination: ?string, is_special: bool}>,
-     *     trio: list<array{combination: ?string, is_special: bool}>,
-     *     exacta: list<array{combination: ?string, is_special: bool}>,
-     *     quinella: list<array{combination: ?string, is_special: bool}>,
-     *     quinella_place: list<array{combination: ?string, is_special: bool}>,
-     *     win: list<array{combination: ?string, is_special: bool}>,
-     *     place: list<array{combination: ?string, is_special: bool}>,
+     *     trifecta: list<array{combination: ?string, label: ?string}>,
+     *     trio: list<array{combination: ?string, label: ?string}>,
+     *     exacta: list<array{combination: ?string, label: ?string}>,
+     *     quinella: list<array{combination: ?string, label: ?string}>,
+     *     quinella_place: list<array{combination: ?string, label: ?string}>,
+     *     win: list<array{combination: ?string, label: ?string}>,
+     *     place: list<array{combination: ?string, label: ?string}>,
      * }
      */
     private static function scrapeAllCombinations(Crawler $scraper): array
@@ -365,10 +367,16 @@ final class ResultScraper implements Scraper
     }
 
     /**
+     * A bet type whose combination was never settled carries no entry number spans and prints a
+     * label instead. Both 特払 (the bet type stands but no ticket won) and 不成立 (refunded boats
+     * left the bet type unsettled) read that way, and used to be dropped as an empty combination.
+     * Listing the known labels would drop the next unknown one, so the text of the cell is passed
+     * through as is and the reading is left to the caller.
+     *
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @param list<non-empty-string> $templates
      * @param list<non-negative-int> $indexes
-     * @return list<array{combination: ?string, is_special: bool}>
+     * @return list<array{combination: ?string, label: ?string}>
      */
     private static function scrapeCombinations(Crawler $scraper, array $templates, array $indexes): array
     {
@@ -386,16 +394,17 @@ final class ResultScraper implements Scraper
             $combination = implode($values);
 
             if ($combination !== '') {
-                $response[] = ['combination' => $combination, 'is_special' => false];
+                $response[] = ['combination' => $combination, 'label' => null];
 
                 continue;
             }
 
+            // An empty cell holds only &nbsp;, which trims down to an empty string.
             $label = Filter::byXPath($scraper, $cellXPath);
 
             $response[] = [
                 'combination' => null,
-                'is_special' => $label !== null && str_contains($label, self::SPECIAL_PAYOUT_LABEL),
+                'label' => $label !== null && $label !== '' ? $label : null,
             ];
         }
 
@@ -470,5 +479,39 @@ final class ResultScraper implements Scraper
 
             return $value >= 0 ? $value : null;
         }, $templates);
+    }
+
+    /**
+     * Read the refunded boats, that is the boats whose stakes are returned after a false start,
+     * a late start or a withdrawal. The table is published as empty cells even when nothing was
+     * refunded, so an empty list is the normal case. The entry numbers are laid out three per
+     * row across two rows, and the leftover cells are filled with blank spans.
+     *
+     * @param \Symfony\Component\DomCrawler\Crawler $scraper
+     * @return array{
+     *     refunds: list<int<1, 6>>
+     * }
+     */
+    private static function scrapeRefunds(Crawler $scraper): array
+    {
+        $response = ['refunds' => []];
+
+        foreach (range(1, 2) as $row) {
+            foreach (range(1, 3) as $column) {
+                $format = '%s/div[2]/div[%d]/div[2]/div[1]/div[2]/div[1]/table/tbody/tr/td/div/div[%d]/span[%d]';
+                $xpath = sprintf($format, self::BASE_XPATH, self::$baseLevel + 6, $row, $column);
+                $source = Filter::byXPath($scraper, $xpath);
+
+                $entryNumber = Converter::toInt($source);
+
+                if (!in_array($entryNumber, range(1, 6), true)) {
+                    continue;
+                }
+
+                $response['refunds'][] = $entryNumber;
+            }
+        }
+
+        return $response;
     }
 }

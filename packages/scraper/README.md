@@ -1125,6 +1125,7 @@ Array
     [water_temperature] => 23
     [technique_number_source] => 逃げ
     [technique_number] => 1
+    [remarks] =>
     [racers] => Array
         (
             [1] => Array
@@ -1215,7 +1216,7 @@ Array
                         (
                             [combination] => 1-5-4
                             [amount] => 4430
-                            [is_special] =>
+                            [label] =>
                         )
 
                 )
@@ -1226,7 +1227,7 @@ Array
                         (
                             [combination] => 1=4=5
                             [amount] => 1550
-                            [is_special] =>
+                            [label] =>
                         )
 
                 )
@@ -1237,7 +1238,7 @@ Array
                         (
                             [combination] => 1-5
                             [amount] => 950
-                            [is_special] =>
+                            [label] =>
                         )
 
                 )
@@ -1248,7 +1249,7 @@ Array
                         (
                             [combination] => 1=5
                             [amount] => 840
-                            [is_special] =>
+                            [label] =>
                         )
 
                 )
@@ -1259,21 +1260,21 @@ Array
                         (
                             [combination] => 1=5
                             [amount] => 320
-                            [is_special] =>
+                            [label] =>
                         )
 
                     [1] => Array
                         (
                             [combination] => 1=4
                             [amount] => 240
-                            [is_special] =>
+                            [label] =>
                         )
 
                     [2] => Array
                         (
                             [combination] => 4=5
                             [amount] => 790
-                            [is_special] =>
+                            [label] =>
                         )
 
                 )
@@ -1284,7 +1285,7 @@ Array
                         (
                             [combination] => 1
                             [amount] => 120
-                            [is_special] =>
+                            [label] =>
                         )
 
                 )
@@ -1295,18 +1296,22 @@ Array
                         (
                             [combination] => 1
                             [amount] => 110
-                            [is_special] =>
+                            [label] =>
                         )
 
                     [1] => Array
                         (
                             [combination] => 5
                             [amount] => 360
-                            [is_special] =>
+                            [label] =>
                         )
 
                 )
 
+        )
+
+    [refunds] => Array
+        (
         )
 
 )
