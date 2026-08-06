@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## [0.7.2] - 2026-08-06
+
+- fix: skip the progress bar when there is nothing to scrape
+- fix: capture special payouts in the result scraper
+- chore: update CHANGELOG.md
+
+
 ## [0.7.1] - 2026-08-02
 
 - fix: normalize racer keys and guard the result table
