@@ -11,7 +11,7 @@ Turnmark Scraper Fukuoka は、ボートレース福岡の公式サイトから�
 ## 📦 Requirements
 
 - php: ^8.4
-- turnmark/scraper: ^0.7.0
+- turnmark/scraper: ^0.7.2
 
 ## 💾 Installation
 
@@ -68,7 +68,7 @@ Array
             [1] => Array
                 (
                     [entry_number] => 1
-                    [name] => 上平真二
+                    [name] => 上平 真二
                     [exhibition_time] => 6.91
                     [lap_time] => 37.24
                     [turn_time] => 5.59
@@ -78,7 +78,7 @@ Array
             [2] => Array
                 (
                     [entry_number] => 2
-                    [name] => 古結宏
+                    [name] => 古結 宏
                     [exhibition_time] => 6.89
                     [lap_time] => 37.6
                     [turn_time] => 5.47
@@ -88,7 +88,7 @@ Array
             [3] => Array
                 (
                     [entry_number] => 3
-                    [name] => 作間章
+                    [name] => 作間 章
                     [exhibition_time] => 6.88
                     [lap_time] => 37.58
                     [turn_time] => 5.66
@@ -98,7 +98,7 @@ Array
             [4] => Array
                 (
                     [entry_number] => 4
-                    [name] => 横澤剛治
+                    [name] => 横澤 剛治
                     [exhibition_time] => 6.9
                     [lap_time] => 38.6
                     [turn_time] => 5.6
@@ -108,7 +108,7 @@ Array
             [5] => Array
                 (
                     [entry_number] => 5
-                    [name] => 佐藤大介
+                    [name] => 佐藤 大介
                     [exhibition_time] => 6.92
                     [lap_time] => 38.21
                     [turn_time] => 5.72
@@ -118,7 +118,7 @@ Array
             [6] => Array
                 (
                     [entry_number] => 6
-                    [name] => 飯山泰
+                    [name] => 飯山 泰
                     [exhibition_time] => 6.85
                     [lap_time] => 37.53
                     [turn_time] => 5.57
