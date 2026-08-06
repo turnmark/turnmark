@@ -40,22 +40,28 @@ final class BatchScraper
 
         $output = Scraper::getShowProgress() ? new ConsoleOutput() : new NullOutput();
         $output->writeln('<info>📊 出走表のスクレイピングを開始します</info>');
-        $progressBar = new ProgressBar($output, $totalSteps);
-        $progressBar->setFormat(
-            ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
-        );
-        $progressBar->start();
+
+        // A total of zero leaves the bar without a maximum, which makes %estimated% throw.
+        $progressBar = null;
+
+        if ($totalSteps > 0) {
+            $progressBar = new ProgressBar($output, $totalSteps);
+            $progressBar->setFormat(
+                ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
+            );
+            $progressBar->start();
+        }
 
         foreach ($activeUniqueStadiumNumbers as $stadiumNumber) {
             foreach ($uniqueRaceNumbers as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     Scraper::scrapeProgram($date, $stadiumNumber, $raceNumber, $httpBrowser);
 
-                $progressBar->advance();
+                $progressBar?->advance();
             }
         }
 
-        $progressBar->finish();
+        $progressBar?->finish();
         $output->writeln('');
         $output->writeln("<info>✅ 出走表のスクレイピングが完了しました（{$totalSteps}件）</info>");
         $output->writeln('');
@@ -88,22 +94,28 @@ final class BatchScraper
 
         $output = Scraper::getShowProgress() ? new ConsoleOutput() : new NullOutput();
         $output->writeln('<info>📊 直前情報のスクレイピングを開始します</info>');
-        $progressBar = new ProgressBar($output, $totalSteps);
-        $progressBar->setFormat(
-            ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
-        );
-        $progressBar->start();
+
+        // A total of zero leaves the bar without a maximum, which makes %estimated% throw.
+        $progressBar = null;
+
+        if ($totalSteps > 0) {
+            $progressBar = new ProgressBar($output, $totalSteps);
+            $progressBar->setFormat(
+                ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
+            );
+            $progressBar->start();
+        }
 
         foreach ($activeUniqueStadiumNumbers as $stadiumNumber) {
             foreach ($uniqueRaceNumbers as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     Scraper::scrapePreview($date, $stadiumNumber, $raceNumber, $httpBrowser);
 
-                $progressBar->advance();
+                $progressBar?->advance();
             }
         }
 
-        $progressBar->finish();
+        $progressBar?->finish();
         $output->writeln('');
         $output->writeln("<info>✅ 直前情報のスクレイピングが完了しました（{$totalSteps}件）</info>");
         $output->writeln('');
@@ -136,22 +148,28 @@ final class BatchScraper
 
         $output = Scraper::getShowProgress() ? new ConsoleOutput() : new NullOutput();
         $output->writeln('<info>📊 オッズのスクレイピングを開始します</info>');
-        $progressBar = new ProgressBar($output, $totalSteps);
-        $progressBar->setFormat(
-            ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
-        );
-        $progressBar->start();
+
+        // A total of zero leaves the bar without a maximum, which makes %estimated% throw.
+        $progressBar = null;
+
+        if ($totalSteps > 0) {
+            $progressBar = new ProgressBar($output, $totalSteps);
+            $progressBar->setFormat(
+                ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
+            );
+            $progressBar->start();
+        }
 
         foreach ($activeUniqueStadiumNumbers as $stadiumNumber) {
             foreach ($uniqueRaceNumbers as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     Scraper::scrapeOdds($date, $stadiumNumber, $raceNumber, $httpBrowser);
 
-                $progressBar->advance();
+                $progressBar?->advance();
             }
         }
 
-        $progressBar->finish();
+        $progressBar?->finish();
         $output->writeln('');
         $output->writeln("<info>✅ オッズのスクレイピングが完了しました（{$totalSteps}件）</info>");
         $output->writeln('');
@@ -184,22 +202,28 @@ final class BatchScraper
 
         $output = Scraper::getShowProgress() ? new ConsoleOutput() : new NullOutput();
         $output->writeln('<info>📊 結果のスクレイピングを開始します</info>');
-        $progressBar = new ProgressBar($output, $totalSteps);
-        $progressBar->setFormat(
-            ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
-        );
-        $progressBar->start();
+
+        // A total of zero leaves the bar without a maximum, which makes %estimated% throw.
+        $progressBar = null;
+
+        if ($totalSteps > 0) {
+            $progressBar = new ProgressBar($output, $totalSteps);
+            $progressBar->setFormat(
+                ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
+            );
+            $progressBar->start();
+        }
 
         foreach ($activeUniqueStadiumNumbers as $stadiumNumber) {
             foreach ($uniqueRaceNumbers as $raceNumber) {
                 $response[$stadiumNumber][$raceNumber] =
                     Scraper::scrapeResult($date, $stadiumNumber, $raceNumber, $httpBrowser);
 
-                $progressBar->advance();
+                $progressBar?->advance();
             }
         }
 
-        $progressBar->finish();
+        $progressBar?->finish();
         $output->writeln('');
         $output->writeln("<info>✅ 結果のスクレイピングが完了しました（{$totalSteps}件）</info>");
         $output->writeln('');

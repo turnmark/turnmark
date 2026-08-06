@@ -34,20 +34,26 @@ final class BatchScraper
 
         $output = BoatraceScraper::getShowProgress() ? new ConsoleOutput() : new NullOutput();
         $output->writeln('<info>📊 オリジナル展示タイムのスクレイピングを開始します</info>');
-        $progressBar = new ProgressBar($output, $totalSteps);
-        $progressBar->setFormat(
-            ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
-        );
-        $progressBar->start();
+
+        // A total of zero leaves the bar without a maximum, which makes %estimated% throw.
+        $progressBar = null;
+
+        if ($totalSteps > 0) {
+            $progressBar = new ProgressBar($output, $totalSteps);
+            $progressBar->setFormat(
+                ' %current%/%max% [%bar%] %percent:3s%% ⏱️ %elapsed:6s% / %estimated:-6s%'
+            );
+            $progressBar->start();
+        }
 
         foreach ($uniqueRaceNumbers as $raceNumber) {
             $response[$raceNumber] =
                 Scraper::scrapeTime($date, $raceNumber, $httpBrowser);
 
-            $progressBar->advance();
+            $progressBar?->advance();
         }
 
-        $progressBar->finish();
+        $progressBar?->finish();
         $output->writeln('');
         $output->writeln("<info>✅ オリジナル展示タイムのスクレイピングが完了しました（{$totalSteps}件）</info>");
         $output->writeln('');
