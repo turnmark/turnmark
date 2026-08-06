@@ -37,7 +37,7 @@ final class BatchScraper
         $uniqueStadiumNumbers = array_unique($stadiumNumbers ?: Scraper::getStadiumNumbers());
         $uniqueRaceNumbers = array_unique($raceNumbers ?: Scraper::getRaceNumbers());
 
-        $activeStadiumNumbers = array_keys(Scraper::scrapeStadium($date));
+        $activeStadiumNumbers = array_keys(Scraper::scrapeStadium($date, $httpBrowser));
         $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
 
         $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
@@ -91,7 +91,7 @@ final class BatchScraper
         $uniqueStadiumNumbers = array_unique($stadiumNumbers ?: Scraper::getStadiumNumbers());
         $uniqueRaceNumbers = array_unique($raceNumbers ?: Scraper::getRaceNumbers());
 
-        $activeStadiumNumbers = array_keys(Scraper::scrapeStadium($date));
+        $activeStadiumNumbers = array_keys(Scraper::scrapeStadium($date, $httpBrowser));
         $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
 
         $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
@@ -145,7 +145,7 @@ final class BatchScraper
         $uniqueStadiumNumbers = array_unique($stadiumNumbers ?: Scraper::getStadiumNumbers());
         $uniqueRaceNumbers = array_unique($raceNumbers ?: Scraper::getRaceNumbers());
 
-        $activeStadiumNumbers = array_keys(Scraper::scrapeStadium($date));
+        $activeStadiumNumbers = array_keys(Scraper::scrapeStadium($date, $httpBrowser));
         $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
 
         $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
@@ -199,7 +199,7 @@ final class BatchScraper
         $uniqueStadiumNumbers = array_unique($stadiumNumbers ?: Scraper::getStadiumNumbers());
         $uniqueRaceNumbers = array_unique($raceNumbers ?: Scraper::getRaceNumbers());
 
-        $activeStadiumNumbers = array_keys(Scraper::scrapeStadium($date));
+        $activeStadiumNumbers = array_keys(Scraper::scrapeStadium($date, $httpBrowser));
         $activeUniqueStadiumNumbers = array_intersect($uniqueStadiumNumbers, $activeStadiumNumbers);
 
         $totalSteps = count($activeUniqueStadiumNumbers) * count($uniqueRaceNumbers);
