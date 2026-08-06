@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+## [0.8.0] - 2026-08-06
+
+- docs: update README.md
+- docs: describe what each class does and the page quirks behind the code
+- refactor: normalize program racer keys
+- fix!: report missing payout amounts as missing instead of zero
+- fix: keep the stadium list alive on an unknown stadium name
+- fix!: report non-numeric odds as missing instead of zero
+- fix: keep racer names that are not in the spacing map
+- fix: stop writing enum resolution failures to the output
+- feat!: capture propeller and parts exchange in the preview scraper
+- feat!: capture void payouts, refunded boats, and remarks in the result scraper
+- chore: update CHANGELOG.md
+
+
 ## [0.7.2] - 2026-08-06
 
 - fix: skip the progress bar when there is nothing to scrape
