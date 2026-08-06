@@ -29,4 +29,21 @@ final class Filter
 
         return $value === null ? null : mb_trim($value);
     }
+
+    /**
+     * Return the text of every matched node in document order. Used for columns whose number of
+     * entries varies and cannot be read with fixed indexes, such as the parts exchange list.
+     *
+     * @param \Symfony\Component\DomCrawler\Crawler $scraper
+     * @param string $xpath
+     * @return list<string>
+     */
+    public static function byXPathAsList(Crawler $scraper, string $xpath): array
+    {
+        return $scraper->filterXPath($xpath)->each(function (Crawler $node): string {
+            $value = Converter::toKana($node->text());
+
+            return $value === null ? '' : mb_trim($value);
+        });
+    }
 }

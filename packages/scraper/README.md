@@ -372,6 +372,11 @@ Array
                     [exhibition_time] => 6.66
                     [tilt_adjustment_source] => 0.0
                     [tilt_adjustment] => 0
+                    [propeller] =>
+                    [parts] => Array
+                        (
+                        )
+
                 )
 
             [2] => Array
@@ -388,6 +393,11 @@ Array
                     [exhibition_time] => 6.6
                     [tilt_adjustment_source] => 0.0
                     [tilt_adjustment] => 0
+                    [propeller] =>
+                    [parts] => Array
+                        (
+                        )
+
                 )
 
             [3] => Array
@@ -404,6 +414,11 @@ Array
                     [exhibition_time] => 6.69
                     [tilt_adjustment_source] => 0.0
                     [tilt_adjustment] => 0
+                    [propeller] =>
+                    [parts] => Array
+                        (
+                        )
+
                 )
 
             [4] => Array
@@ -420,6 +435,11 @@ Array
                     [exhibition_time] => 6.68
                     [tilt_adjustment_source] => -0.5
                     [tilt_adjustment] => -0.5
+                    [propeller] =>
+                    [parts] => Array
+                        (
+                        )
+
                 )
 
             [5] => Array
@@ -436,6 +456,11 @@ Array
                     [exhibition_time] => 6.69
                     [tilt_adjustment_source] => 0.0
                     [tilt_adjustment] => 0
+                    [propeller] =>
+                    [parts] => Array
+                        (
+                        )
+
                 )
 
             [6] => Array
@@ -452,6 +477,11 @@ Array
                     [exhibition_time] => 6.58
                     [tilt_adjustment_source] => 0.0
                     [tilt_adjustment] => 0
+                    [propeller] =>
+                    [parts] => Array
+                        (
+                        )
+
                 )
 
         )
