@@ -8,6 +8,7 @@ use Carbon\CarbonImmutable as Carbon;
 use DateTimeInterface;
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\DomCrawler\Crawler;
+use Turnmark\Scraper\Converters\Converter;
 use Turnmark\Scraper\Enums\Stadium;
 use Turnmark\Scraper\Factories\HttpBrowserFactory;
 
@@ -51,7 +52,12 @@ final class StadiumScraper
                     return [];
                 }
 
-                $stadiumNumber = Stadium::fromName($stadiumName)?->value;
+                // A name the enum does not know must not take the whole list down with it: every
+                // batch method reads this list first, so an unexpected alt would stop everything.
+                $stadiumNumber = Converter::toEnumOrNull(
+                    fn() => Stadium::fromName($stadiumName)
+                )?->value;
+
                 if ($stadiumNumber === null) {
                     return [];
                 }
