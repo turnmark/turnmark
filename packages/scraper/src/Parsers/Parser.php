@@ -88,6 +88,10 @@ final class Parser
             ]);
         }
 
+        // A handful of names are printed without the space between the family and the given
+        // name. They are listed here to put it back, but a name that is not listed keeps its
+        // printed form: dropping it would lose the racer entirely, and there is no source key
+        // to fall back on.
         $nameMap = [
             '小神野紀代子' => '小神野 紀代子',
             '堀之内紀代子' => '堀之内 紀代子',
@@ -97,7 +101,7 @@ final class Parser
         ];
 
         return array_combine(self::NAME_KEYS, [
-            Converter::toString($nameMap[$value] ?? null),
+            Converter::toString($nameMap[$value] ?? $value),
         ]);
     }
 }
