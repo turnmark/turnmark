@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## [0.8.1] - 2026-08-06
+
+- fix: pass the browser through to the stadium list in batch scrapes
+- chore: update CHANGELOG.md
+
+
 ## [0.8.0] - 2026-08-06
 
 - docs: update README.md
