@@ -145,6 +145,10 @@ final class Converter
     }
 
     /**
+     * A value the enum does not know is not worth interrupting a scrape for, so the resolver is
+     * allowed to fail and the caller keeps the source text. Nothing is written to the output:
+     * this runs inside a library, and a stray line corrupts whatever the caller is printing.
+     *
      * @template T of \UnitEnum
      * @param callable(): ?T $resolver
      * @return ?T
@@ -153,9 +157,7 @@ final class Converter
     {
         try {
             return $resolver();
-        } catch (ValueError $error) {
-            echo $error->getMessage() . PHP_EOL;
-
+        } catch (ValueError) {
             return null;
         }
     }
