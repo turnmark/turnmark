@@ -7,6 +7,8 @@ namespace Turnmark\Scraper\Enums;
 use ValueError;
 
 /**
+ * The class a racer is ranked in.
+ *
  * @author shimomo
  */
 enum Rank: int

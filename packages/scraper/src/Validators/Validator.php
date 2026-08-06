@@ -7,6 +7,8 @@ namespace Turnmark\Scraper\Validators;
 use ValueError;
 
 /**
+ * Checks the arguments the entry points take before a request is made.
+ *
  * @author shimomo
  */
 final class Validator

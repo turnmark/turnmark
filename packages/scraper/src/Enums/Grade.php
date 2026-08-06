@@ -7,6 +7,9 @@ namespace Turnmark\Scraper\Enums;
 use ValueError;
 
 /**
+ * The grade of the series a race belongs to. The page does not print it as text: it is
+ * carried in the class attribute of the title and resolved by ProgramParser.
+ *
  * @author shimomo
  */
 enum Grade: int

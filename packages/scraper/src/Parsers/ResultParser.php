@@ -11,6 +11,9 @@ use Turnmark\Scraper\Enums\Weather;
 use Turnmark\Scraper\Enums\WindDirection;
 
 /**
+ * Turns the text of the result page into the keys of the response. A field that is printed
+ * keeps its printed form in a `_source` key beside the parsed value.
+ *
  * @author shimomo
  */
 final class ResultParser
@@ -247,6 +250,10 @@ final class ResultParser
     }
 
     /**
+     * The start timing is printed as a fraction of a second without its leading zero, and it is
+     * prefixed when the start was not a clean one: `F` for a start before the gun, which is
+     * signed the other way, and `L` for one so late there is no timing to record.
+     *
      * @param ?string $value
      * @return array{
      *     start_timing_source: ?string,

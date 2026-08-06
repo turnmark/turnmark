@@ -8,6 +8,9 @@ use DateTimeInterface;
 use Symfony\Component\BrowserKit\HttpBrowser;
 
 /**
+ * The shape shared by the scrapers that read a stadium's own site, where the stadium is
+ * fixed and only the race varies.
+ *
  * @author shimomo
  */
 interface LocalScraper

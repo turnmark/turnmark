@@ -7,6 +7,9 @@ namespace Turnmark\Scraper\Filters;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
+ * Reads the grade out of the class attribute of a node. The grade is styled rather than
+ * printed, so there is no text to read.
+ *
  * @author shimomo
  */
 final class GradeFilter

@@ -7,6 +7,9 @@ namespace Turnmark\Scraper\Enums;
 use ValueError;
 
 /**
+ * Where a boat finished, including the ways it can fail to finish. The result table prints
+ * the short name.
+ *
  * @author shimomo
  */
 enum Place: int

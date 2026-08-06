@@ -11,6 +11,9 @@ use Turnmark\Scraper\Tamagawa\Scrapers\TimeScraper;
 use Turnmark\Scraper\Validators\Validator;
 
 /**
+ * The entry point of the Tamagawa package. Spaces its request away from the previous one, sharing
+ * that interval with the rest of the packages, and checks its arguments before scraping.
+ *
  * @author shimomo
  */
 final class Scraper

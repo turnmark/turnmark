@@ -7,6 +7,8 @@ namespace Turnmark\Scraper\Enums;
 use ValueError;
 
 /**
+ * The weather, as printed on the preview and result pages.
+ *
  * @author shimomo
  */
 enum Weather: int

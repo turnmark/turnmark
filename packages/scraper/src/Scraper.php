@@ -16,6 +16,10 @@ use Turnmark\Scraper\Validators\Validator;
 use ValueError;
 
 /**
+ * The entry point of the package. Every method here spaces its request away from the
+ * previous one and checks its arguments before handing the work to the scraper behind it,
+ * neither of which the scrapers do on their own.
+ *
  * @author shimomo
  */
 final class Scraper
@@ -80,6 +84,9 @@ final class Scraper
     }
 
     /**
+     * The interval can be widened but not taken below a second, so that no setting turns the
+     * package into something that hammers the site.
+     *
      * @param float $seconds
      * @return void
      * @throws \ValueError
@@ -113,6 +120,10 @@ final class Scraper
     }
 
     /**
+     * Holds the next request back until enough time has passed since the last one. The clock is
+     * shared by every scraper in every package, so a batch run keeps to one pace no matter how
+     * many entry points it goes through.
+     *
      * @return void
      */
     public static function throttle(): void

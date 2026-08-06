@@ -8,6 +8,9 @@ use Symfony\Component\DomCrawler\Crawler;
 use Turnmark\Scraper\Converters\Converter;
 
 /**
+ * Pulls text out of a page by XPath. The text is normalised on the way out, so that what the
+ * parsers and enums are matched against does not depend on how the page was typed.
+ *
  * @author shimomo
  */
 final class Filter

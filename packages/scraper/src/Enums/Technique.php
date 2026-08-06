@@ -7,6 +7,8 @@ namespace Turnmark\Scraper\Enums;
 use ValueError;
 
 /**
+ * The technique the winning boat used, as printed on the result page.
+ *
  * @author shimomo
  */
 enum Technique: int

@@ -7,6 +7,9 @@ namespace Turnmark\Scraper\Filters;
 use Symfony\Component\DomCrawler\Crawler;
 
 /**
+ * Reads the wind direction out of the class attribute of a node. The direction is drawn as
+ * an icon, so there is no text to read.
+ *
  * @author shimomo
  */
 final class WindDirectionFilter

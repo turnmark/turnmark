@@ -8,6 +8,9 @@ use Symfony\Component\DomCrawler\Crawler;
 use Turnmark\Scraper\Converters\Converter;
 
 /**
+ * Reads odds out of a page. Odds are numbers the caller computes with, so a cell holding
+ * anything else is reported as missing rather than cast.
+ *
  * @author shimomo
  */
 final class OddsFilter

@@ -13,6 +13,9 @@ use Turnmark\Scraper\Enums\Stadium;
 use Turnmark\Scraper\Factories\HttpBrowserFactory;
 
 /**
+ * Reads which stadiums hold a race on a date. Every batch method starts here, so a name that
+ * cannot be recognised is dropped on its own rather than taking the whole list down.
+ *
  * @author shimomo
  */
 final class StadiumScraper
@@ -23,6 +26,9 @@ final class StadiumScraper
     private const string BASE_URL = 'https://www.boatrace.jp';
 
     /**
+     * The stadium is named nowhere as text: it is the alt of the banner image, which carries a
+     * marker alongside the name.
+     *
      * @param \DateTimeInterface|non-empty-string $date
      * @param ?\Symfony\Component\BrowserKit\HttpBrowser $httpBrowser
      * @return array<int<1, 24>, non-empty-string>

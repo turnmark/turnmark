@@ -7,6 +7,8 @@ namespace Turnmark\Scraper\Converters;
 use ValueError;
 
 /**
+ * Casts the text pulled out of a page into the types the responses are built from.
+ *
  * @author shimomo
  */
 final class Converter
@@ -93,6 +95,10 @@ final class Converter
     }
 
     /**
+     * Folds the width the page happens to use: letters, digits and spaces come down to
+     * half-width, kana go up to full-width. Without it the same value read from two pages would
+     * not compare equal.
+     *
      * @param ?string $value
      * @return ?string
      */

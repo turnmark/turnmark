@@ -12,6 +12,8 @@ use Symfony\Component\Console\Output\NullOutput;
 use Turnmark\Scraper\Scraper as BoatraceScraper;
 
 /**
+ * Runs the Mikuni scraper over a range of races, reporting progress as it goes.
+ *
  * @author shimomo
  */
 final class BatchScraper

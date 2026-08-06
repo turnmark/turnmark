@@ -7,6 +7,8 @@ namespace Turnmark\Scraper\Enums;
 use ValueError;
 
 /**
+ * The prefectures a racer is registered to or born in.
+ *
  * @author shimomo
  */
 enum Prefecture: int

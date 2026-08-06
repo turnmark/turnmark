@@ -11,6 +11,10 @@ use Symfony\Component\Console\Output\ConsoleOutput;
 use Symfony\Component\Console\Output\NullOutput;
 
 /**
+ * Runs one scraper over a range of stadiums and races, reporting progress as it goes. Only
+ * the stadiums holding a race on the date are visited, so asking for all 24 costs nothing
+ * extra on a quiet day.
+ *
  * @author shimomo
  */
 final class BatchScraper

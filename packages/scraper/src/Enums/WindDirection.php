@@ -7,6 +7,9 @@ namespace Turnmark\Scraper\Enums;
 use ValueError;
 
 /**
+ * The sixteen points of the compass, numbered clockwise from the north, plus the value the
+ * page uses when there is no wind. The direction is drawn as an icon rather than printed.
+ *
  * @author shimomo
  */
 enum WindDirection: int

@@ -7,6 +7,8 @@ namespace Turnmark\Scraper\Parsers;
 use Turnmark\Scraper\Converters\Converter;
 
 /**
+ * The fields that read the same way on every page.
+ *
  * @author shimomo
  */
 final class Parser

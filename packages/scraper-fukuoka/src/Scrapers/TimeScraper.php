@@ -13,6 +13,9 @@ use Turnmark\Scraper\Factories\HttpBrowserFactory;
 use Turnmark\Scraper\Normalizers\Normalizer;
 
 /**
+ * Reads the exhibition times Fukuoka publishes on its own site, which carries more of the run
+ * than the official page does: the lap, turn and straight times as well. The stadium is fixed at 22.
+ *
  * @author shimomo
  */
 final class TimeScraper implements LocalScraper
@@ -53,6 +56,9 @@ final class TimeScraper implements LocalScraper
         $response['race_number'] = $raceNumber;
         $response['racers'] = [];
 
+        // A data cell shares its class with the header cells standing above it in the column,
+        // and the number of those differs from column to column, so each list is read from its
+        // own offset.
         foreach (range(1, 6) as $entryNumber) {
             $name = Normalizer::normalize($names[$entryNumber - 1] ?? null);
             if (!is_string($name) || $name === '') {

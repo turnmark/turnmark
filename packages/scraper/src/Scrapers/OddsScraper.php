@@ -14,6 +14,9 @@ use Turnmark\Scraper\Filters\OddsFilter;
 use Turnmark\Scraper\Scraper as BoatraceScraper;
 
 /**
+ * Reads the odds pages of a race and lays every bet type out by boat, so that the odds on a
+ * trifecta are reached as [first][second][third].
+ *
  * @author shimomo
  */
 final class OddsScraper implements Scraper
@@ -29,11 +32,18 @@ final class OddsScraper implements Scraper
     private const string BASE_XPATH = 'descendant-or-self::body/main/div/div/div';
 
     /**
+     * How far the content of the page is pushed down. Some pages carry an extra list block above
+     * it, and everything below shifts by one div, so the offset is measured once per request and
+     * added to the level every XPath below it reads from.
+     *
      * @var int<0, 1>
      */
     private static int $baseLevel = 0;
 
     /**
+     * The odds live on five pages, one per group of bet types, so a single call makes five
+     * requests and spaces them apart the way the entry point spaces its own.
+     *
      * @param \DateTimeInterface|non-empty-string $date
      * @param int<1, 24> $stadiumNumber
      * @param int<1, 12> $raceNumber

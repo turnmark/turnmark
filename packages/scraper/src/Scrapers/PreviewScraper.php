@@ -16,6 +16,9 @@ use Turnmark\Scraper\Parsers\Parser;
 use Turnmark\Scraper\Parsers\PreviewParser;
 
 /**
+ * Reads the preview page, published a few tens of minutes before a race: the water as it
+ * stands, the exhibition run of each boat and what was exchanged on it.
+ *
  * @author shimomo
  */
 final class PreviewScraper implements Scraper
@@ -51,6 +54,10 @@ final class PreviewScraper implements Scraper
     ];
 
     /**
+     * How far the content of the page is pushed down. Some pages carry an extra list block above
+     * it, and everything below shifts by one div, so the offset is measured once per request and
+     * added to the level every XPath below it reads from.
+     *
      * @var int<0, 1>
      */
     private static int $baseLevel = 0;
@@ -153,6 +160,10 @@ final class PreviewScraper implements Scraper
     }
 
     /**
+     * The page splits a boat across two tables. The start display is ordered by course, so a
+     * boat's course is the row it stands in rather than anything printed; the table above it is
+     * ordered by entry number and carries the exhibition run. Both are read into the same boat.
+     *
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @return array<int<1, 6>, array<non-empty-string, mixed>>
      */

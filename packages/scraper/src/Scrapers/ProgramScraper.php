@@ -17,6 +17,9 @@ use Turnmark\Scraper\Parsers\Parser;
 use Turnmark\Scraper\Parsers\ProgramParser;
 
 /**
+ * Reads the program page: the series the race belongs to and the record each racer brings
+ * into it.
+ *
  * @author shimomo
  */
 final class ProgramScraper implements Scraper
@@ -68,6 +71,10 @@ final class ProgramScraper implements Scraper
     ];
 
     /**
+     * How far the content of the page is pushed down. Some pages carry an extra list block above
+     * it, and everything below shifts by one div, so the offset is measured once per request and
+     * added to the level every XPath below it reads from.
+     *
      * @var int<0, 1>
      */
     private static int $baseLevel = 0;
@@ -143,6 +150,10 @@ final class ProgramScraper implements Scraper
     }
 
     /**
+     * Works out which day of the series the race belongs to. The tab of the day being shown is
+     * the only one without a link, and it is labelled with a number on every day but the first
+     * and the last, which are worded instead.
+     *
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @return array{
      *     day_number_source: ?string,
@@ -174,6 +185,10 @@ final class ProgramScraper implements Scraper
     }
 
     /**
+     * The last day is worded rather than numbered, so its number is taken from the nearest
+     * earlier tab that carries one. Series do not all run the same number of days, which is why
+     * it is counted back from the tabs rather than assumed.
+     *
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @param int<1, 14> $index
      * @return ?int

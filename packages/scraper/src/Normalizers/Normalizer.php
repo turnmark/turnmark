@@ -7,6 +7,9 @@ namespace Turnmark\Scraper\Normalizers;
 use Turnmark\Scraper\Converters\Converter;
 
 /**
+ * Squares up the loosely shaped values the stadiums' own sites publish, turning numeric text
+ * into numbers and collapsing runs of whitespace.
+ *
  * @author shimomo
  */
 final class Normalizer
@@ -21,6 +24,10 @@ final class Normalizer
     ];
 
     /**
+     * Numeric text becomes a number, anything else stays text with its whitespace collapsed, and
+     * an array is walked through. The options strip a class of character out of the text: they
+     * are read in either snake case or camel case, since callers write them both ways.
+     *
      * @param int|float|string|array|null $data
      * @param array<string, bool> $options
      * @return int|float|string|array|null

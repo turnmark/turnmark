@@ -7,6 +7,9 @@ namespace Turnmark\Scraper\Enums;
 use ValueError;
 
 /**
+ * The 24 stadiums, numbered the way the official site numbers them. That number is what
+ * every scraper takes as its stadium argument.
+ *
  * @author shimomo
  */
 enum Stadium: int

@@ -10,6 +10,9 @@ use Turnmark\Scraper\Enums\Prefecture;
 use Turnmark\Scraper\Enums\Rank;
 
 /**
+ * Turns the text of the program page into the keys of the response. A field that is printed
+ * keeps its printed form in a `_source` key beside the parsed value.
+ *
  * @author shimomo
  */
 final class ProgramParser
@@ -121,6 +124,9 @@ final class ProgramParser
             return array_fill_keys(self::GRADE_NUMBER_KEYS, null);
         }
 
+        // The class attribute the grade is styled with is finer grained than the grade itself:
+        // it splits a grade into an A and a B variant, and the A variant of G1 is the premium
+        // series, which is a grade of its own.
         $gradeMap = [
             'SGA' => Grade::SG,
             'SGB' => Grade::SG,

@@ -7,6 +7,9 @@ namespace Turnmark\Scraper\Factories;
 use Symfony\Component\BrowserKit\HttpBrowser;
 
 /**
+ * Builds the browser every scraper requests through, carrying the headers a desktop browser
+ * would send.
+ *
  * @author shimomo
  */
 final class HttpBrowserFactory

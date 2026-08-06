@@ -18,6 +18,9 @@ use Turnmark\Scraper\Parsers\Parser;
 use Turnmark\Scraper\Parsers\ResultParser;
 
 /**
+ * Reads the result page: the finishing order, the water the race was run on and what every
+ * bet type paid.
+ *
  * @author shimomo
  */
 final class ResultScraper implements Scraper
@@ -48,6 +51,10 @@ final class ResultScraper implements Scraper
     ];
 
     /**
+     * How far the content of the page is pushed down. Some pages carry an extra list block above
+     * it, and everything below shifts by one div, so the offset is measured once per request and
+     * added to the level every XPath below it reads from.
+     *
      * @var int<0, 1>
      */
     private static int $baseLevel = 0;
@@ -188,6 +195,10 @@ final class ResultScraper implements Scraper
     }
 
     /**
+     * The page splits a boat across two tables. The start display is ordered by course, so a
+     * boat's course is the row it stands in rather than anything printed; the result table is
+     * ordered by finishing place. Both are read into the same boat, keyed by entry number.
+     *
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
      * @return array<int<1, 6>, array<non-empty-string, mixed>>
      */
