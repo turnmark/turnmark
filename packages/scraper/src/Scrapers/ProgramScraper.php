@@ -32,6 +32,42 @@ final class ProgramScraper implements Scraper
     private const string BASE_XPATH = 'descendant-or-self::body/main/div/div/div';
 
     /**
+     * @var non-empty-list<non-empty-string>
+     */
+    private const array RACER_KEYS = [
+        'entry_number',
+        'name',
+        'number',
+        'rank_number_source',
+        'rank_number',
+        'branch_number_source',
+        'branch_number',
+        'birthplace_number_source',
+        'birthplace_number',
+        'age_source',
+        'age',
+        'weight_source',
+        'weight',
+        'flying_count_source',
+        'flying_count',
+        'late_count_source',
+        'late_count',
+        'average_start_timing',
+        'national_win_rate',
+        'national_top_2_percent',
+        'national_top_3_percent',
+        'local_win_rate',
+        'local_top_2_percent',
+        'local_top_3_percent',
+        'motor_number',
+        'motor_top_2_percent',
+        'motor_top_3_percent',
+        'boat_number',
+        'boat_top_2_percent',
+        'boat_top_3_percent',
+    ];
+
+    /**
      * @var int<0, 1>
      */
     private static int $baseLevel = 0;
@@ -166,44 +202,32 @@ final class ProgramScraper implements Scraper
 
     /**
      * @param \Symfony\Component\DomCrawler\Crawler $scraper
-     * @return array{
-     *     racers: array<int<1, 6>, array{
-     *         entry_number?: ?int,
-     *         name?: ?string,
-     *         number?: ?int,
-     *         rank_number_source?: ?string,
-     *         rank_number?: ?int,
-     *         branch_number_source?: ?string,
-     *         branch_number?: ?int,
-     *         birthplace_number_source?: ?string,
-     *         birthplace_number?: ?int,
-     *         age_source?: ?string,
-     *         age?: ?int,
-     *         weight_source?: ?string,
-     *         weight?: ?float,
-     *         flying_count_source?: ?string,
-     *         flying_count?: ?int,
-     *         late_count_source?: ?string,
-     *         late_count?: ?int,
-     *         average_start_timing?: ?float,
-     *         national_win_rate?: ?float,
-     *         national_top_2_percent?: ?float,
-     *         national_top_3_percent?: ?float,
-     *         local_win_rate?: ?float,
-     *         local_top_2_percent?: ?float,
-     *         local_top_3_percent?: ?float,
-     *         motor_number?: ?int,
-     *         motor_top_2_percent?: ?float,
-     *         motor_top_3_percent?: ?float,
-     *         boat_number?: ?int,
-     *         boat_top_2_percent?: ?float,
-     *         boat_top_3_percent?: ?float,
-     *     }>
-     * }
+     * @return array<non-empty-string, mixed>
      */
     private static function scrapeRacers(Crawler $scraper): array
     {
+        $racers = self::scrapeProgramTable($scraper);
+
+        $template = array_fill_keys(self::RACER_KEYS, null);
+
         $response = ['racers' => []];
+
+        foreach (range(1, 6) as $entryNumberKey) {
+            $response['racers'][$entryNumberKey] = array_replace($template, [
+                'entry_number' => $entryNumberKey,
+            ], $racers[$entryNumberKey] ?? []);
+        }
+
+        return $response;
+    }
+
+    /**
+     * @param \Symfony\Component\DomCrawler\Crawler $scraper
+     * @return array<int<1, 6>, array<non-empty-string, mixed>>
+     */
+    private static function scrapeProgramTable(Crawler $scraper): array
+    {
+        $response = [];
 
         foreach (range(1, 6) as $index) {
             $entryNumberFormat = '%s/div[2]/div[%d]/table/tbody[%s]/tr[1]/td[1]';
@@ -255,25 +279,23 @@ final class ProgramScraper implements Scraper
                 $entryNumber['entry_number'] = $index;
             }
 
-            $entryNumberKey = $entryNumber['entry_number'] ?? $index;
+            $entryNumberKey = $entryNumber['entry_number'];
 
             if (!in_array($entryNumberKey, range(1, 6), true)) {
                 continue;
             }
 
-            $response['racers'][$entryNumberKey] ??= [];
-            $response['racers'][$entryNumberKey] += $entryNumber;
-            $response['racers'][$entryNumberKey] += $name;
-            $response['racers'][$entryNumberKey] += $numberAndRankNumber;
-            $response['racers'][$entryNumberKey] += $branchNumberAndBirthplaceNumberAndAgeAndWeight;
-            $response['racers'][$entryNumberKey] += $flyingCountAndLateCountAndAverageStartTiming;
-            $response['racers'][$entryNumberKey] += $nationalWinRateAndNationalTop23Percent;
-            $response['racers'][$entryNumberKey] += $localWinRateAndLocalTop23Percent;
-            $response['racers'][$entryNumberKey] += $motorNumberANDMotorTop23Percent;
-            $response['racers'][$entryNumberKey] += $boatNumberANDBoatTop23Percent;
+            $response[$entryNumberKey] ??= [];
+            $response[$entryNumberKey] += $entryNumber;
+            $response[$entryNumberKey] += $name;
+            $response[$entryNumberKey] += $numberAndRankNumber;
+            $response[$entryNumberKey] += $branchNumberAndBirthplaceNumberAndAgeAndWeight;
+            $response[$entryNumberKey] += $flyingCountAndLateCountAndAverageStartTiming;
+            $response[$entryNumberKey] += $nationalWinRateAndNationalTop23Percent;
+            $response[$entryNumberKey] += $localWinRateAndLocalTop23Percent;
+            $response[$entryNumberKey] += $motorNumberANDMotorTop23Percent;
+            $response[$entryNumberKey] += $boatNumberANDBoatTop23Percent;
         }
-
-        ksort($response['racers'], SORT_NUMERIC);
 
         return $response;
     }
