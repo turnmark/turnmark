@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="robots" content="NOINDEX,NOFOLLOW" />
+  <!--[if lt IE 9]>
+  <script src="/themes/fukuoka/js/common/html5.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="/themes/fukuoka/css/reset.css" type="text/css">
+  <link rel="stylesheet" href="/themes/fukuoka/css/common.css" type="text/css">
+  <link rel="stylesheet" href="/themes/fukuoka/css/common22.css" type="text/css">
+  <link rel="stylesheet" href="/modules/yosou/css/yosou.css?var=1" type="text/css">
+  <link rel="stylesheet" href="/modules/yosou/css/tenji_info.css?ver=1" type="text/css">  <script type="text/javascript" src="/themes/fukuoka/js/jquery-1.11.2.min.js"></script>
+  <script type="text/javascript" src="/themes/fukuoka/js/common.js"></script>
+  <script type="text/javascript">
+    //window.parent.location.reload();
+  </script>
+</head>
+<body class="yosou">
+<div class="contents-wrapper">
+
+<script type="text/javascript">
+    $(window).bind("load", function() {
+        // console.log( "document loaded" + $(".yosou_data", parent.document).height() );
+        if(parseInt($(".yosou_data", parent.document).height()) > 250) {
+            console.log("in llll");
+            $(".yosou_data", parent.document).css({"height": "14em", "overflow": "hidden"});
+            $(".yosou_data", parent.document).addClass("content");
+            $(".yosou_more", parent.document).css({"display": ""});
+        }else {
+            $(".yosou_more", parent.document).css({"display": "none"});
+        }
+    });
+</script>
+
+<div class='category-tenji inner'>
+<link rel='stylesheet' href='/function/css/sorry.css' type='text/css'><div class="contents__inner">        <div class="sorry info">
+            <div class="sorry__sub_outer">
+                <div class="sorry__sub_inner">
+                    <div>
+                        <p>次節開催までしばらくお待ちください
+</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div></div></div>
+<script type='text/javascript' src='/themes/fukuoka/js/jquery-1.11.2.min.js'></script>
+<script type='text/javascript' src='./js/simple-light-box.js'></script>
+
+</div>
+</body>
+</html>

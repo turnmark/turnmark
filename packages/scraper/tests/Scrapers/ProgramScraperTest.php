@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Turnmark\Scraper\Scrapers\ProgramScraper;
+use Turnmark\Scraper\Tests\MockBrowser;
 
 /**
  * @psalm-import-type Arguments from \Turnmark\Scraper\Tests\ScraperPsalmType
@@ -26,6 +27,6 @@ final class ProgramScraperTest extends TestCase
     #[DataProviderExternal(ProgramScraperDataProvider::class, 'scrapeProvider')]
     public function scrape(array $arguments, array $expected): void
     {
-        $this->assertSame($expected, ProgramScraper::scrape(...$arguments));
+        $this->assertSame($expected, ProgramScraper::scrape(...$arguments, httpBrowser: MockBrowser::create()));
     }
 }

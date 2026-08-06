@@ -8,6 +8,7 @@ use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\TestCase;
 use Turnmark\Scraper\Mikuni\Scrapers\TimeScraper;
+use Turnmark\Scraper\Mikuni\Tests\MockBrowser;
 
 /**
  * @psalm-import-type Arguments from \Turnmark\Scraper\Mikuni\Tests\ScraperPsalmType
@@ -26,6 +27,6 @@ final class TimeScraperTest extends TestCase
     #[DataProviderExternal(TimeScraperDataProvider::class, 'scrapeProvider')]
     public function scrape(array $arguments, array $expected): void
     {
-        $this->assertSame($expected, TimeScraper::scrape(...$arguments));
+        $this->assertSame($expected, TimeScraper::scrape(...$arguments, httpBrowser: MockBrowser::create()));
     }
 }

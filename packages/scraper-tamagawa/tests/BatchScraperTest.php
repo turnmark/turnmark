@@ -26,6 +26,6 @@ final class BatchScraperTest extends TestCase
     #[DataProviderExternal(BatchScraperDataProvider::class, 'scrapeTimeProvider')]
     public function scrapeTime(array $arguments, array $expected): void
     {
-        $this->assertSame($expected, BatchScraper::scrapeTime(...$arguments));
+        $this->assertSame($expected, BatchScraper::scrapeTime(...$arguments, httpBrowser: MockBrowser::create()));
     }
 }

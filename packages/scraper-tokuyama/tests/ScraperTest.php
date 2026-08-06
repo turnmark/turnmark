@@ -26,6 +26,6 @@ final class ScraperTest extends TestCase
     #[DataProviderExternal(ScraperDataProvider::class, 'scrapeTimeProvider')]
     public function scrapeTime(array $arguments, array $expected): void
     {
-        $this->assertSame($expected, Scraper::scrapeTime(...$arguments));
+        $this->assertSame($expected, Scraper::scrapeTime(...$arguments, httpBrowser: MockBrowser::create()));
     }
 }
