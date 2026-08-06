@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## [0.9.0] - 2026-08-07
+
+- test: serve every test from a fixture instead of the live site
+- fix!: keep payout rows whose amount cannot be read
+- chore: update CHANGELOG.md
+
+
 ## [0.8.1] - 2026-08-06
 
 - fix: pass the browser through to the stadium list in batch scrapes
