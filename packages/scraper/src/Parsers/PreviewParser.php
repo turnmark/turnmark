@@ -389,13 +389,13 @@ final class PreviewParser
      * Some parts are printed without a quantity, and a ring is printed as `リング×1` even for a
      * single one, so a missing quantity means the part is not counted rather than one of it. The
      * quantity is left null in that case. An unknown short name keeps its element and only
-     * leaves part_number null.
+     * leaves `number` null.
      *
      * @param ?list<string> $values
      * @return array{
      *     parts: ?list<array{
-     *         part_number_source: ?string,
-     *         part_number: ?int,
+     *         number_source: ?string,
+     *         number: ?int,
      *         quantity: ?int,
      *     }>,
      * }
@@ -424,8 +424,8 @@ final class PreviewParser
             }
 
             $parts[] = [
-                'part_number_source' => Converter::toString($shortName),
-                'part_number' => Converter::toInt(
+                'number_source' => Converter::toString($shortName),
+                'number' => Converter::toInt(
                     Converter::toEnumOrNull(fn() => Part::fromShortName($shortName))?->value
                 ),
                 'quantity' => Converter::toInt($quantity),

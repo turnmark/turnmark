@@ -312,18 +312,18 @@ final class PreviewScraperDataProvider
                             'propeller' => null,
                             'parts' => [
                                 [
-                                    'part_number_source' => 'ピストン',
-                                    'part_number' => 1,
+                                    'number_source' => 'ピストン',
+                                    'number' => 1,
                                     'quantity' => 2,
                                 ],
                                 [
-                                    'part_number_source' => 'リング',
-                                    'part_number' => 2,
+                                    'number_source' => 'リング',
+                                    'number' => 2,
                                     'quantity' => 4,
                                 ],
                                 [
-                                    'part_number_source' => 'シリンダ',
-                                    'part_number' => 5,
+                                    'number_source' => 'シリンダ',
+                                    'number' => 5,
                                     'quantity' => null,
                                 ],
                             ],
