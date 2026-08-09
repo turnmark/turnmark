@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## [0.10.0] - 2026-08-09
+
+- refactor!: drop the redundant part_ prefix from parts elements
+- chore: update CHANGELOG.md
+
+
 ## [0.9.0] - 2026-08-07
 
 - test: serve every test from a fixture instead of the live site
