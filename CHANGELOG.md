@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+## [0.10.1] - 2026-10-02
+
+gpg: Signature made Fri Oct  2 14:36:33 2026 JST
+gpg:                using EDDSA key 6170FDB6BC09D67DD36013CBBE45C3AE956CB330
+gpg: Good signature from "shimomo <yuichi@shimomo.net>" [ultimate]
+- fix: derive the spoofed Chrome version from the date instead of pinning it
+gpg: Signature made Sun Aug  9 17:41:15 2026 JST
+gpg:                using EDDSA key 6170FDB6BC09D67DD36013CBBE45C3AE956CB330
+gpg: Good signature from "shimomo <yuichi@shimomo.net>" [ultimate]
+- chore: update CHANGELOG.md
+
+
 ## [0.10.0] - 2026-08-09
 
 - refactor!: drop the redundant part_ prefix from parts elements
